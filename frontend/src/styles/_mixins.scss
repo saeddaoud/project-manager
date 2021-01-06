@@ -1,0 +1,30 @@
+// Mobile "small" is the default/starting point
+$breakpoints-up: (
+  'medium': '600px',
+  'large': '900px',
+  'x-large': '1200px',
+);
+
+$breakpoints-down: (
+  'small': '599px',
+  'medium': '899px',
+  'large': '1199px',
+);
+
+@mixin breakpoint-up($size) {
+  @media (min-width: map-get($map: $breakpoints-up, $key: $size)) {
+    @content;
+  }
+}
+
+// How to use breakpoint mixins to change styles for medium size screens and larger:
+// @include breakpoint-up(medium){[css selector]{...}}
+
+@mixin breakpoint-down($size) {
+  @media (max-width: map-get($map: $breakpoints-down, $key: $size)) {
+    @content;
+  }
+}
+
+// How to use breakpoint mixins to change styles for medium size screens and smaller:
+// @include breakpoint-down(medium){[css selector]{...}}
