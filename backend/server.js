@@ -15,6 +15,9 @@ connectDB();
 
 const app = express();
 
+// Express middleware
+app.use(express.json());
+
 // Mount routes
 app.use('/api/v1/auth', authRoutes);
 
