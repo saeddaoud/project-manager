@@ -50,6 +50,11 @@ employeeSchema.methods.getSignedJWTToken = function () {
   });
 };
 
+// Match password
+employeeSchema.methods.matchPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
 const Employee = mongoose.model('Employee', employeeSchema);
 
 export default Employee;
