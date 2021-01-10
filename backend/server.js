@@ -2,6 +2,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import helmet from 'helmet';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import hpp from 'hpp';
+import mongoSanitizer from 'express-mongo-sanitize';
 
 // import files
 import connectDB from './config/db.js';
@@ -17,6 +22,17 @@ const app = express();
 
 // Express middleware
 app.use(express.json());
+app.use(helmet());
+app.use(cors());
+app.use(hpp());
+app.use(mongoSanitizer());
+
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
 
 // Mount routes
 app.use('/api/v1/auth', authRoutes);
