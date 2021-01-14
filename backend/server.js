@@ -12,6 +12,8 @@ import mongoSanitizer from 'express-mongo-sanitize';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
+import employeeRoutes from './routes/employeeRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
 
 dotenv.config();
 
@@ -36,6 +38,8 @@ app.use(limiter);
 
 // Mount routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/employees', employeeRoutes);
+app.use('/api/v1/projects', projectRoutes);
 
 // Error Middleware
 app.use(errorHandler);
