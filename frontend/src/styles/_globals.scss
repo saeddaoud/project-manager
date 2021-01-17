@@ -21,15 +21,15 @@ a {
   text-decoration: none;
 }
 
+.page {
+  width: 100%;
+  height: calc(100vh - 120px);
+}
+
 .container {
   width: 80%;
   height: 100%;
   margin: 0 auto;
-}
-
-.page {
-  width: 100%;
-  min-height: calc(100vh - 120px);
 }
 
 .flex {
@@ -39,7 +39,7 @@ a {
   &-col {
     flex-direction: column;
   }
-  &-jsc {
+  &-jcc {
     justify-content: center;
   }
 }
