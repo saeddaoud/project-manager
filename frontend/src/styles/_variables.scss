@@ -1,0 +1,28 @@
+// Background colors
+$primary-bg-color: steelblue;
+$primary-bg-color-hover: rgb(18, 54, 133);
+
+// Text colors
+$primary-text-color: #fff;
+
+// Font size
+$h4-font-size: (
+  small: 2rem,
+  medium: 2.5rem,
+  large: 2.8rem,
+  x-large: 3rem,
+);
+
+$default-font-size: (
+  small: 1.5rem,
+  medium: 1.8rem,
+  large: 2rem,
+  x-large: 2.3rem,
+);
+
+$reduced-font-size: (
+  small: 1.3rem,
+  medium: 1.5rem,
+  large: 1.8rem,
+  x-large: 2rem,
+);
