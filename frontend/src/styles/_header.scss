@@ -7,14 +7,14 @@
     height: 100%;
     background-color: $primary-bg-color;
     .nav__logo {
-      @include font-size($h4-font-size);
+      @include responsive-property(font-size, $h4-font-size);
       // font-size: 2rem;
       width: 45%;
     }
     .nav__menu {
       width: 45%;
       a {
-        @include font-size($default-font-size);
+        @include responsive-property(font-size, $default-font-size);
         // font-size: 1.5rem;
         color: $primary-text-color;
         padding: 1rem;

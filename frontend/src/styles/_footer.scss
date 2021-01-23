@@ -4,7 +4,7 @@
   height: 40px;
   background-color: $primary-bg-color;
   color: $primary-text-color;
-  @include font-size($default-font-size);
+  @include responsive-property(font-size, $default-font-size);
 
   font-family: 'Caveat', cursive;
 }

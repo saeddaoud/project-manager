@@ -31,10 +31,14 @@ $breakpoints-down: (
 
 // Typography mixins for responsive font size
 
-@mixin font-size($fs-map, $fs-breakpoints: $breakpoints-up) {
-  @each $fs-breakpoint, $fs-font-size in $fs-map {
+@mixin responsive-property(
+  $css-property,
+  $fs-map,
+  $fs-breakpoints: $breakpoints-up
+) {
+  @each $fs-breakpoint, $fs-property-value in $fs-map {
     @if $fs-breakpoint == small {
-      font-size: $fs-font-size;
+      #{$css-property}: $fs-property-value;
     } @else {
       @if map-has-key($map: $fs-breakpoints, $key: $fs-breakpoint) {
         $fs-breakpoint: map-get(
@@ -43,7 +47,7 @@ $breakpoints-down: (
         );
       }
       @media screen and (min-width: $fs-breakpoint) {
-        font-size: $fs-font-size;
+        #{$css-property}: $fs-property-value;
       }
     }
   }
