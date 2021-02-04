@@ -1,7 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../redux/actions/employeeActions';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.employeeFetch);
   return (
     <div className='header'>
       <nav className='nav'>
@@ -11,11 +15,23 @@ const Header = () => {
           </div>
           <div className='nav__menu'>
             <ul className='menu__list flex'>
+              {user ? (
+                <li>
+                  <Link to='/profile/me'>{user.name}</Link>
+                </li>
+              ) : (
+                <li>
+                  <Link to='/'>Home</Link>
+                </li>
+              )}
               <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/login'>Login</Link>
+                {user ? (
+                  <Link to='/login' onClick={() => dispatch(logout())}>
+                    Logout
+                  </Link>
+                ) : (
+                  <Link to='/login'>Login</Link>
+                )}
               </li>
             </ul>
           </div>

@@ -1,9 +1,14 @@
 import axios from 'axios';
 
 import {
+  EMPLOYEE_FETCH_FAIL,
+  EMPLOYEE_FETCH_REQUEST,
+  EMPLOYEE_FETCH_SUCCESS,
   EMPLOYEE_LOGIN_FAIL,
   EMPLOYEE_LOGIN_REQUEST,
   EMPLOYEE_LOGIN_SUCCESS,
+  EMPLOYEE_LOGIN_RESET,
+  EMPLOYEE_FETCH_RESET,
 } from '../constants/employeeConstants';
 
 export const loginEmployee = (employee) => async (dispatch) => {
@@ -36,4 +41,48 @@ export const loginEmployee = (employee) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const fetchEmployee = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: EMPLOYEE_FETCH_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.get('/api/v1/employees/me', config);
+
+    dispatch({
+      type: EMPLOYEE_FETCH_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response.data.error);
+    dispatch({
+      type: EMPLOYEE_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: EMPLOYEE_LOGIN_RESET,
+  });
+  dispatch({
+    type: EMPLOYEE_FETCH_RESET,
+  });
+  localStorage.removeItem('userInfo');
 };

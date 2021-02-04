@@ -22,7 +22,7 @@ export const getMe = asyncHandler(async (req, res, next) => {
   );
   res.status(200).json({
     success: true,
-    date: employee,
+    data: employee,
   });
 });
 
