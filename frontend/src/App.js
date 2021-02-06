@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import EmployeeProfileScreen from './screens/EmployeeProfileScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -15,6 +16,7 @@ function App() {
         <Route exact path='/login' component={LoginScreen} />
         <Route exact path='/signup' component={RegistrationScreen} />
         <Route exact path='/profile/me' component={ProfileScreen} />
+        <Route exact path='/profile/:id' component={EmployeeProfileScreen} />
       </Switch>
       <Footer />
     </Router>

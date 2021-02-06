@@ -11,6 +11,10 @@ import {
   EMPLOYEE_LOGIN_REQUEST,
   EMPLOYEE_LOGIN_RESET,
   EMPLOYEE_LOGIN_SUCCESS,
+  ME_FETCH_FAIL,
+  ME_FETCH_REQUEST,
+  ME_FETCH_RESET,
+  ME_FETCH_SUCCESS,
 } from '../constants/employeeConstants';
 
 export const employeeLoginReducer = (state = {}, action) => {
@@ -23,6 +27,22 @@ export const employeeLoginReducer = (state = {}, action) => {
     case EMPLOYEE_LOGIN_FAIL:
       return { loading: false, error: payload };
     case EMPLOYEE_LOGIN_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const meFetchReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case ME_FETCH_REQUEST:
+      return { loading: true };
+    case ME_FETCH_SUCCESS:
+      return { loading: false, success: payload.success, user: payload.data };
+    case ME_FETCH_FAIL:
+      return { loading: false, error: payload };
+    case ME_FETCH_RESET:
       return {};
     default:
       return state;

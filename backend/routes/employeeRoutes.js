@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {
+  getEmployee,
   getEmployees,
   getMe,
   updateEmployeeInfo,
@@ -15,6 +16,9 @@ router
 
 router.route('/me').get(protect, getMe);
 
-router.route('/:id').put(protect, updateEmployeeInfo);
+router
+  .route('/:id')
+  .put(protect, updateEmployeeInfo)
+  .get(protect, authorize('supervisor', 'manager'), getEmployee);
 
 export default router;

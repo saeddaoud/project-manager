@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEmployee, listEmployees } from '../redux/actions/employeeActions';
+import {
+  fetchEmployee,
+  listEmployees,
+  fetchMe,
+} from '../redux/actions/employeeActions';
 
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
+import { Link } from 'react-router-dom';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -17,20 +22,29 @@ const ProfileScreen = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchEmployee());
+    dispatch(fetchMe());
   }, [dispatch]);
 
   return (
     <div className='page profile-page'>
-      <button className='btn m-2' onClick={clickHandler}>
-        List Employees
-      </button>
-      {loading && <Spinner />}
-      {error && <Message>{error}</Message>}
-      <div className='list'>
-        <ul>
-          {users && users.map((user) => <li key={user._id}>{user.name}</li>)}
-        </ul>
+      <div className='container'>
+        <button className='btn m-2' onClick={clickHandler}>
+          List Employees
+        </button>
+        {loading && <Spinner />}
+        {error && <Message>{error}</Message>}
+        <div className='list'>
+          <ul>
+            {users &&
+              users.map((user) => (
+                <Link key={user._id} to={`/profile/${user._id}`}>
+                  <li>
+                    {user.name} {user.email}
+                  </li>
+                </Link>
+              ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

@@ -5,12 +5,14 @@ import {
   employeeFetchReducer,
   employeeLoginReducer,
   employeesListReducer,
+  meFetchReducer,
 } from './reducers/employeeReducers';
 
 const middleware = [thunk];
 
 const reducer = combineReducers({
   employeeLogin: employeeLoginReducer,
+  meFetch: meFetchReducer,
   employeeFetch: employeeFetchReducer,
   employeesList: employeesListReducer,
 });

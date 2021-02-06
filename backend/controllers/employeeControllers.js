@@ -26,6 +26,17 @@ export const getMe = asyncHandler(async (req, res, next) => {
   });
 });
 
+//@route            GET /api/v1/employees/:id
+//@desc             Get an employee by id
+//@Access           Private/manager or supervisor
+export const getEmployee = asyncHandler(async (req, res, next) => {
+  const employee = await Employee.findById(req.params.id).select('-password');
+  res.status(200).json({
+    success: true,
+    data: employee,
+  });
+});
+
 //@route            PUT /api/v1/employees/:id
 //@desc             Update employee's info
 //@Access           Private
