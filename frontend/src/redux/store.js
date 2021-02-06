@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import {
   employeeFetchReducer,
   employeeLoginReducer,
+  employeesListReducer,
 } from './reducers/employeeReducers';
 
 const middleware = [thunk];
@@ -11,6 +12,7 @@ const middleware = [thunk];
 const reducer = combineReducers({
   employeeLogin: employeeLoginReducer,
   employeeFetch: employeeFetchReducer,
+  employeesList: employeesListReducer,
 });
 
 const userInforFromStorage = localStorage.getItem('userInfo')

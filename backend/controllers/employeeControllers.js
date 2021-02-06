@@ -8,7 +8,7 @@ import ErrorResponse from '../utils/errorResponse.js';
 export const getEmployees = asyncHandler(async (req, res, next) => {
   const employees = await Employee.find({}).select('-password');
   res.status(200).json({
-    sucess: true,
+    success: true,
     data: employees,
   });
 });

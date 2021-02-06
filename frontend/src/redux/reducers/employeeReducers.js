@@ -1,4 +1,8 @@
 import {
+  EMPLOYEES_LIST_FAIL,
+  EMPLOYEES_LIST_REQUEST,
+  EMPLOYEES_LIST_RESET,
+  EMPLOYEES_LIST_SUCCESS,
   EMPLOYEE_FETCH_FAIL,
   EMPLOYEE_FETCH_REQUEST,
   EMPLOYEE_FETCH_RESET,
@@ -35,6 +39,26 @@ export const employeeFetchReducer = (state = {}, action) => {
     case EMPLOYEE_FETCH_FAIL:
       return { loading: false, error: payload };
     case EMPLOYEE_FETCH_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const employeesListReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case EMPLOYEES_LIST_REQUEST:
+      return { loading: true };
+    case EMPLOYEES_LIST_SUCCESS:
+      return {
+        loading: false,
+        success: payload.success,
+        users: payload.data,
+      };
+    case EMPLOYEES_LIST_FAIL:
+      return { loading: false, error: payload };
+    case EMPLOYEES_LIST_RESET:
       return {};
     default:
       return state;

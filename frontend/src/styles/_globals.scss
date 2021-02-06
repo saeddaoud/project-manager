@@ -140,9 +140,48 @@ p {
   }
 }
 
+.list {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px black solid;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  color: $primary-text-color;
+  font-size: 1.5rem;
+  li {
+    padding: 1rem;
+  }
+  li:nth-child(even) {
+    background: $primary-bg-color;
+  }
+  li:nth-child(odd) {
+    background: $secondary-bg-color;
+  }
+  li:first-child {
+    border-radius: 10px 10px 0 0;
+  }
+  li:last-child {
+    border-radius: 0 0 10px 10px;
+  }
+}
+
+.m-1 {
+  margin: 1rem;
+}
+.m-2 {
+  margin: 1.5rem;
+}
+
 .my-1 {
   margin: 1rem 0;
 }
 .my-2 {
   margin: 1.5rem 0;
+}
+
+.mx-1 {
+  margin: 0 1rem;
+}
+.mx-2 {
+  margin: 0 1.5rem;
 }
