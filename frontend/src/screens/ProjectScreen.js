@@ -2,31 +2,29 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
-import { fetchEmployee } from '../redux/actions/employeeActions';
+import { fetchProject } from '../redux/actions/projectActions';
 
-const EmployeeProfileScreen = ({ match }) => {
+const ProjectScreen = ({ match }) => {
   const id = match.params.id;
 
-  console.log(id);
-
   const dispatch = useDispatch();
-  const { user, loading, success, error } = useSelector(
-    (state) => state.employeeFetch
+  const { project, loading, success, error } = useSelector(
+    (state) => state.projectFetch
   );
 
   useEffect(() => {
-    dispatch(fetchEmployee(id));
+    dispatch(fetchProject(id));
   }, [dispatch, id]);
 
   return (
     <div className='page profile-page'>
-      <div className='container'>
+      <div className='container flex flex-jcc flex-fdc'>
         {loading && <Spinner />}
         {error && <Message>{error}</Message>}
-        {user && <h3>{user.name}</h3>}
+        {project && <h3>{project.name}</h3>}
       </div>
     </div>
   );
 };
 
-export default EmployeeProfileScreen;
+export default ProjectScreen;

@@ -32,7 +32,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 
 export const authorize = (...roles) => (req, res, next) => {
   if (!roles.includes(req.employee.role)) {
-    console.log(req.employee.role);
+    // console.log(req.employee.role);
     return next(
       new ErrorResponse('Your role is not authorized for this action', 403)
     );

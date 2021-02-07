@@ -5,6 +5,7 @@ import EmployeeProfileScreen from './screens/EmployeeProfileScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ProjectScreen from './screens/ProjectScreen';
 import RegistrationScreen from './screens/RegistrationScreen';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/signup' component={RegistrationScreen} />
         <Route exact path='/profile/me' component={ProfileScreen} />
         <Route exact path='/profile/:id' component={EmployeeProfileScreen} />
+        <Route exact path='/project/:id' component={ProjectScreen} />
       </Switch>
       <Footer />
     </Router>

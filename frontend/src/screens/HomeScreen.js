@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const HomeScreen = () => {
+  const history = useHistory();
+  const { userInfo } = useSelector((state) => state.employeeLogin);
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/profile/me');
+    }
+  }, [userInfo, history]);
   return (
     <div className='page home-page'>
       <div className='container flex flex-jcc '>

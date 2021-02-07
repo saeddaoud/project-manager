@@ -9,10 +9,10 @@
     .nav__logo {
       @include responsive-property(font-size, $h4-font-size);
       // font-size: 2rem;
-      width: 45%;
+      width: 35%;
     }
     .nav__menu {
-      width: 45%;
+      width: 55%;
       a {
         @include responsive-property(font-size, $default-font-size);
         // font-size: 1.5rem;

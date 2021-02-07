@@ -144,38 +144,43 @@ p {
 .list {
   width: 100%;
   margin: 0 auto;
-  border: 1px black solid;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  color: $primary-text-color;
+
   font-size: 1.5rem;
   a {
     text-decoration: none;
     color: $primary-text-color;
-    li {
-      padding: 1rem;
-    }
-  }
-  a:nth-child(odd) {
-    li {
-      background: $secondary-bg-color;
-    }
-  }
-  a:nth-child(even) {
+
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     li {
       background: $primary-bg-color;
+      border-radius: 10px;
+      padding: 1rem;
+      p {
+        text-align: left;
+        margin-top: 1rem;
+      }
     }
   }
-  a:first-child {
-    li {
-      border-radius: 10px 10px 0 0;
-    }
-  }
-  a:last-child {
-    li {
-      border-radius: 0 0 10px 10px;
-    }
-  }
+  // a:nth-child(odd) {
+  //   li {
+  //     background: $secondary-bg-color;
+  //   }
+  // }
+  // a:nth-child(even) {
+  //   li {
+  //     background: $primary-bg-color;
+  //   }
+  // }
+  // a:first-child {
+  //   li {
+  //     border-radius: 10px 10px 0 0;
+  //   }
+  // }
+  // a:last-child {
+  //   li {
+  //     border-radius: 0 0 10px 10px;
+  //   }
+  // }
 }
 
 .m-1 {

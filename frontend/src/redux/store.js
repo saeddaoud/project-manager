@@ -7,6 +7,10 @@ import {
   employeesListReducer,
   meFetchReducer,
 } from './reducers/employeeReducers';
+import {
+  projectFetchReducer,
+  projectsFetchReducer,
+} from './reducers/projectReducers';
 
 const middleware = [thunk];
 
@@ -15,6 +19,8 @@ const reducer = combineReducers({
   meFetch: meFetchReducer,
   employeeFetch: employeeFetchReducer,
   employeesList: employeesListReducer,
+  projectsFetch: projectsFetchReducer,
+  projectFetch: projectFetchReducer,
 });
 
 const userInforFromStorage = localStorage.getItem('userInfo')

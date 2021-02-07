@@ -6,6 +6,7 @@ import { logout } from '../redux/actions/employeeActions';
 const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.meFetch);
+  console.log(user);
   return (
     <div className='header'>
       <nav className='nav'>
@@ -17,7 +18,7 @@ const Header = () => {
             <ul className='menu__list flex'>
               {user ? (
                 <li>
-                  <Link to='/profile/me'>{user.name}</Link>
+                  <Link to='/profile/me'>Dashboard</Link>
                 </li>
               ) : (
                 <li>

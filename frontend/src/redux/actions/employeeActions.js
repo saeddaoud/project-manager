@@ -110,7 +110,7 @@ export const fetchEmployee = (id) => async (dispatch, getState) => {
   } catch (error) {
     console.log(error.response.data.error);
     dispatch({
-      type: ME_FETCH_FAIL,
+      type: EMPLOYEE_FETCH_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
