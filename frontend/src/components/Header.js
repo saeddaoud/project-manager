@@ -22,7 +22,9 @@ const Header = () => {
                 </li>
               ) : (
                 <li>
-                  <Link to='/'>Home</Link>
+                  <Link to='/' className='flex'>
+                    <div>Home</div>
+                  </Link>
                 </li>
               )}
               <li>
