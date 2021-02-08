@@ -6,7 +6,6 @@ import { logout } from '../redux/actions/employeeActions';
 const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.meFetch);
-  console.log(user);
   return (
     <div className='header'>
       <nav className='nav'>
