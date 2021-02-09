@@ -18,10 +18,10 @@ const ProfileScreen = () => {
   // const { users, loading, success, error } = useSelector(
   //   (state) => state.employeesList
   // );
-  const { user } = useSelector((state) => state.meFetch);
-  const { projects, loading, error, success } = useSelector(
-    (state) => state.projectsFetch
-  );
+  const { user, loading, error } = useSelector((state) => state.meFetch);
+  // const { projects, loading, error, success } = useSelector(
+  //   (state) => state.projectsFetch
+  // );
 
   // const clickHandler = () => {
   //   console.log('clicked');
@@ -45,7 +45,14 @@ const ProfileScreen = () => {
         </button> */}
         {loading && <Spinner />}
         {error && <Message>{error}</Message>}
-        {projects && (
+        {user && (
+          <div>
+            <img src={user.avatar} alt={user.name} />
+            <h3>{user.name}</h3>
+            <h5>{user.email}</h5>
+          </div>
+        )}
+        {/* {projects && (
           <div className='list'>
             <ul>
               {projects.map((project) => (
@@ -58,7 +65,7 @@ const ProfileScreen = () => {
               ))}
             </ul>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

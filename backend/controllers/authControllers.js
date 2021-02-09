@@ -1,3 +1,6 @@
+import normalize from 'normalize-url';
+import gravatar from 'gravatar';
+
 import asyncHandler from '../middleware/asyncHandler.js';
 import Employee from '../models/employeeModel.js';
 import ErrorResponse from '../utils/errorResponse.js';
@@ -11,8 +14,16 @@ export const register = asyncHandler(async (req, res, next) => {
   if (employee) {
     return next(new ErrorResponse('Email already exists', 400));
   }
+  const avatar = normalize(
+    gravatar.url(req.body.email, {
+      s: '200',
+      r: 'pg',
+      d: 'mm',
+    }),
+    { forceHttps: true }
+  );
   // Create a new user with the enetered data and return a token
-  employee = await Employee.create(req.body);
+  employee = await Employee.create({ ...req.body, avatar });
   const token = employee.getSignedJWTToken();
   res.status(200).json({
     success: true,
