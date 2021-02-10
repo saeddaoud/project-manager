@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import {
   fetchEmployee,
   listEmployees,
   fetchMe,
+  updateAvatar,
 } from '../redux/actions/employeeActions';
 
 import Spinner from '../components/Spinner';
@@ -13,12 +15,18 @@ import { projectsFetch } from '../redux/reducers/projectReducers';
 import { fetchProjects } from '../redux/actions/projectActions';
 
 const ProfileScreen = () => {
+  const { user, loading, error } = useSelector((state) => state.meFetch);
+
+  // console.log(user, loading);
+
+  const [avatar, setAvatar] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
   const dispatch = useDispatch();
   // States
   // const { users, loading, success, error } = useSelector(
   //   (state) => state.employeesList
   // );
-  const { user, loading, error } = useSelector((state) => state.meFetch);
   // const { projects, loading, error, success } = useSelector(
   //   (state) => state.projectsFetch
   // );
@@ -33,10 +41,35 @@ const ProfileScreen = () => {
     if (!user) {
       dispatch(fetchMe());
     }
+    if (user) {
+      setAvatar(user.avatar);
+    }
 
-    dispatch(fetchProjects());
+    // dispatch(fetchProjects());
   }, [dispatch, user]);
 
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('avatar', file);
+    setUploading(true);
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-date',
+        },
+      };
+
+      const { data } = await axios.post('/api/v1/upload', formData, config);
+      // console.log(data);
+      setAvatar(data);
+      setUploading(false);
+      dispatch(updateAvatar(data));
+    } catch (error) {
+      console.error(error.message);
+      setUploading(false);
+    }
+  };
   return (
     <div className='page profile-page'>
       <div className='container flex flex-jcc flex-fdc'>
@@ -47,7 +80,20 @@ const ProfileScreen = () => {
         {error && <Message>{error}</Message>}
         {user && (
           <div>
-            <img src={user.avatar} alt={user.name} />
+            <form>
+              <div className='image-upload'>
+                <label htmlFor='file-input'>
+                  <img src={avatar} />
+                </label>
+
+                <input
+                  id='file-input'
+                  type='file'
+                  onChange={handleAvatarUpload}
+                />
+              </div>
+            </form>
+            {/* <img src={user.avatar} alt={user.name} /> */}
             <h3>{user.name}</h3>
             <h5>{user.email}</h5>
           </div>

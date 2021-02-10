@@ -109,6 +109,12 @@ p {
   }
 }
 
+.image-upload {
+  input {
+    display: none;
+  }
+}
+
 .card {
   min-height: 70%;
   padding: 1rem;

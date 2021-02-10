@@ -2,6 +2,7 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {
+  avatarUpdateReducer,
   employeeFetchReducer,
   employeeLoginReducer,
   employeesListReducer,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   meFetch: meFetchReducer,
   employeeFetch: employeeFetchReducer,
   employeesList: employeesListReducer,
+  avatarUpdate: avatarUpdateReducer,
   projectsFetch: projectsFetchReducer,
   projectFetch: projectFetchReducer,
 });

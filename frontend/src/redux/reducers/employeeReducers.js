@@ -1,4 +1,7 @@
 import {
+  AVATAR_UPDATE_FAIL,
+  AVATAR_UPDATE_REQUEST,
+  AVATAR_UPDATE_SUCCESS,
   EMPLOYEES_LIST_FAIL,
   EMPLOYEES_LIST_REQUEST,
   EMPLOYEES_LIST_RESET,
@@ -80,6 +83,24 @@ export const employeesListReducer = (state = {}, action) => {
       return { loading: false, error: payload };
     case EMPLOYEES_LIST_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const avatarUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case AVATAR_UPDATE_REQUEST:
+      return { loading: true };
+    case AVATAR_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: payload.success,
+        user: payload.data,
+      };
+    case AVATAR_UPDATE_FAIL:
+      return { loading: false, error: payload };
     default:
       return state;
   }

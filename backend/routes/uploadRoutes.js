@@ -1,6 +1,9 @@
 import path from 'path';
 import express from 'express';
 import multer from 'multer';
+
+import { protect } from '../middleware/authMiddleware.js';
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -29,13 +32,26 @@ function checkFileType(file, cb) {
 
 const upload = multer({
   storage,
+  limits: {
+    fileSize: 1000000,
+  },
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
 });
 
-router.post('/', [protect, upload.single('image')], (req, res) => {
-  res.send(`/${req.file.path}`);
+router.post('/', upload.single('avatar'), (req, res) => {
+  console.log('upload');
+  // try {
+  //   res.status(200).json({ msg: 'image uploaded successfully' });
+  // } catch (error) {
+  //   console.error(error.message);
+  // }
+  try {
+    res.send(`/${req.file.path}`);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 export default router;

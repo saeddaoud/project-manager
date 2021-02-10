@@ -83,3 +83,26 @@ export const updateEmployeeInfo = asyncHandler(async (req, res, next) => {
     date: employee,
   });
 });
+
+//@route            PUT /api/v1/employees/avatar
+//@desc             Update employee's avatar
+//@Access           Private
+export const updateEmployeeAvatar = asyncHandler(async (req, res, next) => {
+  // console.log(req.body);
+  // const avatar = req.body;
+
+  const employee = await Employee.findByIdAndUpdate(
+    req.employee._id,
+    req.body,
+    { new: true, fields: '-password' }
+  );
+
+  // employee.avatar = avatar;
+
+  // await employee.save();
+
+  res.status(200).json({
+    success: true,
+    data: employee,
+  });
+});

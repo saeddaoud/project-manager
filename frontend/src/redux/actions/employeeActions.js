@@ -17,6 +17,9 @@ import {
   ME_FETCH_SUCCESS,
   ME_FETCH_REQUEST,
   ME_FETCH_RESET,
+  AVATAR_UPDATE_SUCCESS,
+  AVATAR_UPDATE_FAIL,
+  AVATAR_UPDATE_REQUEST,
 } from '../constants/employeeConstants';
 
 export const loginEmployee = (employee) => async (dispatch) => {
@@ -145,6 +148,45 @@ export const listEmployees = () => async (dispatch, getState) => {
     console.log(error.response.data.error);
     dispatch({
       type: EMPLOYEES_LIST_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const updateAvatar = (avatar) => async (dispatch, getState) => {
+  console.log(avatar);
+  try {
+    dispatch({
+      type: AVATAR_UPDATE_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.post(
+      '/api/v1/employees/avatar',
+      { avatar },
+      config
+    );
+    console.log(data);
+    dispatch({
+      type: AVATAR_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response.data.error);
+    dispatch({
+      type: AVATAR_UPDATE_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
