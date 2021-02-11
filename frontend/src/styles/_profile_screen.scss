@@ -1,0 +1,27 @@
+.display {
+  background-color: transparent;
+  width: 100%;
+  &__image {
+    form {
+      .image-upload {
+        img {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          border: 5px solid $primary-bg-color;
+        }
+        input {
+          display: none;
+        }
+      }
+    }
+    // border-bottom: 1px solid black;
+  }
+  &__body {
+    h4 {
+      span {
+        color: $primary-bg-color;
+      }
+    }
+  }
+}

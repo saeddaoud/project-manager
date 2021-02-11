@@ -157,7 +157,7 @@ export const listEmployees = () => async (dispatch, getState) => {
 };
 
 export const updateAvatar = (avatar) => async (dispatch, getState) => {
-  console.log(avatar);
+  // console.log(avatar);
   try {
     dispatch({
       type: AVATAR_UPDATE_REQUEST,

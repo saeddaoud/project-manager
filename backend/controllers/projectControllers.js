@@ -4,7 +4,7 @@ import ErrorResponse from '../utils/errorResponse.js';
 
 //@route          GET /api/v1/projects
 //@decsription    Get all projects
-//@access         Private/manager only
+//@access         Private/manager and supervisor only
 export const getProjects = asyncHandler(async (req, res, next) => {
   const projects = await Project.find({});
   res.status(200).json({
@@ -15,7 +15,7 @@ export const getProjects = asyncHandler(async (req, res, next) => {
 
 //@route          GET /api/v1/projects/:id
 //@decsription    Get project by id
-//@access         Private/manager only
+//@access         Private/manager and supervisor only
 export const getProject = asyncHandler(async (req, res, next) => {
   const project = await Project.findById(req.params.id);
   // Check if project found

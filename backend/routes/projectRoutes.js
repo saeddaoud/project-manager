@@ -11,8 +11,10 @@ const router = express.Router();
 router
   .route('/')
   .post(protect, authorize('manager'), createProject)
-  .get(protect, authorize('manager'), getProjects);
+  .get(protect, authorize('supervisor', 'manager'), getProjects);
 
-router.route('/:id').get(protect, authorize('manager'), getProject);
+router
+  .route('/:id')
+  .get(protect, authorize('supervisor', 'manager'), getProject);
 
 export default router;

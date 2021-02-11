@@ -72,30 +72,50 @@ const ProfileScreen = () => {
   };
   return (
     <div className='page profile-page'>
-      <div className='container flex flex-jcc flex-fdc'>
+      <div className='container flex flex-jcc flex-aifs'>
         {/* <button className='btn m-2' onClick={clickHandler}>
           List Employees
         </button> */}
         {loading && <Spinner />}
         {error && <Message>{error}</Message>}
         {user && (
-          <div>
-            <form>
-              <div className='image-upload'>
-                <label htmlFor='file-input'>
-                  <img src={avatar} />
-                </label>
+          <div className='display flex flex-fdc my-1'>
+            <div className='display__image'>
+              <form>
+                <div className='image-upload my-1'>
+                  <label htmlFor='file-input'>
+                    <img src={avatar} />
+                  </label>
 
-                <input
-                  id='file-input'
-                  type='file'
-                  onChange={handleAvatarUpload}
-                />
+                  <input
+                    id='file-input'
+                    type='file'
+                    onChange={handleAvatarUpload}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className='h-line'></div>
+            <div className='display__body'>
+              <div className='my-1'>
+                <h4>
+                  Username : <span>{user.name}</span>
+                </h4>
+                <h4>
+                  Email : <span>{user.email}</span>
+                </h4>
               </div>
-            </form>
-            {/* <img src={user.avatar} alt={user.name} /> */}
-            <h3>{user.name}</h3>
-            <h5>{user.email}</h5>
+            </div>
+            <div className='h-line'></div>
+            {user && user.role !== 'employee' ? (
+              <div className='recent-projects my-1'>
+                <h1>Recent Projects</h1>
+              </div>
+            ) : (
+              <div className='recent-tasks my-1'>
+                <h1>Recent Tasks</h1>
+              </div>
+            )}
           </div>
         )}
         {/* {projects && (

@@ -18,7 +18,7 @@ const ProjectScreen = ({ match }) => {
 
   return (
     <div className='page profile-page'>
-      <div className='container flex flex-jcc flex-fdc'>
+      <div className='container flex flex-jcsb flex-fdc'>
         {loading && <Spinner />}
         {error && <Message>{error}</Message>}
         {project && <h3>{project.name}</h3>}
