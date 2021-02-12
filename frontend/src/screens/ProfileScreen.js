@@ -15,6 +15,8 @@ import { projectsFetch } from '../redux/reducers/projectReducers';
 import { fetchProjects } from '../redux/actions/projectActions';
 
 const ProfileScreen = () => {
+  const [hidden, setHidden] = useState(true);
+
   const { user, loading, error } = useSelector((state) => state.meFetch);
 
   // console.log(user, loading);
@@ -81,10 +83,17 @@ const ProfileScreen = () => {
         {user && (
           <div className='display flex flex-fdc my-1'>
             <div className='display__image'>
-              <form>
-                <div className='image-upload my-1'>
+              <div
+                className='image-upload my-1'
+                onMouseEnter={() => setHidden(false)}
+                onMouseLeave={() => setHidden(true)}
+              >
+                <img src={avatar} />
+                <form className={hidden ? 'hidden' : 'shown'}>
                   <label htmlFor='file-input'>
-                    <img src={avatar} />
+                    <div>
+                      <div>Update</div>
+                    </div>
                   </label>
 
                   <input
@@ -92,8 +101,8 @@ const ProfileScreen = () => {
                     type='file'
                     onChange={handleAvatarUpload}
                   />
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
             <div className='h-line'></div>
             <div className='display__body'>

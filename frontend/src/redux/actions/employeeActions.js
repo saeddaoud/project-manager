@@ -178,7 +178,7 @@ export const updateAvatar = (avatar) => async (dispatch, getState) => {
       { avatar },
       config
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: AVATAR_UPDATE_SUCCESS,
       payload: data,
