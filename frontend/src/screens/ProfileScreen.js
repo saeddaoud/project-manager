@@ -146,7 +146,8 @@ const ProfileScreen = () => {
                 </div>
               )}
               <ul>
-                {projects &&
+                {user.role !== 'employee' &&
+                  projects &&
                   projects.map((project) => (
                     <Link to={`/project/${project._id}`} key={project._id}>
                       <li>

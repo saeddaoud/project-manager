@@ -62,7 +62,10 @@ export const fetchActiveProjects = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/v1/projects/active?limit=3`, config);
+    const { data } = await axios.get(
+      `/api/v1/projects?status=active&limit=3`,
+      config
+    );
 
     dispatch({
       type: ACTIVE_PROJECTS_FETCH_SUCCESS,

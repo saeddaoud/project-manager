@@ -1,7 +1,6 @@
 import express from 'express';
 import {
   createProject,
-  getActiveProjects,
   getProject,
   getProjects,
 } from '../controllers/projectControllers.js';
@@ -14,9 +13,9 @@ router
   .post(protect, authorize('manager'), createProject)
   .get(protect, authorize('supervisor', 'manager'), getProjects);
 
-router
-  .route('/active')
-  .get(protect, authorize('supervisor', 'manager'), getActiveProjects);
+// router
+//   .route('/active')
+//   .get(protect, authorize('supervisor', 'manager'), getActiveProjects);
 
 router
   .route('/:id')

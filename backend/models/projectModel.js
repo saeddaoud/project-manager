@@ -7,6 +7,7 @@ const projectSchema = new Schema(
     name: {
       type: String,
       required: [true, "Please provide a project's name"],
+      unique: true,
     },
     description: {
       type: String,

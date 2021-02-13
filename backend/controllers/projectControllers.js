@@ -6,28 +6,40 @@ import ErrorResponse from '../utils/errorResponse.js';
 //@decsription    Get all projects
 //@access         Private/manager and supervisor only
 export const getProjects = asyncHandler(async (req, res, next) => {
-  const projects = await Project.find({});
-  res.status(200).json({
-    success: true,
-    data: projects,
-  });
-});
-
-//@route          GET /api/v1/projects/active?limit=x
-//@decsription    Get the last x active projects
-//@access         Private/manager and supervisor only
-export const getActiveProjects = asyncHandler(async (req, res, next) => {
-  const limit = Number(req.query.limit);
-
-  const projects = await Project.find({ status: 'active' })
-    .sort({ _id: -1 })
-    .limit(limit);
+  const status = req.query.status;
+  const limit = req.query.limit && Number(req.query.limit);
+  const keyword = req.query.keyword;
+  // If a keyword is provided retrieve the projects whose name is matched. Otherwise if a status is provided filter documents based on status. Else, retrieve all projects.
+  const query = keyword
+    ? { name: { $regex: keyword, $options: 'i' } }
+    : status
+    ? { status: status }
+    : {};
+  const projects = limit
+    ? await Project.find(query).sort({ _id: -1 }).limit(limit)
+    : await Project.find(query).sort({ _id: -1 });
 
   res.status(200).json({
     success: true,
     data: projects,
   });
 });
+
+// //@route          GET /api/v1/projects/active?limit=x
+// //@decsription    Get the last x active projects
+// //@access         Private/manager and supervisor only
+// export const getActiveProjects = asyncHandler(async (req, res, next) => {
+//   const limit = Number(req.query.limit);
+
+//   const projects = await Project.find({ status: 'active' })
+//     .sort({ _id: -1 })
+//     .limit(limit);
+
+//   res.status(200).json({
+//     success: true,
+//     data: projects,
+//   });
+// });
 
 //@route          GET /api/v1/projects/:id
 //@decsription    Get project by id
