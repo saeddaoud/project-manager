@@ -9,6 +9,7 @@ import {
   meFetchReducer,
 } from './reducers/employeeReducers';
 import {
+  activeProjectsFetchReducer,
   projectFetchReducer,
   projectsFetchReducer,
 } from './reducers/projectReducers';
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   employeesList: employeesListReducer,
   avatarUpdate: avatarUpdateReducer,
   projectsFetch: projectsFetchReducer,
+  activeProjectsFetch: activeProjectsFetchReducer,
   projectFetch: projectFetchReducer,
 });
 

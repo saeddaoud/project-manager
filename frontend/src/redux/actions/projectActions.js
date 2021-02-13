@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import {
+  ACTIVE_PROJECTS_FETCH_FAIL,
+  ACTIVE_PROJECTS_FETCH_REQUEST,
+  ACTIVE_PROJECTS_FETCH_SUCCESS,
   PROJECTS_FETCH_FAIL,
   PROJECTS_FETCH_REQUEST,
   PROJECTS_FETCH_SUCCESS,
@@ -35,6 +38,40 @@ export const fetchProjects = () => async (dispatch, getState) => {
     console.log(error.response.data.error);
     dispatch({
       type: PROJECTS_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const fetchActiveProjects = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ACTIVE_PROJECTS_FETCH_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/projects/active?limit=3`, config);
+
+    dispatch({
+      type: ACTIVE_PROJECTS_FETCH_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response.data.error);
+    dispatch({
+      type: ACTIVE_PROJECTS_FETCH_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

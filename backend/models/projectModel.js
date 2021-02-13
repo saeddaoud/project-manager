@@ -12,6 +12,12 @@ const projectSchema = new Schema(
       type: String,
       required: [true, 'Please provide a brief description of the project'],
     },
+    status: {
+      type: String,
+      required: true,
+      enum: ['active', 'completed'],
+      default: 'active',
+    },
   },
   { timestamps: true }
 );

@@ -13,6 +13,22 @@ export const getProjects = asyncHandler(async (req, res, next) => {
   });
 });
 
+//@route          GET /api/v1/projects/active?limit=x
+//@decsription    Get the last x active projects
+//@access         Private/manager and supervisor only
+export const getActiveProjects = asyncHandler(async (req, res, next) => {
+  const limit = Number(req.query.limit);
+
+  const projects = await Project.find({ status: 'active' })
+    .sort({ _id: -1 })
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    data: projects,
+  });
+});
+
 //@route          GET /api/v1/projects/:id
 //@decsription    Get project by id
 //@access         Private/manager and supervisor only

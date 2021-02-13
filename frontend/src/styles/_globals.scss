@@ -45,12 +45,18 @@ p {
 .page {
   width: 100%;
   height: calc(100vh - 100px);
+  overflow-y: scroll;
 }
 
 .container {
   width: 90%;
   height: 100%;
   margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-text-color;
 }
 
 .flex {

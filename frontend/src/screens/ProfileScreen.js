@@ -12,12 +12,26 @@ import Spinner from '../components/Spinner';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 import { projectsFetch } from '../redux/reducers/projectReducers';
-import { fetchProjects } from '../redux/actions/projectActions';
+import {
+  fetchActiveProjects,
+  fetchProjects,
+} from '../redux/actions/projectActions';
 
 const ProfileScreen = () => {
   const [hidden, setHidden] = useState(true);
 
-  const { user, loading, error } = useSelector((state) => state.meFetch);
+  const {
+    user,
+    loading: userLoading,
+    error: userError,
+    success: userSuccess,
+  } = useSelector((state) => state.meFetch);
+  const {
+    projects,
+    loading: projectsLoading,
+    error: projectsError,
+    success: projectsSuccess,
+  } = useSelector((state) => state.activeProjectsFetch);
 
   // console.log(user, loading);
 
@@ -45,6 +59,10 @@ const ProfileScreen = () => {
     }
     if (user) {
       setAvatar(user.avatar);
+    }
+
+    if (user && user.role !== 'employee') {
+      dispatch(fetchActiveProjects());
     }
 
     // dispatch(fetchProjects());
@@ -78,9 +96,10 @@ const ProfileScreen = () => {
         {/* <button className='btn m-2' onClick={clickHandler}>
           List Employees
         </button> */}
-        {loading && <Spinner />}
-        {error && <Message>{error}</Message>}
-        {user && (
+        {(userLoading || projectsLoading) && <Spinner />}
+        {userError && <Message>{userError}</Message>}
+        {projectsError && <Message>{projectsError}</Message>}
+        {userSuccess && projectsSuccess && user && (
           <div className='display flex flex-fdc my-1'>
             <div className='display__image'>
               <div
@@ -116,15 +135,34 @@ const ProfileScreen = () => {
               </div>
             </div>
             <div className='h-line'></div>
-            {user && user.role !== 'employee' ? (
-              <div className='recent-projects my-1'>
-                <h1>Recent Projects</h1>
-              </div>
-            ) : (
-              <div className='recent-tasks my-1'>
-                <h1>Recent Tasks</h1>
-              </div>
-            )}
+            <div className='recent '>
+              {user && user.role !== 'employee' ? (
+                <div className='recent-projects my-1'>
+                  <h1>Recent Projects</h1>
+                </div>
+              ) : (
+                <div className='recent-tasks my-1'>
+                  <h1>Recent Tasks</h1>
+                </div>
+              )}
+              <ul>
+                {projects &&
+                  projects.map((project) => (
+                    <Link to={`/project/${project._id}`} key={project._id}>
+                      <li>
+                        <div className='flex'>
+                          <div>Name: {project.name}</div>
+                          <div>Status: {project.status}</div>
+                        </div>
+                        <div className='flex'>
+                          <div>Tasks: {project.name}</div>
+                          <div>Employees:{project.status}</div>
+                        </div>
+                      </li>
+                    </Link>
+                  ))}
+              </ul>
+            </div>
           </div>
         )}
         {/* {projects && (
