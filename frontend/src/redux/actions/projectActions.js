@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 import {
-  ACTIVE_PROJECTS_FETCH_FAIL,
-  ACTIVE_PROJECTS_FETCH_REQUEST,
-  ACTIVE_PROJECTS_FETCH_SUCCESS,
+  // ACTIVE_PROJECTS_FETCH_FAIL,
+  // ACTIVE_PROJECTS_FETCH_REQUEST,
+  // ACTIVE_PROJECTS_FETCH_SUCCESS,
   PROJECTS_FETCH_FAIL,
   PROJECTS_FETCH_REQUEST,
   PROJECTS_FETCH_SUCCESS,
@@ -12,7 +12,30 @@ import {
   PROJECT_FETCH_SUCCESS,
 } from '../constants/projectConstants';
 
-export const fetchProjects = () => async (dispatch, getState) => {
+// fetchProjects can take an argument queryOptions as an object with three possible properties' names: keyword, status, and limit.
+
+export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
+  const keyword = queryOptions?.keyword;
+  const limit = queryOptions?.limit;
+  const status = queryOptions?.status;
+
+  console.log(keyword, limit, status);
+
+  let query = [];
+
+  if (keyword) {
+    query.push(`keyword=${keyword}`);
+  } else {
+    if (status) {
+      query.push(`status=${status}`);
+    }
+    if (limit) {
+      query.push(`limit=${limit}`);
+    }
+  }
+
+  console.log(query.length);
+
   try {
     dispatch({
       type: PROJECTS_FETCH_REQUEST,
@@ -28,7 +51,13 @@ export const fetchProjects = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/v1/projects`, config);
+    const { data } =
+      query.length > 0
+        ? await axios.get(
+            `/api/v1/projects?${query.join(',').replace(',', '&')}`,
+            config
+          )
+        : await axios.get(`/api/v1/projects`, config);
 
     dispatch({
       type: PROJECTS_FETCH_SUCCESS,
@@ -46,42 +75,42 @@ export const fetchProjects = () => async (dispatch, getState) => {
   }
 };
 
-export const fetchActiveProjects = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: ACTIVE_PROJECTS_FETCH_REQUEST,
-    });
+// export const fetchActiveProjects = () => async (dispatch, getState) => {
+//   try {
+//     dispatch({
+//       type: ACTIVE_PROJECTS_FETCH_REQUEST,
+//     });
 
-    let token = getState().employeeLogin.userInfo.token;
-    token = `Bearer ${token}`;
+//     let token = getState().employeeLogin.userInfo.token;
+//     token = `Bearer ${token}`;
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-    };
+//     const config = {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: token,
+//       },
+//     };
 
-    const { data } = await axios.get(
-      `/api/v1/projects?status=active&limit=3`,
-      config
-    );
+//     const { data } = await axios.get(
+//       `/api/v1/projects?status=active&limit=3`,
+//       config
+//     );
 
-    dispatch({
-      type: ACTIVE_PROJECTS_FETCH_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    console.log(error.response.data.error);
-    dispatch({
-      type: ACTIVE_PROJECTS_FETCH_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    });
-  }
-};
+//     dispatch({
+//       type: ACTIVE_PROJECTS_FETCH_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     console.log(error.response.data.error);
+//     dispatch({
+//       type: ACTIVE_PROJECTS_FETCH_FAIL,
+//       payload:
+//         error.response && error.response.data.error
+//           ? error.response.data.error
+//           : error.message,
+//     });
+//   }
+// };
 
 export const fetchProject = (id) => async (dispatch, getState) => {
   try {

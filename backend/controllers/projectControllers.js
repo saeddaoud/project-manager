@@ -15,6 +15,7 @@ export const getProjects = asyncHandler(async (req, res, next) => {
     : status
     ? { status: status }
     : {};
+  // console.log(query);
   const projects = limit
     ? await Project.find(query).sort({ _id: -1 }).limit(limit)
     : await Project.find(query).sort({ _id: -1 });

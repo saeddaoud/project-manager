@@ -1,8 +1,8 @@
 import {
-  ACTIVE_PROJECTS_FETCH_FAIL,
-  ACTIVE_PROJECTS_FETCH_REQUEST,
-  ACTIVE_PROJECTS_FETCH_RESET,
-  ACTIVE_PROJECTS_FETCH_SUCCESS,
+  // ACTIVE_PROJECTS_FETCH_FAIL,
+  // ACTIVE_PROJECTS_FETCH_REQUEST,
+  // ACTIVE_PROJECTS_FETCH_RESET,
+  // ACTIVE_PROJECTS_FETCH_SUCCESS,
   PROJECTS_FETCH_FAIL,
   PROJECTS_FETCH_REQUEST,
   PROJECTS_FETCH_RESET,
@@ -33,28 +33,28 @@ export const projectsFetchReducer = (state = { projects: null }, action) => {
   }
 };
 
-export const activeProjectsFetchReducer = (
-  state = { projects: null },
-  action
-) => {
-  const { type, payload } = action;
-  switch (type) {
-    case ACTIVE_PROJECTS_FETCH_REQUEST:
-      return { loading: true };
-    case ACTIVE_PROJECTS_FETCH_SUCCESS:
-      return {
-        loading: false,
-        success: payload.success,
-        projects: payload.data,
-      };
-    case ACTIVE_PROJECTS_FETCH_FAIL:
-      return { loading: false, error: payload };
-    case ACTIVE_PROJECTS_FETCH_RESET:
-      return { projects: null };
-    default:
-      return state;
-  }
-};
+// export const activeProjectsFetchReducer = (
+//   state = { projects: null },
+//   action
+// ) => {
+//   const { type, payload } = action;
+//   switch (type) {
+//     case ACTIVE_PROJECTS_FETCH_REQUEST:
+//       return { loading: true };
+//     case ACTIVE_PROJECTS_FETCH_SUCCESS:
+//       return {
+//         loading: false,
+//         success: payload.success,
+//         projects: payload.data,
+//       };
+//     case ACTIVE_PROJECTS_FETCH_FAIL:
+//       return { loading: false, error: payload };
+//     case ACTIVE_PROJECTS_FETCH_RESET:
+//       return { projects: null };
+//     default:
+//       return state;
+//   }
+// };
 
 export const projectFetchReducer = (state = {}, action) => {
   const { type, payload } = action;

@@ -31,7 +31,7 @@ const ProfileScreen = () => {
     loading: projectsLoading,
     error: projectsError,
     success: projectsSuccess,
-  } = useSelector((state) => state.activeProjectsFetch);
+  } = useSelector((state) => state.projectsFetch);
 
   // console.log(user, loading);
 
@@ -62,7 +62,8 @@ const ProfileScreen = () => {
     }
 
     if (user && user.role !== 'employee') {
-      dispatch(fetchActiveProjects());
+      dispatch(fetchProjects({ status: 'active', limit: '3' }));
+      // dispatch(fetchProjects());
     }
 
     // dispatch(fetchProjects());

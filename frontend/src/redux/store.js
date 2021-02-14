@@ -23,7 +23,7 @@ const reducer = combineReducers({
   employeesList: employeesListReducer,
   avatarUpdate: avatarUpdateReducer,
   projectsFetch: projectsFetchReducer,
-  activeProjectsFetch: activeProjectsFetchReducer,
+  // activeProjectsFetch: activeProjectsFetchReducer,
   projectFetch: projectFetchReducer,
 });
 
