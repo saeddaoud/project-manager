@@ -31,7 +31,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className='page login-page'>
+    // <div className='page login-page'>
       <div className='container flex flex-jcc flex-fdc'>
         {error && <Message>{error}</Message>}
         {loading ? (
@@ -73,7 +73,7 @@ const LoginScreen = () => {
           <Link to='/signup'> here</Link>
         </p>
       </div>
-    </div>
+    // </div>
   );
 };
 

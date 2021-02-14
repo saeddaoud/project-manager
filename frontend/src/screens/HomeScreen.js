@@ -11,7 +11,7 @@ const HomeScreen = () => {
     }
   }, [userInfo, history]);
   return (
-    <div className='page home-page'>
+    // <div className='page'>
       <div className='container flex flex-jcc '>
         <div className='card flex flex-jcsa flex-fdc'>
           <h2>Welcome to</h2>
@@ -23,7 +23,7 @@ const HomeScreen = () => {
           </p>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

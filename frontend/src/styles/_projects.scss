@@ -1,0 +1,23 @@
+.projects-list {
+  color: $primary-text-color;
+  width: 100%;
+  li {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    @include responsive-property('font-size', $reduced-font-size);
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    > div {
+      width: 100%;
+      height: 40px;
+    }
+  }
+  li:nth-child(odd) {
+    background: $primary-bg-color;
+  }
+  li:nth-child(even) {
+    background: $secondary-bg-color;
+  }
+}

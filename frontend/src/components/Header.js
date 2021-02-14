@@ -18,7 +18,7 @@ const Header = () => {
             <ul className='menu__list flex'>
               {user ? (
                 <li>
-                  <Link to='/profile/me'>Dashboard</Link>
+                  <Link to='/profile/me'>My Profile</Link>
                 </li>
               ) : (
                 <li>
@@ -27,6 +27,28 @@ const Header = () => {
                   </Link>
                 </li>
               )}
+              <li>
+                {user && user.role !== 'employee' ? (
+                  <Link to='/projects' onClick={() => setShow(false)}>
+                    Projects
+                  </Link>
+                ) : (
+                  <Link to='/employees/projects' onClick={() => setShow(false)}>
+                    My Projects
+                  </Link>
+                )}
+              </li>
+              <li>
+                {user && user.role !== 'employee' ? (
+                  <Link to='/employees' onClick={() => setShow(false)}>
+                    Employees
+                  </Link>
+                ) : (
+                  <Link to='/tasks' onClick={() => setShow(false)}>
+                    My Tasks
+                  </Link>
+                )}
+              </li>
               <li>
                 {user ? (
                   <Link to='/login' onClick={() => dispatch(logout())}>
@@ -52,38 +74,65 @@ const Header = () => {
               <div></div>
             </div>
             <div className={show ? 'side-nav__menu show' : 'side-nav__menu'}>
-              <ul className='menu__list flex flex-fdc my-2'>
-                {user ? (
-                  <li>
-                    <Link to='/profile/me' onClick={() => setShow(false)}>
-                      Dashboard
-                    </Link>
-                  </li>
-                ) : (
-                  <li>
-                    <Link to='/' onClick={() => setShow(false)}>
-                      Home
-                    </Link>
-                  </li>
-                )}
-                <li>
+              <div className='menu__list'>
+                <ul className='flex flex-fdc my-2'>
                   {user ? (
-                    <Link
-                      to='/login'
-                      onClick={() => {
-                        dispatch(logout());
-                        setShow(false);
-                      }}
-                    >
-                      Logout
-                    </Link>
+                    <li>
+                      <Link to='/profile/me' onClick={() => setShow(false)}>
+                        My Profile
+                      </Link>
+                    </li>
                   ) : (
-                    <Link to='/login' onClick={() => setShow(false)}>
-                      Login
-                    </Link>
+                    <li>
+                      <Link to='/' onClick={() => setShow(false)}>
+                        Home
+                      </Link>
+                    </li>
                   )}
-                </li>
-              </ul>
+                  <li>
+                    {user && user.role !== 'employee' ? (
+                      <Link to='/projects' onClick={() => setShow(false)}>
+                        Projects
+                      </Link>
+                    ) : (
+                      <Link
+                        to='/employees/projects'
+                        onClick={() => setShow(false)}
+                      >
+                        My Projects
+                      </Link>
+                    )}
+                  </li>
+                  <li>
+                    {user && user.role !== 'employee' ? (
+                      <Link to='/employees' onClick={() => setShow(false)}>
+                        Employees
+                      </Link>
+                    ) : (
+                      <Link to='/tasks' onClick={() => setShow(false)}>
+                        My Tasks
+                      </Link>
+                    )}
+                  </li>
+                  <li>
+                    {user ? (
+                      <Link
+                        to='/login'
+                        onClick={() => {
+                          dispatch(logout());
+                          setShow(false);
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    ) : (
+                      <Link to='/login' onClick={() => setShow(false)}>
+                        Login
+                      </Link>
+                    )}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </nav>

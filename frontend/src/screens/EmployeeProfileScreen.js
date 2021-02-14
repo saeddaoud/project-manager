@@ -19,13 +19,13 @@ const EmployeeProfileScreen = ({ match }) => {
   }, [dispatch, id]);
 
   return (
-    <div className='page profile-page'>
+    // <div className='page profile-page'>
       <div className='container'>
         {loading && <Spinner />}
         {error && <Message>{error}</Message>}
         {user && <h3>{user.name}</h3>}
       </div>
-    </div>
+    // </div>
   );
 };
 

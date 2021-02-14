@@ -17,13 +17,13 @@ const ProjectScreen = ({ match }) => {
   }, [dispatch, id]);
 
   return (
-    <div className='page profile-page'>
+    // <div className='page profile-page'>
       <div className='container flex flex-jcsb flex-fdc'>
         {loading && <Spinner />}
         {error && <Message>{error}</Message>}
         {project && <h3>{project.name}</h3>}
       </div>
-    </div>
+    // </div>
   );
 };
 

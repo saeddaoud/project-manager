@@ -16,6 +16,7 @@ import {
   fetchActiveProjects,
   fetchProjects,
 } from '../redux/actions/projectActions';
+import Projects from '../components/Projects';
 
 const ProfileScreen = () => {
   const [hidden, setHidden] = useState(true);
@@ -92,7 +93,7 @@ const ProfileScreen = () => {
     }
   };
   return (
-    <div className='page profile-page'>
+    // <div className='page profile-page'>
       <div className='container flex flex-jcc flex-aifs'>
         {/* <button className='btn m-2' onClick={clickHandler}>
           List Employees
@@ -146,24 +147,9 @@ const ProfileScreen = () => {
                   <h1>Recent Tasks</h1>
                 </div>
               )}
-              <ul>
-                {user.role !== 'employee' &&
-                  projects &&
-                  projects.map((project) => (
-                    <Link to={`/project/${project._id}`} key={project._id}>
-                      <li>
-                        <div className='flex'>
-                          <div>Name: {project.name}</div>
-                          <div>Status: {project.status}</div>
-                        </div>
-                        <div className='flex'>
-                          <div>Tasks: {project.name}</div>
-                          <div>Employees:{project.status}</div>
-                        </div>
-                      </li>
-                    </Link>
-                  ))}
-              </ul>
+              {user.role !== 'employee' && projects && (
+                <Projects projects={projects} />
+              )}
             </div>
           </div>
         )}
@@ -182,7 +168,7 @@ const ProfileScreen = () => {
           </div>
         )} */}
       </div>
-    </div>
+    // </div>
   );
 };
 

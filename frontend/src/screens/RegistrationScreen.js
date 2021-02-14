@@ -7,7 +7,7 @@ const RegistrationScreen = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   return (
-    <div className='page signup-page'>
+    // <div className='page signup-page'>
       <div className='container flex flex-jcc flex-fdc'>
         <form className='form flex flex-fdc flex-jcsa'>
           <div className='input-control'>
@@ -59,7 +59,7 @@ const RegistrationScreen = () => {
           <Link to='/login'> here</Link>
         </p>
       </div>
-    </div>
+    // </div>
   );
 };
 
