@@ -11,7 +11,7 @@ const projectSchema = new Schema(
     },
     description: {
       type: String,
-      required: [true, 'Please provide a brief description of the project'],
+      // required: [true, 'Please provide a brief description of the project'],
     },
     status: {
       type: String,

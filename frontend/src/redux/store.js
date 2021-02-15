@@ -9,7 +9,7 @@ import {
   meFetchReducer,
 } from './reducers/employeeReducers';
 import {
-  activeProjectsFetchReducer,
+  projectAddReducer,
   projectFetchReducer,
   projectsFetchReducer,
 } from './reducers/projectReducers';
@@ -23,8 +23,8 @@ const reducer = combineReducers({
   employeesList: employeesListReducer,
   avatarUpdate: avatarUpdateReducer,
   projectsFetch: projectsFetchReducer,
-  // activeProjectsFetch: activeProjectsFetchReducer,
   projectFetch: projectFetchReducer,
+  projectAdd: projectAddReducer,
 });
 
 const userInforFromStorage = localStorage.getItem('userInfo')

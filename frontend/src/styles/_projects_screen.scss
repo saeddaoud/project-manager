@@ -1,10 +1,15 @@
 .actions {
   width: 100%;
-
+  .add-project {
+    width: 100%;
+  }
   .search {
     width: 100%;
   }
   input {
     border: none;
   }
+}
+.display-projects {
+  width: 100%;
 }

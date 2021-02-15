@@ -7,6 +7,9 @@ import {
   PROJECTS_FETCH_FAIL,
   PROJECTS_FETCH_REQUEST,
   PROJECTS_FETCH_SUCCESS,
+  PROJECT_ADD_FAIL,
+  PROJECT_ADD_REQUEST,
+  PROJECT_ADD_SUCCESS,
   PROJECT_FETCH_FAIL,
   PROJECT_FETCH_REQUEST,
   PROJECT_FETCH_SUCCESS,
@@ -138,6 +141,44 @@ export const fetchProject = (id) => async (dispatch, getState) => {
     console.log(error.response.data.error);
     dispatch({
       type: PROJECT_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const addProject = (project) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROJECT_ADD_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.post(`/api/v1/projects/`, project, config);
+
+    const fetchedProjects = getState().projectsFecth();
+
+    console.log(fetchedProjects);
+
+    dispatch({
+      type: PROJECT_ADD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response.data.error);
+    dispatch({
+      type: PROJECT_ADD_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

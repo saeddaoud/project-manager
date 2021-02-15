@@ -7,7 +7,6 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.meFetch);
-  // console.log(user);
   return (
     <div className='header'>
       <div className='container '>
