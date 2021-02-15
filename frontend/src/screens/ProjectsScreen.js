@@ -13,7 +13,7 @@ const ProjectsScreen = () => {
 
   const dispatch = useDispatch();
   const { user, loading: userLoading } = useSelector((state) => state.meFetch);
-  console.log(user);
+  // console.log(user);
   const { projects, error, loading, success } = useSelector(
     (state) => state.projectsFetch
   );
@@ -46,7 +46,7 @@ const ProjectsScreen = () => {
 
   const addProjectHandler = (e) => {
     e.preventDefault();
-    console.log(projectName, projectDescription);
+    // console.log(projectName, projectDescription);
     if (projectName !== '' && projectDescription !== '') {
       //add the project
       setProjectNameError('');
@@ -132,23 +132,23 @@ const ProjectsScreen = () => {
                 borderBottom: '1px solid black',
               }}
             >
-              <div
+              {/* <div
                 className='input-control'
                 style={{
-                  height: '50px',
+                  height: '30px',
                   marginBottom: '0',
                   width: '100%',
                 }}
-              >
-                {/* <label>Keyword</label> */}
-                <input
-                  style={{ top: '15px', width: '100%' }}
-                  type='text'
-                  placeholder='Search Projects'
-                  value={keyword1}
-                  onChange={(e) => setKeyword1(e.target.value)}
-                />
-              </div>
+              > */}
+              {/* <label>Keyword</label> */}
+              <input
+                style={{ top: '15px', width: '100%' }}
+                type='text'
+                placeholder='Search Projects'
+                value={keyword1}
+                onChange={(e) => setKeyword1(e.target.value)}
+              />
+              {/* </div> */}
             </form>
           </div>
           <div className='filter'>

@@ -22,7 +22,7 @@ export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
   const limit = queryOptions?.limit;
   const status = queryOptions?.status;
 
-  console.log(keyword, limit, status);
+  // console.log(keyword, limit, status);
 
   let query = [];
 
@@ -37,7 +37,7 @@ export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
     }
   }
 
-  console.log(query.length);
+  // console.log(query.length);
 
   try {
     dispatch({
@@ -167,7 +167,7 @@ export const addProject = (project) => async (dispatch, getState) => {
 
     const { data } = await axios.post(`/api/v1/projects/`, project, config);
 
-    const fetchedProjects = getState().projectsFecth();
+    const fetchedProjects = getState().projectsFecth;
 
     console.log(fetchedProjects);
 
