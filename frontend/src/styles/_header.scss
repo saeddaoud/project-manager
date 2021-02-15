@@ -76,6 +76,9 @@
             width: 100%;
           }
         }
+        .menu__list.reduce--m {
+          height: 30%;
+        }
 
         // a {
 
@@ -111,6 +114,9 @@
       //     background-color: $primary-bg-color-hover;
       //   }
       // }
+    }
+    .reduce--d {
+      width: 40%;
     }
   }
 }

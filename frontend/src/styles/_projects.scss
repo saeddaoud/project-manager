@@ -1,6 +1,9 @@
 .projects-list {
   color: $primary-text-color;
   width: 100%;
+  a {
+    color: $primary-text-color;
+  }
   li {
     display: block;
     padding: 1rem;

@@ -7,6 +7,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.meFetch);
+  // console.log(user);
   return (
     <div className='header'>
       <div className='container '>
@@ -14,7 +15,7 @@ const Header = () => {
           <div className='nav__logo'>
             <h4>Project M</h4>
           </div>
-          <div className='nav__menu'>
+          <div className={user ? 'nav__menu' : 'nav__menu reduce--d'}>
             <ul className='menu__list flex'>
               {user ? (
                 <li>
@@ -27,37 +28,50 @@ const Header = () => {
                   </Link>
                 </li>
               )}
-              <li>
-                {user && user.role !== 'employee' ? (
+              {user && user.role !== 'employee' ? (
+                <li>
                   <Link to='/projects' onClick={() => setShow(false)}>
                     Projects
                   </Link>
-                ) : (
-                  <Link to='/employees/projects' onClick={() => setShow(false)}>
-                    My Projects
-                  </Link>
-                )}
-              </li>
-              <li>
-                {user && user.role !== 'employee' ? (
+                </li>
+              ) : (
+                user && (
+                  <li>
+                    <Link
+                      to='/employees/projects'
+                      onClick={() => setShow(false)}
+                    >
+                      My Projects
+                    </Link>
+                  </li>
+                )
+              )}
+              {user && user.role !== 'employee' ? (
+                <li>
                   <Link to='/employees' onClick={() => setShow(false)}>
                     Employees
                   </Link>
-                ) : (
-                  <Link to='/tasks' onClick={() => setShow(false)}>
-                    My Tasks
-                  </Link>
-                )}
-              </li>
-              <li>
-                {user ? (
+                </li>
+              ) : (
+                user && (
+                  <li>
+                    <Link to='/tasks' onClick={() => setShow(false)}>
+                      My Tasks
+                    </Link>
+                  </li>
+                )
+              )}
+              {user ? (
+                <li>
                   <Link to='/login' onClick={() => dispatch(logout())}>
                     Logout
                   </Link>
-                ) : (
+                </li>
+              ) : (
+                <li>
                   <Link to='/login'>Login</Link>
-                )}
-              </li>
+                </li>
+              )}
             </ul>
           </div>
           <div className='side-nav'>
@@ -74,7 +88,7 @@ const Header = () => {
               <div></div>
             </div>
             <div className={show ? 'side-nav__menu show' : 'side-nav__menu'}>
-              <div className='menu__list'>
+              <div className={user ? 'menu__list' : 'menu__list reduce--m'}>
                 <ul className='flex flex-fdc my-2'>
                   {user ? (
                     <li>
@@ -89,33 +103,41 @@ const Header = () => {
                       </Link>
                     </li>
                   )}
-                  <li>
-                    {user && user.role !== 'employee' ? (
+                  {user && user.role !== 'employee' ? (
+                    <li>
                       <Link to='/projects' onClick={() => setShow(false)}>
                         Projects
                       </Link>
-                    ) : (
-                      <Link
-                        to='/employees/projects'
-                        onClick={() => setShow(false)}
-                      >
-                        My Projects
-                      </Link>
-                    )}
-                  </li>
-                  <li>
-                    {user && user.role !== 'employee' ? (
+                    </li>
+                  ) : (
+                    user && (
+                      <li>
+                        <Link
+                          to='/employees/projects'
+                          onClick={() => setShow(false)}
+                        >
+                          My Projects
+                        </Link>
+                      </li>
+                    )
+                  )}
+                  {user && user.role !== 'employee' ? (
+                    <li>
                       <Link to='/employees' onClick={() => setShow(false)}>
                         Employees
                       </Link>
-                    ) : (
-                      <Link to='/tasks' onClick={() => setShow(false)}>
-                        My Tasks
-                      </Link>
-                    )}
-                  </li>
-                  <li>
-                    {user ? (
+                    </li>
+                  ) : (
+                    user && (
+                      <li>
+                        <Link to='/tasks' onClick={() => setShow(false)}>
+                          My Tasks
+                        </Link>
+                      </li>
+                    )
+                  )}
+                  {user ? (
+                    <li>
                       <Link
                         to='/login'
                         onClick={() => {
@@ -125,12 +147,14 @@ const Header = () => {
                       >
                         Logout
                       </Link>
-                    ) : (
+                    </li>
+                  ) : (
+                    <li>
                       <Link to='/login' onClick={() => setShow(false)}>
                         Login
                       </Link>
-                    )}
-                  </li>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
