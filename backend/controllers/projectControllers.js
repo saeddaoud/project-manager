@@ -68,3 +68,19 @@ export const createProject = asyncHandler(async (req, res, next) => {
     data: project,
   });
 });
+
+//@route          DELETE /api/v1/projects/:id
+//@decsription    Delete a project
+//@access         Private/manager only
+export const deleteProject = asyncHandler(async (req, res, next) => {
+  const project = await Project.findByIdAndDelete(req.params.id);
+
+  if (!project) {
+    return next(new ErrorResponse('Project not found', 404));
+  }
+
+  res.status(201).json({
+    success: true,
+    data: {},
+  });
+});

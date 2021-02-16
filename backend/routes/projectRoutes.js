@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   createProject,
+  deleteProject,
   getProject,
   getProjects,
 } from '../controllers/projectControllers.js';
@@ -19,6 +20,7 @@ router
 
 router
   .route('/:id')
-  .get(protect, authorize('supervisor', 'manager'), getProject);
+  .get(protect, authorize('supervisor', 'manager'), getProject)
+  .delete(protect, authorize('manager'), deleteProject);
 
 export default router;

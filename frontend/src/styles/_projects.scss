@@ -18,7 +18,8 @@
     }
   }
   li:nth-child(odd) {
-    background: $primary-bg-color;
+    // background: $primary-bg-color;
+    background: $ternary-bg-color;
   }
   li:nth-child(even) {
     background: $secondary-bg-color;
