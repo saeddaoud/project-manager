@@ -10,6 +10,7 @@ import {
 } from './reducers/employeeReducers';
 import {
   projectAddReducer,
+  projectDeleteReducer,
   projectFetchReducer,
   projectsFetchReducer,
 } from './reducers/projectReducers';
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   projectsFetch: projectsFetchReducer,
   projectFetch: projectFetchReducer,
   projectAdd: projectAddReducer,
+  projectDelete: projectDeleteReducer,
 });
 
 const userInforFromStorage = localStorage.getItem('userInfo')

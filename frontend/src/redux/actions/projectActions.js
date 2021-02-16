@@ -10,6 +10,9 @@ import {
   PROJECT_ADD_FAIL,
   PROJECT_ADD_REQUEST,
   PROJECT_ADD_SUCCESS,
+  PROJECT_DELETE_FAIL,
+  PROJECT_DELETE_REQUEST,
+  PROJECT_DELETE_SUCCESS,
   PROJECT_FETCH_FAIL,
   PROJECT_FETCH_REQUEST,
   PROJECT_FETCH_SUCCESS,
@@ -184,6 +187,58 @@ export const addProject = (project) => async (dispatch, getState) => {
     // console.log(error.response.data.error);
     dispatch({
       type: PROJECT_ADD_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const deleteProject = (projectId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROJECT_DELETE_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.delete(
+      `/api/v1/projects/${projectId}`,
+      config
+    );
+
+    let fetchedProjects = getState().projectsFetch.projects;
+
+    console.log(fetchedProjects);
+
+    fetchedProjects = fetchedProjects.filter(
+      (fetchedProject) => fetchedProject._id.toString() !== projectId.toString()
+    );
+
+    console.log(fetchedProjects);
+
+    dispatch({
+      type: PROJECT_DELETE_SUCCESS,
+      payload: data,
+    });
+    // updata projects in the frontend by appending the new added project without fetching all the projects again from the backend
+    dispatch({
+      type: PROJECTS_FETCH_SUCCESS,
+      payload: { success: true, data: fetchedProjects },
+    });
+  } catch (error) {
+    // console.log(error.response.data.error);
+    dispatch({
+      type: PROJECT_DELETE_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

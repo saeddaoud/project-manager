@@ -97,6 +97,7 @@ const ProjectsScreen = () => {
                 <small>{projectDescriptionError}</small>
               )}
             </div>
+
             <div className='flex'>
               <button className='btn btn--add' type='submit'>
                 Add Project
@@ -113,17 +114,19 @@ const ProjectsScreen = () => {
       )}
 
       <div className='actions flex flex-aife flex-fdc my-1'>
-        <div className='add-container'>
-          <div
-            className='add-container__btn'
-            onClick={() => setShowAddProjectForm(true)}
-          >
-            <div className='btn btn--dark'>
-              <i className='fas fa-plus'></i> Add Project
+        {user && user.role === 'manager' && (
+          <div className='add-container'>
+            <div
+              className='add-container__btn'
+              onClick={() => setShowAddProjectForm(true)}
+            >
+              <div className='btn btn--dark'>
+                <i className='fas fa-plus'></i> Add Project
+              </div>
+              {/* <i className='far fa-plus-square'></i> */}
             </div>
-            {/* <i className='far fa-plus-square'></i> */}
           </div>
-        </div>
+        )}
         <div className='flex flex-aife' style={{ width: '100%' }}>
           <div className='search'>
             <form

@@ -21,6 +21,12 @@ import {
   AVATAR_UPDATE_FAIL,
   AVATAR_UPDATE_REQUEST,
 } from '../constants/employeeConstants';
+import {
+  PROJECTS_FETCH_RESET,
+  PROJECT_ADD_RESET,
+  PROJECT_DELETE_RESET,
+  PROJECT_FETCH_RESET,
+} from '../constants/projectConstants';
 
 export const loginEmployee = (employee) => async (dispatch) => {
   try {
@@ -207,6 +213,18 @@ export const logout = () => (dispatch) => {
   });
   dispatch({
     type: EMPLOYEES_LIST_RESET,
+  });
+  dispatch({
+    type: PROJECTS_FETCH_RESET,
+  });
+  dispatch({
+    type: PROJECT_FETCH_RESET,
+  });
+  dispatch({
+    type: PROJECT_ADD_RESET,
+  });
+  dispatch({
+    type: PROJECT_DELETE_RESET,
   });
 
   localStorage.removeItem('userInfo');

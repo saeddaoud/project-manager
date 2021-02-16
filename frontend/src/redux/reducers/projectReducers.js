@@ -11,6 +11,10 @@ import {
   PROJECT_ADD_REQUEST,
   PROJECT_ADD_RESET,
   PROJECT_ADD_SUCCESS,
+  PROJECT_DELETE_FAIL,
+  PROJECT_DELETE_REQUEST,
+  PROJECT_DELETE_RESET,
+  PROJECT_DELETE_SUCCESS,
   PROJECT_FETCH_FAIL,
   PROJECT_FETCH_REQUEST,
   PROJECT_FETCH_RESET,
@@ -94,6 +98,26 @@ export const projectAddReducer = (state = {}, action) => {
     case PROJECT_ADD_FAIL:
       return { loading: false, error: payload };
     case PROJECT_ADD_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const projectDeleteReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case PROJECT_DELETE_REQUEST:
+      return { loading: true };
+    case PROJECT_DELETE_SUCCESS:
+      return {
+        loading: false,
+        success: payload.success,
+        // project: payload.data,
+      };
+    case PROJECT_DELETE_FAIL:
+      return { loading: false, error: payload };
+    case PROJECT_DELETE_RESET:
       return {};
     default:
       return state;

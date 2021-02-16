@@ -58,6 +58,7 @@ const ProfileScreen = () => {
     if (!user) {
       dispatch(fetchMe());
     }
+
     if (user) {
       setAvatar(user.avatar);
     }
@@ -94,66 +95,66 @@ const ProfileScreen = () => {
   };
   return (
     // <div className='page profile-page'>
-      <div className='container flex flex-jcc flex-aifs'>
-        {/* <button className='btn m-2' onClick={clickHandler}>
+    <div className='container flex flex-jcc flex-aifs'>
+      {/* <button className='btn m-2' onClick={clickHandler}>
           List Employees
         </button> */}
-        {(userLoading || projectsLoading) && <Spinner />}
-        {userError && <Message>{userError}</Message>}
-        {projectsError && <Message>{projectsError}</Message>}
-        {userSuccess && projectsSuccess && user && (
-          <div className='display flex flex-fdc my-1'>
-            <div className='display__image'>
-              <div
-                className='image-upload my-1'
-                onMouseEnter={() => setHidden(false)}
-                onMouseLeave={() => setHidden(true)}
-              >
-                <img src={avatar} />
-                <form className={hidden ? 'hidden' : 'shown'}>
-                  <label htmlFor='file-input'>
-                    <div>
-                      <div>Update</div>
-                    </div>
-                  </label>
+      {(userLoading || projectsLoading) && <Spinner />}
+      {userError && <Message>{userError}</Message>}
+      {projectsError && <Message>{projectsError}</Message>}
+      {userSuccess && user && (
+        <div className='display flex flex-fdc my-1'>
+          <div className='display__image'>
+            <div
+              className='image-upload my-1'
+              onMouseEnter={() => setHidden(false)}
+              onMouseLeave={() => setHidden(true)}
+            >
+              <img src={avatar} />
+              <form className={hidden ? 'hidden' : 'shown'}>
+                <label htmlFor='file-input'>
+                  <div>
+                    <div>Update</div>
+                  </div>
+                </label>
 
-                  <input
-                    id='file-input'
-                    type='file'
-                    onChange={handleAvatarUpload}
-                  />
-                </form>
-              </div>
-            </div>
-            <div className='h-line'></div>
-            <div className='display__body'>
-              <div className='my-1'>
-                <h4>
-                  Username : <span>{user.name}</span>
-                </h4>
-                <h4>
-                  Email : <span>{user.email}</span>
-                </h4>
-              </div>
-            </div>
-            <div className='h-line'></div>
-            <div className='recent '>
-              {user && user.role !== 'employee' ? (
-                <div className='recent-projects my-1'>
-                  <h1>Recent Projects</h1>
-                </div>
-              ) : (
-                <div className='recent-tasks my-1'>
-                  <h1>Recent Tasks</h1>
-                </div>
-              )}
-              {user.role !== 'employee' && projects && (
-                <Projects projects={projects} />
-              )}
+                <input
+                  id='file-input'
+                  type='file'
+                  onChange={handleAvatarUpload}
+                />
+              </form>
             </div>
           </div>
-        )}
-        {/* {projects && (
+          <div className='h-line'></div>
+          <div className='display__body'>
+            <div className='my-1'>
+              <h4>
+                Username : <span>{user.name}</span>
+              </h4>
+              <h4>
+                Email : <span>{user.email}</span>
+              </h4>
+            </div>
+          </div>
+          <div className='h-line'></div>
+          <div className='recent '>
+            {user && user.role !== 'employee' ? (
+              <div className='recent-projects my-1'>
+                <h1>Recent Projects</h1>
+              </div>
+            ) : (
+              <div className='recent-tasks my-1'>
+                <h1>Recent Tasks</h1>
+              </div>
+            )}
+            {user.role !== 'employee' && projects && (
+              <Projects projects={projects} />
+            )}
+          </div>
+        </div>
+      )}
+      {/* {projects && (
           <div className='list'>
             <ul>
               {projects.map((project) => (
@@ -167,7 +168,7 @@ const ProfileScreen = () => {
             </ul>
           </div>
         )} */}
-      </div>
+    </div>
     // </div>
   );
 };
