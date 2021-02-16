@@ -165,18 +165,23 @@ export const addProject = (project) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/v1/projects/`, project, config);
+    const { data } = await axios.post(`/api/v1/projects`, project, config);
 
-    const fetchedProjects = getState().projectsFecth;
+    const fetchedProjects = getState().projectsFetch.projects;
 
-    console.log(fetchedProjects);
+    fetchedProjects.unshift(data.data);
 
     dispatch({
       type: PROJECT_ADD_SUCCESS,
       payload: data,
     });
+    // updata projects in the frontend by appending the new added project without fetching all the projects again from the backend
+    dispatch({
+      type: PROJECTS_FETCH_SUCCESS,
+      payload: { success: true, data: fetchedProjects },
+    });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: PROJECT_ADD_FAIL,
       payload:

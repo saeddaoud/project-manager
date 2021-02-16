@@ -18,6 +18,8 @@ const ProjectsScreen = () => {
     (state) => state.projectsFetch
   );
 
+  console.log(projects);
+
   const [keyword1, setKeyword1] = useState('');
   const [keyword, setKeyword] = useState('');
   const [status, setStatus] = useState('active');
@@ -46,7 +48,9 @@ const ProjectsScreen = () => {
 
   const addProjectHandler = (e) => {
     e.preventDefault();
-    // console.log(projectName, projectDescription);
+    dispatch(
+      addProject({ name: projectName, description: projectDescription })
+    );
     if (projectName !== '' && projectDescription !== '') {
       //add the project
       setProjectNameError('');
@@ -114,7 +118,10 @@ const ProjectsScreen = () => {
             className='add-container__btn'
             onClick={() => setShowAddProjectForm(true)}
           >
-            <i className='far fa-plus-square'></i>
+            <div className='btn btn--dark'>
+              <i className='fas fa-plus'></i> Add Project
+            </div>
+            {/* <i className='far fa-plus-square'></i> */}
           </div>
         </div>
         <div className='flex flex-aife' style={{ width: '100%' }}>

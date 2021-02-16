@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Projects = ({ projects }) => {
-  // console.log(projects);
+  console.log(projects);
   return (
     <ul className='projects-list'>
       {projects.map((project) => (
