@@ -9,7 +9,7 @@ const EmployeesProjectsScreen = () => {
     if (!user) {
       history.push('/login');
     }
-  }, [user]);
+  }, [user, history]);
   return <div>Employees Projects</div>;
 };
 

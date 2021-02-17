@@ -1,37 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import {
-  fetchEmployee,
-  listEmployees,
-  fetchMe,
-  updateAvatar,
-} from '../redux/actions/employeeActions';
+import { fetchMe, updateAvatar } from '../redux/actions/employeeActions';
 
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
-import { Link } from 'react-router-dom';
-import { projectsFetch } from '../redux/reducers/projectReducers';
-import {
-  fetchActiveProjects,
-  fetchProjects,
-} from '../redux/actions/projectActions';
+import { fetchProjects } from '../redux/actions/projectActions';
 import Projects from '../components/Projects';
 
 const ProfileScreen = () => {
   const [hidden, setHidden] = useState(true);
 
-  const {
-    user,
-    loading: userLoading,
-    error: userError,
-    success: userSuccess,
-  } = useSelector((state) => state.meFetch);
+  const { user, loading: userLoading, error: userError } = useSelector(
+    (state) => state.meFetch
+  );
   const {
     projects,
     loading: projectsLoading,
     error: projectsError,
-    success: projectsSuccess,
   } = useSelector((state) => state.projectsFetch);
 
   // console.log(user, loading);
@@ -102,7 +88,7 @@ const ProfileScreen = () => {
       {(userLoading || projectsLoading) && <Spinner />}
       {userError && <Message>{userError}</Message>}
       {projectsError && <Message>{projectsError}</Message>}
-      {userSuccess && user && (
+      {!userLoading && !projectsLoading && user && (
         <div className='display flex flex-fdc my-1'>
           <div className='display__image'>
             <div
@@ -110,7 +96,7 @@ const ProfileScreen = () => {
               onMouseEnter={() => setHidden(false)}
               onMouseLeave={() => setHidden(true)}
             >
-              <img src={avatar} />
+              <img src={avatar} alt='avatar' />
               <form className={hidden ? 'hidden' : 'shown'}>
                 <label htmlFor='file-input'>
                   <div>

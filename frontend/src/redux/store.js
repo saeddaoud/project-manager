@@ -29,12 +29,18 @@ const reducer = combineReducers({
   projectDelete: projectDeleteReducer,
 });
 
-const userInforFromStorage = localStorage.getItem('userInfo')
+const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
+  : null;
+const myDetailsFromStorage = localStorage.getItem('myDetails')
+  ? JSON.parse(localStorage.getItem('myDetails'))
   : null;
 
 const initialState = {
-  employeeLogin: { userInfo: userInforFromStorage },
+  employeeLogin: { userInfo: userInfoFromStorage },
+  meFetch: {
+    user: myDetailsFromStorage,
+  },
 };
 
 const store = createStore(

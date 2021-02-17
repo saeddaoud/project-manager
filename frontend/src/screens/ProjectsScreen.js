@@ -5,20 +5,20 @@ import { fetchProjects, addProject } from '../redux/actions/projectActions';
 import Projects from '../components/Projects';
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
-import { useHistory } from 'react-router-dom';
-import BackDrop from '../components/BackDrop';
+// import BackDrop from '../components/BackDrop';
+import AddEditProjectForm from '../components/AddEditProjectForm';
 
 const ProjectsScreen = () => {
-  const history = useHistory();
+  // const history = useHistory();
 
   const dispatch = useDispatch();
-  const { user, loading: userLoading } = useSelector((state) => state.meFetch);
+  const { user } = useSelector((state) => state.meFetch);
   // console.log(user);
-  const { projects, error, loading, success } = useSelector(
+  const { projects, error, loading } = useSelector(
     (state) => state.projectsFetch
   );
 
-  console.log(projects);
+  // console.log(projects);
 
   const [keyword1, setKeyword1] = useState('');
   const [keyword, setKeyword] = useState('');
@@ -71,46 +71,56 @@ const ProjectsScreen = () => {
   return (
     <div className='container'>
       {showAddProjectForm && (
-        <>
-          <BackDrop />
-          <form className='form add-project-form' onSubmit={addProjectHandler}>
-            <div className='input-control'>
-              <label>Project's Name</label>
-              <input
-                type='text'
-                placeholder="Enter Project's Name"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-              />
-              {projectNameError && <small>{projectNameError}</small>}
-            </div>
-            <div className='input-control' style={{ height: '140px' }}>
-              <label>Project's Description</label>
-              <textarea
-                placeholder="Enter Project's Name"
-                rows='5'
-                // cols='35'
-                value={projectDescription}
-                onChange={(e) => setProjectDescription(e.target.value)}
-              />
-              {projectDescriptionError && (
-                <small>{projectDescriptionError}</small>
-              )}
-            </div>
+        <AddEditProjectForm
+          setProjectName={setProjectName}
+          projectName={projectName}
+          projectNameError={projectNameError}
+          setProjectDescription={setProjectDescription}
+          projectDescription={projectDescription}
+          projectDescriptionError={projectDescriptionError}
+          setShowAddProjectForm={setShowAddProjectForm}
+          addProjectHandler={addProjectHandler}
+        />
+        // <AddEditProjectForm>
+        //   <BackDrop />
+        //   <form className='form add-project-form' onSubmit={addProjectHandler}>
+        //     <div className='input-control'>
+        //       <label>Project's Name</label>
+        //       <input
+        //         type='text'
+        //         placeholder="Enter Project's Name"
+        //         value={projectName}
+        //         onChange={(e) => setProjectName(e.target.value)}
+        //       />
+        //       {projectNameError && <small>{projectNameError}</small>}
+        //     </div>
+        //     <div className='input-control' style={{ height: '140px' }}>
+        //       <label>Project's Description</label>
+        //       <textarea
+        //         placeholder="Enter Project's Name"
+        //         rows='5'
+        //         // cols='35'
+        //         value={projectDescription}
+        //         onChange={(e) => setProjectDescription(e.target.value)}
+        //       />
+        //       {projectDescriptionError && (
+        //         <small>{projectDescriptionError}</small>
+        //       )}
+        //     </div>
 
-            <div className='flex'>
-              <button className='btn btn--add' type='submit'>
-                Add Project
-              </button>
-              <button
-                className='btn'
-                onClick={() => setShowAddProjectForm(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </>
+        //     <div className='flex'>
+        //       <button className='btn btn--add' type='submit'>
+        //         Add Project
+        //       </button>
+        //       <button
+        //         className='btn'
+        //         onClick={() => setShowAddProjectForm(false)}
+        //       >
+        //         Cancel
+        //       </button>
+        //     </div>
+        //   </form>
+        // </AddEditProjectForm>
       )}
 
       <div className='actions flex flex-aife flex-fdc my-1'>

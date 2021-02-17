@@ -8,7 +8,7 @@ const ProjectScreen = ({ match }) => {
   const id = match.params.id;
 
   const dispatch = useDispatch();
-  const { project, loading, success, error } = useSelector(
+  const { project, loading, error } = useSelector(
     (state) => state.projectFetch
   );
 
@@ -18,11 +18,11 @@ const ProjectScreen = ({ match }) => {
 
   return (
     // <div className='page profile-page'>
-      <div className='container flex flex-jcsb flex-fdc'>
-        {loading && <Spinner />}
-        {error && <Message>{error}</Message>}
-        {project && <h3>{project.name}</h3>}
-      </div>
+    <div className='container flex flex-jcsb flex-fdc'>
+      {loading && <Spinner />}
+      {error && <Message>{error}</Message>}
+      {project && <h3>{project.name}</h3>}
+    </div>
     // </div>
   );
 };

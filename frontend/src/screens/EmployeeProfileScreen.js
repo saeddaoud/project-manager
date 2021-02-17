@@ -7,12 +7,10 @@ import { fetchEmployee } from '../redux/actions/employeeActions';
 const EmployeeProfileScreen = ({ match }) => {
   const id = match.params.id;
 
-  console.log(id);
+  // console.log(id);
 
   const dispatch = useDispatch();
-  const { user, loading, success, error } = useSelector(
-    (state) => state.employeeFetch
-  );
+  const { user, loading, error } = useSelector((state) => state.employeeFetch);
 
   useEffect(() => {
     dispatch(fetchEmployee(id));
@@ -20,11 +18,11 @@ const EmployeeProfileScreen = ({ match }) => {
 
   return (
     // <div className='page profile-page'>
-      <div className='container'>
-        {loading && <Spinner />}
-        {error && <Message>{error}</Message>}
-        {user && <h3>{user.name}</h3>}
-      </div>
+    <div className='container'>
+      {loading && <Spinner />}
+      {error && <Message>{error}</Message>}
+      {user && <h3>{user.name}</h3>}
+    </div>
     // </div>
   );
 };

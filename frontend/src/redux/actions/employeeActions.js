@@ -82,6 +82,8 @@ export const fetchMe = () => async (dispatch, getState) => {
       type: ME_FETCH_SUCCESS,
       payload: data,
     });
+
+    localStorage.setItem('myDetails', JSON.stringify(data.data));
   } catch (error) {
     console.log(error.response.data.error);
     dispatch({
@@ -228,4 +230,5 @@ export const logout = () => (dispatch) => {
   });
 
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('myDetails');
 };
