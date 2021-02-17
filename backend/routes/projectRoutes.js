@@ -4,6 +4,7 @@ import {
   deleteProject,
   getProject,
   getProjects,
+  updateProject,
 } from '../controllers/projectControllers.js';
 import { authorize, protect } from '../middleware/authMiddleware.js';
 
@@ -21,6 +22,7 @@ router
 router
   .route('/:id')
   .get(protect, authorize('supervisor', 'manager'), getProject)
-  .delete(protect, authorize('manager'), deleteProject);
+  .delete(protect, authorize('manager'), deleteProject)
+  .put(protect, authorize('manager'), updateProject);
 
 export default router;

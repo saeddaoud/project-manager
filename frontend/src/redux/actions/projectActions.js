@@ -16,6 +16,9 @@ import {
   PROJECT_FETCH_FAIL,
   PROJECT_FETCH_REQUEST,
   PROJECT_FETCH_SUCCESS,
+  PROJECT_UPDATE_FAIL,
+  PROJECT_UPDATE_REQUEST,
+  PROJECT_UPDATE_SUCCESS,
 } from '../constants/projectConstants';
 
 // fetchProjects can take an argument queryOptions as an object with three possible properties' names: keyword, status, and limit.
@@ -187,6 +190,57 @@ export const addProject = (project) => async (dispatch, getState) => {
     // console.log(error.response.data.error);
     dispatch({
       type: PROJECT_ADD_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const updateProject = ({ projectId, ...project }) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: PROJECT_UPDATE_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/projects/${projectId}`,
+      project,
+      config
+    );
+
+    // const fetchedProjects = getState().projectsFetch.projects;
+
+    // fetchedProjects.unshift(data.data);
+
+    dispatch({
+      type: PROJECT_UPDATE_SUCCESS,
+      payload: data,
+    });
+
+    // updata fetch project in the frontend by updating the project
+    dispatch({
+      type: PROJECT_FETCH_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    // console.log(error.response.data.error);
+    dispatch({
+      type: PROJECT_UPDATE_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

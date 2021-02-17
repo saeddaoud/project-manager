@@ -69,6 +69,21 @@ export const createProject = asyncHandler(async (req, res, next) => {
   });
 });
 
+//@route          PUT /api/v1/projects/:id
+//@decsription    Update project's details
+//@access         Private/manager only
+export const updateProject = asyncHandler(async (req, res, next) => {
+  const project = await Project.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    { new: true }
+  );
+  res.status(201).json({
+    success: true,
+    data: project,
+  });
+});
+
 //@route          DELETE /api/v1/projects/:id
 //@decsription    Delete a project
 //@access         Private/manager only

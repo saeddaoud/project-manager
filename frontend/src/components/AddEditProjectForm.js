@@ -8,8 +8,9 @@ const AddEditProjectForm = ({
   setProjectDescription,
   projectDescription,
   projectDescriptionError,
-  setShowAddProjectForm,
+  setShowProjectForm,
   addProjectHandler,
+  edit = false,
 }) => {
   return (
     <>
@@ -39,12 +40,12 @@ const AddEditProjectForm = ({
 
         <div className='flex'>
           <button className='btn btn--add' type='submit'>
-            Add Project
+            {edit ? 'Update Project' : 'Add Project'}
           </button>
           <button
             className='btn'
             onClick={() => {
-              setShowAddProjectForm(false);
+              setShowProjectForm(false);
               setProjectName('');
               setProjectDescription('');
             }}

@@ -19,6 +19,10 @@ import {
   PROJECT_FETCH_REQUEST,
   PROJECT_FETCH_RESET,
   PROJECT_FETCH_SUCCESS,
+  PROJECT_UPDATE_FAIL,
+  PROJECT_UPDATE_REQUEST,
+  PROJECT_UPDATE_RESET,
+  PROJECT_UPDATE_SUCCESS,
 } from '../constants/projectConstants';
 
 export const projectsFetchReducer = (state = { projects: null }, action) => {
@@ -98,6 +102,26 @@ export const projectAddReducer = (state = {}, action) => {
     case PROJECT_ADD_FAIL:
       return { loading: false, error: payload };
     case PROJECT_ADD_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const projectUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case PROJECT_UPDATE_REQUEST:
+      return { loading: true };
+    case PROJECT_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: payload.success,
+        project: payload.data,
+      };
+    case PROJECT_UPDATE_FAIL:
+      return { loading: false, error: payload };
+    case PROJECT_UPDATE_RESET:
       return {};
     default:
       return state;

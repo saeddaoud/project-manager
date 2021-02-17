@@ -1,0 +1,14 @@
+.project-summary {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  @include responsive-property('font-size', $reduced-font-size);
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  background: $primary-bg-color;
+  color: $primary-text-color;
+  &__item:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}

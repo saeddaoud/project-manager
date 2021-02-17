@@ -13,6 +13,7 @@ import {
   projectDeleteReducer,
   projectFetchReducer,
   projectsFetchReducer,
+  projectUpdateReducer,
 } from './reducers/projectReducers';
 
 const middleware = [thunk];
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   projectsFetch: projectsFetchReducer,
   projectFetch: projectFetchReducer,
   projectAdd: projectAddReducer,
+  projectUpdate: projectUpdateReducer,
   projectDelete: projectDeleteReducer,
 });
 

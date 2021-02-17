@@ -23,7 +23,7 @@ const ProjectsScreen = () => {
   const [keyword1, setKeyword1] = useState('');
   const [keyword, setKeyword] = useState('');
   const [status, setStatus] = useState('active');
-  const [showAddProjectForm, setShowAddProjectForm] = useState(false);
+  const [showProjectForm, setShowProjectForm] = useState(false);
   const [projectName, setProjectName] = useState('');
   const [projectDescription, setProjectDescription] = useState('');
   const [projectNameError, setProjectNameError] = useState('');
@@ -57,7 +57,7 @@ const ProjectsScreen = () => {
       setProjectDescriptionError('');
       setProjectName('');
       setProjectDescription('');
-      setShowAddProjectForm(false);
+      setShowProjectForm(false);
     } else {
       if (projectName === '') {
         setProjectNameError("Project's name is required");
@@ -70,7 +70,7 @@ const ProjectsScreen = () => {
 
   return (
     <div className='container'>
-      {showAddProjectForm && (
+      {showProjectForm && (
         <AddEditProjectForm
           setProjectName={setProjectName}
           projectName={projectName}
@@ -78,7 +78,7 @@ const ProjectsScreen = () => {
           setProjectDescription={setProjectDescription}
           projectDescription={projectDescription}
           projectDescriptionError={projectDescriptionError}
-          setShowAddProjectForm={setShowAddProjectForm}
+          setShowProjectForm={setShowProjectForm}
           addProjectHandler={addProjectHandler}
         />
         // <AddEditProjectForm>
@@ -128,7 +128,7 @@ const ProjectsScreen = () => {
           <div className='add-container'>
             <div
               className='add-container__btn'
-              onClick={() => setShowAddProjectForm(true)}
+              onClick={() => setShowProjectForm(true)}
             >
               <div className='btn btn--dark'>
                 <i className='fas fa-plus'></i> Add Project

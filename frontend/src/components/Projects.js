@@ -13,8 +13,8 @@ const Projects = ({ projects }) => {
         // <Link to={`/project/${project._id}`} key={project._id}>
         <li key={project._id}>
           <div className='flex'>
-            <div>Name: {project.name}</div>
-            <div>Status: {project.status}</div>
+            <div>{project.name}</div>
+            <div>{project.status}</div>
             <div
               className={
                 user && user.role === 'manager'
@@ -43,8 +43,8 @@ const Projects = ({ projects }) => {
             </div>
           </div>
           <div className='flex'>
-            <div>Tasks: {project.name}</div>
-            <div>Employees:{project.status}</div>
+            <div>Progress</div>
+            <div>Employee</div>
           </div>
         </li>
         // </Link>
