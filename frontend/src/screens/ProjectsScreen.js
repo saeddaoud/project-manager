@@ -48,11 +48,11 @@ const ProjectsScreen = () => {
 
   const addProjectHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      addProject({ name: projectName, description: projectDescription })
-    );
+
     if (projectName !== '' && projectDescription !== '') {
-      //add the project
+      dispatch(
+        addProject({ name: projectName, description: projectDescription })
+      );
       setProjectNameError('');
       setProjectDescriptionError('');
       setProjectName('');
