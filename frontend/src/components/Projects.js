@@ -11,7 +11,7 @@ const Projects = ({ projects }) => {
     <ul className='projects-list'>
       {projects.map((project) => (
         // <Link to={`/project/${project._id}`} key={project._id}>
-        <li>
+        <li key={project._id}>
           <div className='flex'>
             <div>Name: {project.name}</div>
             <div>Status: {project.status}</div>
@@ -35,9 +35,11 @@ const Projects = ({ projects }) => {
                   <i className='far fa-edit'></i>
                 </div>
               )}
-              <div className='action-btn action-btn__link'>
-                <i class='fas fa-external-link-alt'></i>{' '}
-              </div>
+              <Link to={`/project/${project._id}`}>
+                <div className='action-btn action-btn__link'>
+                  <i className='fas fa-external-link-alt'></i>{' '}
+                </div>
+              </Link>
             </div>
           </div>
           <div className='flex'>
