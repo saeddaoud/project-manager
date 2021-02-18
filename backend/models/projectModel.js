@@ -19,9 +19,27 @@ const projectSchema = new Schema(
       enum: ['active', 'completed'],
       default: 'active',
     },
+    tasks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Task',
+      },
+    ],
+    employees: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Employee',
+      },
+    ],
   },
   { timestamps: true }
 );
+
+// Delete all tasks when the project they were created in is deleted
+projectSchema.pre('remove', async function (next) {
+  await this.model('Task').deleteMany({ project: this._id });
+  next();
+});
 
 const Project = mongoose.model('Project', projectSchema);
 

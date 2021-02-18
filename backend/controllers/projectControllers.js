@@ -88,11 +88,13 @@ export const updateProject = asyncHandler(async (req, res, next) => {
 //@decsription    Delete a project
 //@access         Private/manager only
 export const deleteProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findByIdAndDelete(req.params.id);
+  const project = await Project.findById(req.params.id);
 
   if (!project) {
     return next(new ErrorResponse('Project not found', 404));
   }
+
+  await project.remove();
 
   res.status(201).json({
     success: true,

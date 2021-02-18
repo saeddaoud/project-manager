@@ -7,8 +7,11 @@ import {
   updateProject,
 } from '../controllers/projectControllers.js';
 import { authorize, protect } from '../middleware/authMiddleware.js';
+import taskRoutes from './taskRoutes.js';
 
 const router = express.Router();
+
+router.use('/:projectId/tasks', taskRoutes);
 
 router
   .route('/')
