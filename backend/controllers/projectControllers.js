@@ -46,7 +46,7 @@ export const getProjects = asyncHandler(async (req, res, next) => {
 //@decsription    Get project by id
 //@access         Private/manager and supervisor only
 export const getProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findById(req.params.id);
+  const project = await Project.findById(req.params.id).populate('tasks');
   // Check if project found
   if (!project) {
     return next(new ErrorResponse('Project not found', 404));
