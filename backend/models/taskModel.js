@@ -19,6 +19,12 @@ const taskSchema = new Schema(
       type: String,
       required: [true, "Task's description is required"],
     },
+    status: {
+      type: String,
+      required: [true, "Task's status is required"],
+      enum: ['NA', 'In progress', 'Aborted', 'Completed'],
+      default: 'NA',
+    },
   },
   {
     timestamps: true,

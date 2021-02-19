@@ -54,3 +54,27 @@ export const addTask = asyncHandlder(async (req, res, next) => {
     data: task,
   });
 });
+
+//@route          DELETE /api/v1/tasks/:id
+//@decsription    add task to the project with projectId
+//@access         Private/manager only
+export const deleteTask = asyncHandlder(async (req, res, next) => {
+  const task = await Task.findById(req.params.id);
+
+  if (!task) {
+    return next(new ErrorResponse('Task not found', 404));
+  }
+
+  const project = await Project.findByIdAndUpdate(task.project, {
+    $pull: { tasks: task._id },
+  });
+
+  // console.log(project);
+
+  await task.remove();
+
+  res.status(200).json({
+    success: true,
+    data: {},
+  });
+});

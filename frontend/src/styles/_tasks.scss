@@ -1,0 +1,33 @@
+.tasks-list {
+  color: $primary-text-color;
+  width: 100%;
+  a {
+    color: $primary-text-color;
+  }
+  li {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    @include responsive-property('font-size', $reduced-font-size);
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    > div {
+      width: 100%;
+      height: 40px;
+    }
+    .action-btns {
+      @include responsive-property(width, $action-btn-width);
+      .action-btn {
+        cursor: pointer;
+      }
+    }
+  }
+  li:nth-child(odd) {
+    // background: $primary-bg-color;
+    background: $primary-list-color;
+  }
+  li:nth-child(even) {
+    background: $secondary-list-color;
+  }
+}

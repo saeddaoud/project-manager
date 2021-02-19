@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddEditProjectForm from '../components/AddEditProjectForm';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
+import Tasks from '../components/Tasks';
 import { fetchProject, updateProject } from '../redux/actions/projectActions';
 
 const ProjectScreen = ({ match }) => {
@@ -118,10 +119,12 @@ const ProjectScreen = ({ match }) => {
           </div>
           <div className='h-line'></div>
           <div className='project-tasks'>
-            <div className='project-tasks__title'>
+            <div className='project-tasks__title my-1'>
               <h4>Project's Tasks</h4>
             </div>
-            <div className='project-tasks__list'></div>
+            <div className='project-tasks__list'>
+              <Tasks tasks={project.tasks} />
+            </div>
           </div>
         </div>
       )}
