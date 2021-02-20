@@ -11,6 +11,10 @@
   &__item:not(:last-child) {
     margin-bottom: 1rem;
   }
+  a {
+    text-decoration: none;
+    color: $primary-text-color;
+  }
 }
 .project-tasks {
   width: 100%;

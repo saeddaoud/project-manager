@@ -15,7 +15,11 @@ import {
   projectsFetchReducer,
   projectUpdateReducer,
 } from './reducers/projectReducers';
-import { taskDeleteReducer } from './reducers/taskReducers';
+import {
+  taskAddReducer,
+  taskDeleteReducer,
+  taskFetchReducer,
+} from './reducers/taskReducers';
 
 const middleware = [thunk];
 
@@ -30,6 +34,8 @@ const reducer = combineReducers({
   projectAdd: projectAddReducer,
   projectUpdate: projectUpdateReducer,
   projectDelete: projectDeleteReducer,
+  taskAdd: taskAddReducer,
+  taskFetch: taskFetchReducer,
   taskDelete: taskDeleteReducer,
 });
 

@@ -6,6 +6,7 @@ const taskSchema = new Schema(
     project: {
       type: Schema.Types.ObjectId,
       ref: 'Project',
+      required: true,
     },
     employee: {
       type: Schema.Types.ObjectId,
@@ -14,6 +15,7 @@ const taskSchema = new Schema(
     name: {
       type: String,
       required: [true, "Task's name is required"],
+      unique: true,
     },
     description: {
       type: String,
@@ -22,8 +24,8 @@ const taskSchema = new Schema(
     status: {
       type: String,
       required: [true, "Task's status is required"],
-      enum: ['NA', 'In progress', 'Aborted', 'Completed'],
-      default: 'NA',
+      enum: ['Not Started', 'In progress', 'Aborted', 'Completed'],
+      default: 'Not Started',
     },
   },
   {

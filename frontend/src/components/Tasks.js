@@ -24,15 +24,15 @@ const Tasks = ({ tasks }) => {
                   <i className='far fa-trash-alt'></i>
                 </div>
 
-                <div className='action-btn action-btn__edit'>
+                {/* <div className='action-btn action-btn__edit'>
                   <i className='far fa-edit'></i>
-                </div>
+                </div> */}
 
-                {/* <Link to={`/project/${project._id}`}>
-                <div className='action-btn action-btn__link'>
-                  <i className='fas fa-external-link-alt'></i>{' '}
-                </div>
-              </Link> */}
+                <Link to={`/task/${task._id}`}>
+                  <div className='action-btn action-btn__link'>
+                    <i className='fas fa-external-link-alt'></i>{' '}
+                  </div>
+                </Link>
               </div>
             )}
           </div>

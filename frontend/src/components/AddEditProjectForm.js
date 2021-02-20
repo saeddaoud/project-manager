@@ -15,7 +15,7 @@ const AddEditProjectForm = ({
   return (
     <>
       <BackDrop />
-      <form className='form add-project-form' onSubmit={addProjectHandler}>
+      <form className='form add-form' onSubmit={addProjectHandler}>
         <div className='input-control'>
           <label>Project's Name</label>
           <input
@@ -29,7 +29,7 @@ const AddEditProjectForm = ({
         <div className='input-control' style={{ height: '140px' }}>
           <label>Project's Description</label>
           <textarea
-            placeholder="Enter Project's Name"
+            placeholder="Enter Project's Description"
             rows='5'
             // cols='35'
             value={projectDescription}

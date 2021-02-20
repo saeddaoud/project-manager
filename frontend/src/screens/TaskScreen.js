@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import AddEditProjectForm from '../components/AddEditProjectForm';
 import AddEditTaskForm from '../components/AddEditTaskForm';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
 import Tasks from '../components/Tasks';
 import { fetchProject, updateProject } from '../redux/actions/projectActions';
-import { addTask } from '../redux/actions/taskActions';
+import { addTask, fetchTask } from '../redux/actions/taskActions';
 
-const ProjectScreen = ({ match }) => {
+const TaskScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const { project, loading, error } = useSelector(
-    (state) => state.projectFetch
-  );
+  const { task, loading, error } = useSelector((state) => state.taskFetch);
 
-  const [projectName, setProjectName] = useState('');
-  const [projectDescription, setProjectDescription] = useState('');
-  const [projectNameError, setProjectNameError] = useState('');
-  const [projectDescriptionError, setProjectDescriptionError] = useState('');
-  const [showProjectForm, setShowProjectForm] = useState(false);
+  //   const [employeeName, setEmployeeName] = useState('');
+  //   const [employeeDescription, setEmployeeDescription] = useState('');
+  //   const [employeeNameError, setEmployeeNameError] = useState('');
+  //   const [employeeDescriptionError, setEmployeeDescriptionError] = useState('');
+  //   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
 
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
@@ -31,31 +30,57 @@ const ProjectScreen = ({ match }) => {
   // console.log(project, projectName, projectDescription);
 
   useEffect(() => {
-    if (project) {
-      setProjectName(project.name);
-      setProjectDescription(project.description);
+    if (task) {
+      setTaskName(task.name);
+      setTaskDescription(task.description);
     }
-  }, [project]);
+  }, [task]);
 
   useEffect(() => {
     // if (project) {
     //   setProjectName(projectName);
     //   setProjectDescription(projectDescription);
     // }
-    dispatch(fetchProject(id));
+    dispatch(fetchTask(id));
   }, [dispatch, id]);
 
-  const addTaskHandler = (e) => {
+  //   const addEmployeeHandler = (e) => {
+  //     e.preventDefault();
+
+  //     if (employeeName !== '' && employeeDescription !== '') {
+  //       dispatch(
+  //         addEmployee({
+  //           project: project._id,
+  //           name: employeeName,
+  //           description: employeeDescription,
+  //         })
+  //       );
+  //       setEmployeeNameError('');
+  //       setEmployeeDescriptionError('');
+  //       setEmployeeName('');
+  //       setEmployeeDescription('');
+  //       setShowEmployeeForm(false);
+  //     } else {
+  //       if (employeeName === '') {
+  //         setEmployeeNameError("Employee's name is required");
+  //       }
+  //       if (employeeDescription === '') {
+  //         setEmployeeDescriptionError("Employee's decsription is required");
+  //       }
+  //     }
+  //   };
+
+  const editTaskHandler = (e) => {
     e.preventDefault();
 
     if (taskName !== '' && taskDescription !== '') {
-      dispatch(
-        addTask({
-          project: project._id,
-          name: taskName,
-          description: taskDescription,
-        })
-      );
+      //   dispatch(
+      //     editTask({
+      //       taskId: task._id,
+      //       name: taskName,
+      //       description: taskDescription,
+      //     })
+      //   );
       setTaskNameError('');
       setTaskDescriptionError('');
       setTaskName('');
@@ -71,36 +96,10 @@ const ProjectScreen = ({ match }) => {
     }
   };
 
-  const editProjectHandler = (e) => {
-    e.preventDefault();
-
-    if (projectName !== '' && projectDescription !== '') {
-      dispatch(
-        updateProject({
-          projectId: project._id,
-          name: projectName,
-          description: projectDescription,
-        })
-      );
-      setProjectNameError('');
-      setProjectDescriptionError('');
-      setProjectName('');
-      setProjectDescription('');
-      setShowProjectForm(false);
-    } else {
-      if (projectName === '') {
-        setProjectNameError("Project's name is required");
-      }
-      if (projectDescription === '') {
-        setProjectDescriptionError("Project's decsription is required");
-      }
-    }
-  };
-
   return (
     // <div className='page profile-page'>
     <div className='container'>
-      {showProjectForm && (
+      {/* {showProjectForm && (
         <AddEditProjectForm
           setProjectName={setProjectName}
           projectName={projectName}
@@ -112,7 +111,7 @@ const ProjectScreen = ({ match }) => {
           addProjectHandler={editProjectHandler}
           edit={true}
         />
-      )}
+      )} */}
       {showTaskForm && (
         <AddEditTaskForm
           setTaskName={setTaskName}
@@ -122,7 +121,7 @@ const ProjectScreen = ({ match }) => {
           taskDescription={taskDescription}
           taskDescriptionError={taskDescriptionError}
           setShowTaskForm={setShowTaskForm}
-          addTaskHandler={addTaskHandler}
+          addTaskHandler={editTaskHandler}
         />
       )}
       <div className='add-container my-1 flex flex-jcsa'>
@@ -130,11 +129,8 @@ const ProjectScreen = ({ match }) => {
           className='add-container__btn'
           // onClick={() => setShowAddProjectForm(true)}
         >
-          <div
-            className='btn btn--dark'
-            onClick={() => setShowProjectForm(true)}
-          >
-            <i className='far fa-edit'></i> Edit Project
+          <div className='btn btn--dark' onClick={() => setShowTaskForm(true)}>
+            <i className='far fa-edit'></i> Edit Task
           </div>
           {/* <i className='far fa-plus-square'></i> */}
         </div>
@@ -142,34 +138,50 @@ const ProjectScreen = ({ match }) => {
           className='add-container__btn'
           // onClick={() => setShowAddProjectForm(true)}
         >
-          <div className='btn btn--dark' onClick={() => setShowTaskForm(true)}>
-            <i className='fas fa-plus'></i> Add Task
+          <div
+            className='btn btn--dark'
+            //   onClick={() => setShowTaskForm(true)}
+          >
+            <i className='fas fa-plus'></i> Assign Employee
           </div>
           {/* <i className='far fa-plus-square'></i> */}
         </div>
       </div>
       {loading && <Spinner />}
       {error && <Message>{error}</Message>}
-      {project && (
+      {task && (
         <div className='project-details flex flex-fdc'>
           <div className='project-summary'>
             <div className='project-summary__item project-summary__item--title'>
-              <h3>Project's Summary</h3>
+              <h3>Task's Summary</h3>
             </div>
+
+            <div
+              className='project-summary__item project-summary__item--name flex'
+              style={{ width: '30%' }}
+            >
+              {task.project.name}{' '}
+              <Link to={`/project/${task.project._id}`}>
+                <div className='action-btn action-btn__link'>
+                  <i className='fas fa-external-link-alt'></i>{' '}
+                </div>
+              </Link>
+            </div>
+
             <div className='project-summary__item project-summary__item--name'>
-              {project.name}
+              {task.name}
             </div>
             <div className='project-summary__item project-summary__item--desc'>
-              {project.description}
+              {task.description}
             </div>
           </div>
           <div className='h-line'></div>
           <div className='project-tasks'>
             <div className='project-tasks__title my-1'>
-              <h4>Project's Tasks</h4>
+              <h4>Task's Employees</h4>
             </div>
             <div className='project-tasks__list'>
-              <Tasks tasks={project.tasks} />
+              {/* <Tasks tasks={project.tasks} /> */}
             </div>
           </div>
         </div>
@@ -179,4 +191,4 @@ const ProjectScreen = ({ match }) => {
   );
 };
 
-export default ProjectScreen;
+export default TaskScreen;

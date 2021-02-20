@@ -10,6 +10,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import ProjectScreen from './screens/ProjectScreen';
 import ProjectsScreen from './screens/ProjectsScreen';
 import RegistrationScreen from './screens/RegistrationScreen';
+import TaskScreen from './screens/TaskScreen';
 import TasksScreen from './screens/TasksScreen';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route exact path='/employees' component={EmployeesScreen} />
           <Route exact path='/profile/:id' component={EmployeeProfileScreen} />
           <Route exact path='/project/:id' component={ProjectScreen} />
+          <Route exact path='/task/:id' component={TaskScreen} />
         </Switch>
       </div>
       <Footer />
