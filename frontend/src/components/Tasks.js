@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteTask } from '../redux/actions/taskActions';
 
 const Tasks = ({ tasks }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Tasks = ({ tasks }) => {
               <div className='action-btns flex'>
                 <div
                   className='action-btn action-btn__delete'
-                  //   onClick={() => dispatch(deleteProject(project._id))}
+                  onClick={() => dispatch(deleteTask(task._id))}
                 >
                   <i className='far fa-trash-alt'></i>
                 </div>

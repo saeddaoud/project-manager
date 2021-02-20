@@ -15,6 +15,7 @@ import {
   projectsFetchReducer,
   projectUpdateReducer,
 } from './reducers/projectReducers';
+import { taskDeleteReducer } from './reducers/taskReducers';
 
 const middleware = [thunk];
 
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   projectAdd: projectAddReducer,
   projectUpdate: projectUpdateReducer,
   projectDelete: projectDeleteReducer,
+  taskDelete: taskDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
