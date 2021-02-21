@@ -25,7 +25,7 @@ import mongoose from 'mongoose';
 //   });
 // });
 
-//@route          PUT /api/v1/projects/:projectId/tasks
+//@route          POST /api/v1/projects/:projectId/tasks
 //@decsription    add task to the project with projectId
 //@access         Private/manager only
 export const addTask = asyncHandlder(async (req, res, next) => {
@@ -84,6 +84,32 @@ export const deleteTask = asyncHandlder(async (req, res, next) => {
 //@access         Private/manager and supervisor only
 export const getTask = asyncHandlder(async (req, res, next) => {
   const task = await Task.findById(req.params.id).populate('project', 'name');
+
+  if (!task) {
+    return next(new ErrorResponse('Task not found', 404));
+  }
+
+  // const project = await Project.findByIdAndUpdate(task.project, {
+  //   $pull: { tasks: task._id },
+  // });
+
+  // console.log(project);
+
+  // await task.remove();
+
+  res.status(200).json({
+    success: true,
+    data: task,
+  });
+});
+
+//@route          PUT /api/v1/tasks/:id
+//@decsription    Update a task
+//@access         Private/manager only
+export const updateTask = asyncHandlder(async (req, res, next) => {
+  const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));

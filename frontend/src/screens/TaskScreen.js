@@ -6,12 +6,19 @@ import AddEditTaskForm from '../components/AddEditTaskForm';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
 import Tasks from '../components/Tasks';
-import { fetchProject, updateProject } from '../redux/actions/projectActions';
-import { addTask, fetchTask } from '../redux/actions/taskActions';
+import {
+  fetchProject,
+  updateProject,
+  fetchProjects,
+} from '../redux/actions/projectActions';
+import { addTask, fetchTask, updateTask } from '../redux/actions/taskActions';
 
 const TaskScreen = ({ match }) => {
   const dispatch = useDispatch();
   const { task, loading, error } = useSelector((state) => state.taskFetch);
+  const { success } = useSelector((state) => state.taskUpdate);
+  // const { project } = useSelector((state) => state.projectFetch);
+  // const { projects } = useSelector((state) => state.projectsFetch);
 
   //   const [employeeName, setEmployeeName] = useState('');
   //   const [employeeDescription, setEmployeeDescription] = useState('');
@@ -42,7 +49,7 @@ const TaskScreen = ({ match }) => {
     //   setProjectDescription(projectDescription);
     // }
     dispatch(fetchTask(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, success]);
 
   //   const addEmployeeHandler = (e) => {
   //     e.preventDefault();
@@ -74,13 +81,13 @@ const TaskScreen = ({ match }) => {
     e.preventDefault();
 
     if (taskName !== '' && taskDescription !== '') {
-      //   dispatch(
-      //     editTask({
-      //       taskId: task._id,
-      //       name: taskName,
-      //       description: taskDescription,
-      //     })
-      //   );
+      dispatch(
+        updateTask({
+          taskId: task._id,
+          name: taskName,
+          description: taskDescription,
+        })
+      );
       setTaskNameError('');
       setTaskDescriptionError('');
       setTaskName('');
@@ -122,6 +129,7 @@ const TaskScreen = ({ match }) => {
           taskDescriptionError={taskDescriptionError}
           setShowTaskForm={setShowTaskForm}
           addTaskHandler={editTaskHandler}
+          edit={true}
         />
       )}
       <div className='add-container my-1 flex flex-jcsa'>

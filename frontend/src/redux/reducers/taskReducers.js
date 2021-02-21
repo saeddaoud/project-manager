@@ -10,6 +10,10 @@ import {
   TASK_FETCH_REQUEST,
   TASK_FETCH_RESET,
   TASK_FETCH_SUCCESS,
+  TASK_UPDATE_FAIL,
+  TASK_UPDATE_REQUEST,
+  TASK_UPDATE_RESET,
+  TASK_UPDATE_SUCCESS,
 } from '../constants/taskConstants';
 
 export const taskAddReducer = (state = {}, action) => {
@@ -23,6 +27,23 @@ export const taskAddReducer = (state = {}, action) => {
     case TASK_ADD_FAIL:
       return { loading: false, error: payload };
     case TASK_ADD_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const taskUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case TASK_UPDATE_REQUEST:
+      return { loading: true };
+    case TASK_UPDATE_SUCCESS:
+      return { loading: false, success: payload.success, task: payload.data };
+    case TASK_UPDATE_FAIL:
+      return { loading: false, error: payload };
+    case TASK_UPDATE_RESET:
       return {};
     default:
       return state;

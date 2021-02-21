@@ -19,6 +19,7 @@ import {
   taskAddReducer,
   taskDeleteReducer,
   taskFetchReducer,
+  taskUpdateReducer,
 } from './reducers/taskReducers';
 
 const middleware = [thunk];
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   projectUpdate: projectUpdateReducer,
   projectDelete: projectDeleteReducer,
   taskAdd: taskAddReducer,
+  taskUpdate: taskUpdateReducer,
   taskFetch: taskFetchReducer,
   taskDelete: taskDeleteReducer,
 });
