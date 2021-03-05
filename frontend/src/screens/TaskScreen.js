@@ -6,6 +6,7 @@ import AddEditTaskForm from '../components/AddEditTaskForm';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
 import Tasks from '../components/Tasks';
+import AssignEmployee from '../components/AssignEmployee';
 import {
   fetchProject,
   updateProject,
@@ -31,6 +32,7 @@ const TaskScreen = ({ match }) => {
   const [taskNameError, setTaskNameError] = useState('');
   const [taskDescriptionError, setTaskDescriptionError] = useState('');
   const [showTaskForm, setShowTaskForm] = useState(false);
+  const [showEmployeesList, setShowEmployeesList] = useState(false);
 
   const id = match.params.id;
 
@@ -148,6 +150,7 @@ const TaskScreen = ({ match }) => {
         >
           <div
             className='btn btn--dark'
+            onClick={() => setShowEmployeesList(true)}
             //   onClick={() => setShowTaskForm(true)}
           >
             <i className='fas fa-plus'></i> Assign Employee
@@ -189,6 +192,9 @@ const TaskScreen = ({ match }) => {
               <h4>Task's Employees</h4>
             </div>
             <div className='project-tasks__list'>
+              {showEmployeesList && (
+                <AssignEmployee setShowEmployeesList={setShowEmployeesList} />
+              )}
               {/* <Tasks tasks={project.tasks} /> */}
             </div>
           </div>

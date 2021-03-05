@@ -77,7 +77,7 @@ export const employeesListReducer = (state = {}, action) => {
       return {
         loading: false,
         success: payload.success,
-        users: payload.data,
+        employees: payload.data,
       };
     case EMPLOYEES_LIST_FAIL:
       return { loading: false, error: payload };

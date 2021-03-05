@@ -1,0 +1,32 @@
+.employees-list-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  color: $primary-text-color;
+  background-color: rgba(black, 0.8);
+  &__close {
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    font-size: 3.5rem;
+  }
+  @include responsive-property(font-size, $default-font-size);
+  .employees-list {
+    position: absolute;
+    top: 60px;
+    width: 100vw;
+    height: 100vh;
+    .employees-list__item {
+      width: 100%;
+      padding: 1rem;
+      &:nth-child(odd) {
+        background-color: rgba($secondary-list-color, 0.8);
+      }
+      &:nth-child(even) {
+        background-color: rgba($primary-list-color, 0.8);
+      }
+    }
+  }
+}

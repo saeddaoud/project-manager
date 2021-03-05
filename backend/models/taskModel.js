@@ -8,10 +8,12 @@ const taskSchema = new Schema(
       ref: 'Project',
       required: true,
     },
-    employee: {
-      type: Schema.Types.ObjectId,
-      ref: 'Employee',
-    },
+    employee: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Employee',
+      },
+    ],
     name: {
       type: String,
       required: [true, "Task's name is required"],
