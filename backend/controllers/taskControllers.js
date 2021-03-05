@@ -2,6 +2,7 @@ import ErrorResponse from '../utils/errorResponse.js';
 import asyncHandlder from '../middleware/asyncHandler.js';
 import Task from '../models/taskModel.js';
 import Project from '../models/projectModel.js';
+import Employee from '../models/employeeModel.js';
 import mongoose from 'mongoose';
 
 /* ********
@@ -52,6 +53,27 @@ export const addTask = asyncHandlder(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: task,
+  });
+});
+
+//@route          GET /api/v1/projects/:projectId/tasks
+//@decsription    Get all task of a project
+//@access         Private/manager only
+export const getTasks = asyncHandlder(async (req, res, next) => {
+  let project = await Project.findById(req.params.projectId);
+
+  if (!project) {
+    return next(new ErrorResponse('Project not found', 404));
+  }
+
+  const tasks = await Task.find({ project: project._id }).populate(
+    'employee',
+    'name'
+  );
+
+  res.status(200).json({
+    success: true,
+    data: tasks,
   });
 });
 
@@ -122,6 +144,43 @@ export const updateTask = asyncHandlder(async (req, res, next) => {
   // console.log(project);
 
   // await task.remove();
+
+  res.status(200).json({
+    success: true,
+    data: task,
+  });
+});
+
+//@route            PUT /api/v1/tasks/:taskId/employees/:employeeId
+//@desc             Add employee(s) to a task
+//@Access           Private/Manager or Supervisor only
+export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
+  // console.log(req.body);
+  // const avatar = req.body;
+
+  let task = await Task.findById(req.params.taskId);
+
+  if (!task) {
+    return next(new ErrorResponse('Task not found', 404));
+  }
+
+  const employee = await Employee.findById(req.params.employeeId);
+
+  if (!employee) {
+    return next(new ErrorResponse('Employee not found', 404));
+  }
+
+  task = await Task.findByIdAndUpdate(
+    task._id,
+    {
+      $push: { employee: mongoose.Types.ObjectId(employee._id) },
+    },
+    { new: true }
+  );
+
+  // employee.avatar = avatar;
+
+  // await employee.save();
 
   res.status(200).json({
     success: true,
