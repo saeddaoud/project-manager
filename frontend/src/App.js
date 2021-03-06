@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import EmployeeDetailsScreen from './screens/EmployeeDetailsScreen';
 import EmployeeProfileScreen from './screens/EmployeeProfileScreen';
 import EmployeesProjectsScreen from './screens/EmployeesProjectsScreen';
 import EmployeesScreen from './screens/EmployeesScreen';
@@ -31,6 +32,11 @@ function App() {
             component={EmployeesProjectsScreen}
           />
           <Route exact path='/employees' component={EmployeesScreen} />
+          <Route
+            exact
+            path='/admin/employee-details/:id'
+            component={EmployeeDetailsScreen}
+          />
           <Route exact path='/profile/:id' component={EmployeeProfileScreen} />
           <Route exact path='/project/:id' component={ProjectScreen} />
           <Route exact path='/task/:id' component={TaskScreen} />

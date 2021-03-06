@@ -1,4 +1,8 @@
 import {
+  TASKS_FETCH_FAIL,
+  TASKS_FETCH_REQUEST,
+  TASKS_FETCH_RESET,
+  TASKS_FETCH_SUCCESS,
   TASK_ADD_FAIL,
   TASK_ADD_REQUEST,
   TASK_ADD_RESET,
@@ -61,6 +65,23 @@ export const taskFetchReducer = (state = {}, action) => {
     case TASK_FETCH_FAIL:
       return { loading: false, error: payload };
     case TASK_FETCH_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const tasksFetchReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case TASKS_FETCH_REQUEST:
+      return { loading: true };
+    case TASKS_FETCH_SUCCESS:
+      return { loading: false, success: payload.success, tasks: payload.data };
+    case TASKS_FETCH_FAIL:
+      return { loading: false, error: payload };
+    case TASKS_FETCH_RESET:
       return {};
     default:
       return state;

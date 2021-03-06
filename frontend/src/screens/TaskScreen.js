@@ -13,6 +13,7 @@ import {
   fetchProjects,
 } from '../redux/actions/projectActions';
 import { addTask, fetchTask, updateTask } from '../redux/actions/taskActions';
+import Employees from '../components/Employees';
 
 const TaskScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -134,6 +135,9 @@ const TaskScreen = ({ match }) => {
           edit={true}
         />
       )}
+      {showEmployeesList && (
+        <AssignEmployee setShowEmployeesList={setShowEmployeesList} />
+      )}
       <div className='add-container my-1 flex flex-jcsa'>
         <div
           className='add-container__btn'
@@ -192,15 +196,14 @@ const TaskScreen = ({ match }) => {
               <h4>Task's Employees</h4>
             </div>
             <div className='project-tasks__list'>
-              {showEmployeesList && (
-                <AssignEmployee setShowEmployeesList={setShowEmployeesList} />
-              )}
+              <Employees employees={task.employee} />
               {/* <Tasks tasks={project.tasks} /> */}
             </div>
           </div>
         </div>
       )}
     </div>
+
     // </div>
   );
 };

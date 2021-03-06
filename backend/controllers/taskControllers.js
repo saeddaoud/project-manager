@@ -105,7 +105,9 @@ export const deleteTask = asyncHandlder(async (req, res, next) => {
 //@decsription    Retrieve a task by its id
 //@access         Private/manager and supervisor only
 export const getTask = asyncHandlder(async (req, res, next) => {
-  const task = await Task.findById(req.params.id).populate('project', 'name');
+  const task = await Task.findById(req.params.id)
+    .populate('project', 'name')
+    .populate('employee', 'name');
 
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));

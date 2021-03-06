@@ -6,12 +6,15 @@ import Message from '../components/Message';
 import Spinner from '../components/Spinner';
 import Tasks from '../components/Tasks';
 import { fetchProject, updateProject } from '../redux/actions/projectActions';
-import { addTask } from '../redux/actions/taskActions';
+import { addTask, fetchTasks } from '../redux/actions/taskActions';
 
 const ProjectScreen = ({ match }) => {
   const dispatch = useDispatch();
   const { project, loading, error } = useSelector(
     (state) => state.projectFetch
+  );
+  const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
+    (state) => state.tasksFetch
   );
 
   const [projectName, setProjectName] = useState('');
@@ -34,6 +37,7 @@ const ProjectScreen = ({ match }) => {
     if (project) {
       setProjectName(project.name);
       setProjectDescription(project.description);
+      dispatch(fetchTasks(project._id));
     }
   }, [project]);
 
@@ -169,7 +173,9 @@ const ProjectScreen = ({ match }) => {
               <h4>Project's Tasks</h4>
             </div>
             <div className='project-tasks__list'>
-              <Tasks tasks={project.tasks} />
+              {tasksLoading && <Spinner />}
+              {tasksError && <Message>{tasksError}</Message>}
+              {tasks && <Tasks tasks={tasks} />}
             </div>
           </div>
         </div>
