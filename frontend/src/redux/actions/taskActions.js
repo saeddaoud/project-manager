@@ -10,6 +10,12 @@ import {
   TASK_DELETE_FAIL,
   TASK_DELETE_REQUEST,
   TASK_DELETE_SUCCESS,
+  TASK_EMPLOYEE_ADD_FAIL,
+  TASK_EMPLOYEE_ADD_REQUEST,
+  TASK_EMPLOYEE_ADD_SUCCESS,
+  TASK_EMPLOYEE_REMOVE_FAIL,
+  TASK_EMPLOYEE_REMOVE_REQUEST,
+  TASK_EMPLOYEE_REMOVE_SUCCESS,
   TASK_FETCH_FAIL,
   TASK_FETCH_REQUEST,
   TASK_FETCH_SUCCESS,
@@ -156,6 +162,106 @@ export const fetchTask = (taskId) => async (dispatch, getState) => {
     // console.log(error.response.data.error);
     dispatch({
       type: TASK_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const addEmployeeToTask = ({ taskId, employeeToAddToTask }) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: TASK_EMPLOYEE_ADD_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/tasks/${taskId}/employee/add`,
+      { employeeToAddToTask },
+      config
+    );
+
+    // let project = getState().projectFetch.project;
+
+    // project.tasks.unshift(data.data);
+
+    dispatch({
+      type: TASK_EMPLOYEE_ADD_SUCCESS,
+      payload: data,
+    });
+    // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
+    // dispatch({
+    //   type: PROJECT_EMPLOYEE_ADD_SUCCESS,
+    //   payload: { success: true, data: project },
+    // });
+  } catch (error) {
+    // console.log(error.response.data.error);
+    dispatch({
+      type: TASK_EMPLOYEE_ADD_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const removeEmployeeFromTask = ({
+  taskId,
+  employeeToRemoveFromTask,
+}) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TASK_EMPLOYEE_REMOVE_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/tasks/${taskId}/employee/remove`,
+      { employeeToRemoveFromTask },
+      config
+    );
+
+    // let project = getState().projectFetch.project;
+
+    // project.tasks.unshift(data.data);
+
+    dispatch({
+      type: TASK_EMPLOYEE_REMOVE_SUCCESS,
+      payload: data,
+    });
+    // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
+    // dispatch({
+    //   type: PROJECT_EMPLOYEE_REMOVE_SUCCESS,
+    //   payload: { success: true, data: project },
+    // });
+  } catch (error) {
+    // console.log(error.response.data.error);
+    dispatch({
+      type: TASK_EMPLOYEE_REMOVE_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

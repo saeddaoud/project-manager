@@ -153,12 +153,11 @@ export const updateTask = asyncHandlder(async (req, res, next) => {
   });
 });
 
-//@route            PUT /api/v1/tasks/:taskId/employees/:employeeId
+//@route            PUT /api/v1/tasks/:taskId/employee/add
 //@desc             Add employee(s) to a task
 //@Access           Private/Manager or Supervisor only
 export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
-  // console.log(req.body);
-  // const avatar = req.body;
+  const { employeeToAddToTask } = req.body;
 
   let task = await Task.findById(req.params.taskId);
 
@@ -166,16 +165,67 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
     return next(new ErrorResponse('Task not found', 404));
   }
 
-  const employee = await Employee.findById(req.params.employeeId);
+  const employee = await Employee.findById(employeeToAddToTask);
 
   if (!employee) {
     return next(new ErrorResponse('Employee not found', 404));
+  }
+
+  if (task.employee.includes(employee._id)) {
+    return next(
+      new ErrorResponse('Employee already assigned to this task', 400)
+    );
   }
 
   task = await Task.findByIdAndUpdate(
     task._id,
     {
       $push: { employee: mongoose.Types.ObjectId(employee._id) },
+    },
+    { new: true }
+  );
+
+  // employee.avatar = avatar;
+
+  // await employee.save();
+
+  res.status(200).json({
+    success: true,
+    data: task,
+  });
+});
+
+//@route            PUT /api/v1/tasks/:taskId/employee/remove
+//@desc             Remove employee(s) from a task
+//@Access           Private/Manager or Supervisor only
+export const removeEmployeeFromTask = asyncHandlder(async (req, res, next) => {
+  const { employeeToRemoveFromTask } = req.body;
+
+  let task = await Task.findById(req.params.taskId);
+
+  if (!task) {
+    return next(new ErrorResponse('Task not found', 404));
+  }
+
+  const employee = await Employee.findById(employeeToRemoveFromTask);
+
+  if (!employee) {
+    return next(new ErrorResponse('Employee not found', 404));
+  }
+
+  if (!task.employee.includes(employee._id)) {
+    return next(
+      new ErrorResponse(
+        "Employee hasn't been assigned to this task to be removed",
+        400
+      )
+    );
+  }
+
+  task = await Task.findByIdAndUpdate(
+    task._id,
+    {
+      $pull: { employee: mongoose.Types.ObjectId(employee._id) },
     },
     { new: true }
   );

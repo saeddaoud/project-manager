@@ -10,6 +10,14 @@ import {
   TASK_DELETE_FAIL,
   TASK_DELETE_REQUEST,
   TASK_DELETE_SUCCESS,
+  TASK_EMPLOYEE_ADD_FAIL,
+  TASK_EMPLOYEE_ADD_REQUEST,
+  TASK_EMPLOYEE_ADD_RESET,
+  TASK_EMPLOYEE_ADD_SUCCESS,
+  TASK_EMPLOYEE_REMOVE_FAIL,
+  TASK_EMPLOYEE_REMOVE_REQUEST,
+  TASK_EMPLOYEE_REMOVE_RESET,
+  TASK_EMPLOYEE_REMOVE_SUCCESS,
   TASK_FETCH_FAIL,
   TASK_FETCH_REQUEST,
   TASK_FETCH_RESET,
@@ -82,6 +90,40 @@ export const tasksFetchReducer = (state = {}, action) => {
     case TASKS_FETCH_FAIL:
       return { loading: false, error: payload };
     case TASKS_FETCH_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const taskEmployeeAddReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case TASK_EMPLOYEE_ADD_REQUEST:
+      return { loading: true };
+    case TASK_EMPLOYEE_ADD_SUCCESS:
+      return { loading: false, success: payload.success, task: payload.data };
+    case TASK_EMPLOYEE_ADD_FAIL:
+      return { loading: false, error: payload };
+    case TASK_EMPLOYEE_ADD_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const taskEmployeeRemoveReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case TASK_EMPLOYEE_REMOVE_REQUEST:
+      return { loading: true };
+    case TASK_EMPLOYEE_REMOVE_SUCCESS:
+      return { loading: false, success: payload.success, task: payload.data };
+    case TASK_EMPLOYEE_REMOVE_FAIL:
+      return { loading: false, error: payload };
+    case TASK_EMPLOYEE_REMOVE_RESET:
       return {};
     default:
       return state;

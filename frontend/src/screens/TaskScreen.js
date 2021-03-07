@@ -18,6 +18,16 @@ import Employees from '../components/Employees';
 const TaskScreen = ({ match }) => {
   const dispatch = useDispatch();
   const { task, loading, error } = useSelector((state) => state.taskFetch);
+  const {
+    loading: addEmployeeLoading,
+    error: addEmployeeError,
+    success: addEmployeeSuccess,
+  } = useSelector((state) => state.taskEmployeeAdd);
+  const {
+    loading: removeEmployeeLoading,
+    error: removeEmployeeError,
+    success: removeEmployeeSuccess,
+  } = useSelector((state) => state.taskEmployeeRemove);
   const { success } = useSelector((state) => state.taskUpdate);
   // const { project } = useSelector((state) => state.projectFetch);
   // const { projects } = useSelector((state) => state.projectsFetch);
@@ -52,7 +62,7 @@ const TaskScreen = ({ match }) => {
     //   setProjectDescription(projectDescription);
     // }
     dispatch(fetchTask(id));
-  }, [dispatch, id, success]);
+  }, [dispatch, id, success, addEmployeeSuccess, removeEmployeeSuccess]);
 
   //   const addEmployeeHandler = (e) => {
   //     e.preventDefault();
@@ -135,8 +145,11 @@ const TaskScreen = ({ match }) => {
           edit={true}
         />
       )}
-      {showEmployeesList && (
-        <AssignEmployee setShowEmployeesList={setShowEmployeesList} />
+      {showEmployeesList && task && (
+        <AssignEmployee
+          setShowEmployeesList={setShowEmployeesList}
+          task={task}
+        />
       )}
       <div className='add-container my-1 flex flex-jcsa'>
         <div
@@ -157,7 +170,9 @@ const TaskScreen = ({ match }) => {
             onClick={() => setShowEmployeesList(true)}
             //   onClick={() => setShowTaskForm(true)}
           >
-            <i className='fas fa-plus'></i> Assign Employee
+            <i className='fas fa-plus'></i>/<i className='fas fa-minus'></i>
+            {'  '}
+            Employee
           </div>
           {/* <i className='far fa-plus-square'></i> */}
         </div>
@@ -196,6 +211,8 @@ const TaskScreen = ({ match }) => {
               <h4>Task's Employees</h4>
             </div>
             <div className='project-tasks__list'>
+              {addEmployeeLoading && <Spinner />}
+              {addEmployeeError && <Message>{addEmployeeError}</Message>}
               <Employees employees={task.employee} />
               {/* <Tasks tasks={project.tasks} /> */}
             </div>

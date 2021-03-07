@@ -6,6 +6,7 @@ import {
   getTask,
   getTasks,
   updateTask,
+  removeEmployeeFromTask,
 } from '../controllers/taskControllers.js';
 import { authorize, protect } from '../middleware/authMiddleware.js';
 
@@ -21,7 +22,10 @@ router
   .put(protect, authorize('manager'), updateTask)
   .get(protect, authorize('supervisor', 'manager'), getTask);
 router
-  .route('/:taskId/employees/:employeeId')
+  .route('/:taskId/employee/add')
   .put(protect, authorize('supervisor', 'manager'), addEmployeeToTask);
+router
+  .route('/:taskId/employee/remove')
+  .put(protect, authorize('supervisor', 'manager'), removeEmployeeFromTask);
 
 export default router;

@@ -18,6 +18,8 @@ import {
 import {
   taskAddReducer,
   taskDeleteReducer,
+  taskEmployeeAddReducer,
+  taskEmployeeRemoveReducer,
   taskEmployeesFetchReducer,
   taskFetchReducer,
   tasksFetchReducer,
@@ -40,6 +42,8 @@ const reducer = combineReducers({
   taskAdd: taskAddReducer,
   taskUpdate: taskUpdateReducer,
   taskFetch: taskFetchReducer,
+  taskEmployeeAdd: taskEmployeeAddReducer,
+  taskEmployeeRemove: taskEmployeeRemoveReducer,
   tasksFetch: tasksFetchReducer,
   taskDelete: taskDeleteReducer,
 });
