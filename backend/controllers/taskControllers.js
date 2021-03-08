@@ -56,17 +56,17 @@ export const addTask = asyncHandlder(async (req, res, next) => {
   });
 });
 
-//@route          GET /api/v1/projects/:projectId/tasks
-//@decsription    Get all task of a project
-//@access         Private/manager only
+//@route          Get /api/v1/tasks
+//@decsription    Get signed in employee's tasks
+//@access         Private
 export const getTasks = asyncHandlder(async (req, res, next) => {
-  let project = await Project.findById(req.params.projectId);
+  let employee = await Employee.findById(req.employee._id);
 
-  if (!project) {
-    return next(new ErrorResponse('Project not found', 404));
+  if (!employee) {
+    return next(new ErrorResponse('Employee not found', 404));
   }
 
-  const tasks = await Task.find({ project: project._id }).populate(
+  const tasks = await Task.find({ employee: employee._id }).populate(
     'employee',
     'name'
   );

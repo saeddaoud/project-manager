@@ -1,6 +1,7 @@
 import Project from '../models/projectModel.js';
 import asyncHandler from '../middleware/asyncHandler.js';
 import ErrorResponse from '../utils/errorResponse.js';
+import Task from '../models/taskModel.js';
 
 //@route          GET /api/v1/projects
 //@decsription    Get all projects
@@ -55,6 +56,27 @@ export const getProject = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: project,
+  });
+});
+
+//@route          GET /api/v1/projects/:projectId/tasks
+//@decsription    Get all task of a project
+//@access         Private/manager only
+export const getTasks = asyncHandler(async (req, res, next) => {
+  let project = await Project.findById(req.params.projectId);
+
+  if (!project) {
+    return next(new ErrorResponse('Project not found', 404));
+  }
+
+  const tasks = await Task.find({ project: project._id }).populate(
+    'employee',
+    'name'
+  );
+
+  res.status(200).json({
+    success: true,
+    data: tasks,
   });
 });
 

@@ -86,6 +86,24 @@ export const updateEmployeeInfo = asyncHandler(async (req, res, next) => {
   });
 });
 
+//@route          GET /api/v1/employees/:employeeId/tasks
+//@decsription    Get all task of an employee
+//@access         Private
+export const getEmployeeTasks = asyncHandler(async (req, res, next) => {
+  let employee = await Employee.findById(req.params.employeeId);
+
+  if (!employee) {
+    return next(new ErrorResponse('Employee not found', 404));
+  }
+
+  const tasks = await Task.find({ $in: { employee: employee._id } });
+
+  res.status(200).json({
+    success: true,
+    data: tasks,
+  });
+});
+
 //@route            PUT /api/v1/employees/avatar
 //@desc             Update employee's avatar
 //@Access           Private

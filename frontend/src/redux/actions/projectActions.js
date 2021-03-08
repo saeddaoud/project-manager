@@ -20,6 +20,11 @@ import {
   PROJECT_UPDATE_REQUEST,
   PROJECT_UPDATE_SUCCESS,
 } from '../constants/projectConstants';
+import {
+  TASKS_FETCH_FAIL,
+  TASKS_FETCH_REQUEST,
+  TASKS_FETCH_SUCCESS,
+} from '../constants/taskConstants';
 
 // fetchProjects can take an argument queryOptions as an object with three possible properties' names: keyword, status, and limit.
 
@@ -76,6 +81,52 @@ export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
     console.log(error.response.data.error);
     dispatch({
       type: PROJECTS_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const fetchTasks = (projectId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TASKS_FETCH_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/v1/projects/${projectId}/tasks`,
+      config
+    );
+
+    // let project = getState().projectFetch.project;
+
+    // project.tasks.unshift(data.data);
+
+    dispatch({
+      type: TASKS_FETCH_SUCCESS,
+      payload: data,
+    });
+    // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
+    // dispatch({
+    //   type: PROJECT_FETCH_SUCCESS,
+    //   payload: { success: true, data: project },
+    // });
+  } catch (error) {
+    // console.log(error.response.data.error);
+    dispatch({
+      type: TASKS_FETCH_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

@@ -4,9 +4,10 @@ import {
   addTask,
   deleteTask,
   getTask,
-  getTasks,
+  // getTasks,
   updateTask,
   removeEmployeeFromTask,
+  getTasks,
 } from '../controllers/taskControllers.js';
 import { authorize, protect } from '../middleware/authMiddleware.js';
 
@@ -15,7 +16,8 @@ const router = express.Router({ mergeParams: true });
 router
   .route('/')
   .post(protect, authorize('manager'), addTask)
-  .get(protect, authorize('supervisor', 'manager'), getTasks);
+  .get(protect, getTasks);
+
 router
   .route('/:id')
   .delete(protect, authorize('manager'), deleteTask)

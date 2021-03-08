@@ -5,8 +5,12 @@ import AddEditTaskForm from '../components/AddEditTaskForm';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
 import Tasks from '../components/Tasks';
-import { fetchProject, updateProject } from '../redux/actions/projectActions';
-import { addTask, fetchTasks } from '../redux/actions/taskActions';
+import {
+  fetchProject,
+  updateProject,
+  fetchTasks,
+} from '../redux/actions/projectActions';
+import { addTask } from '../redux/actions/taskActions';
 
 const ProjectScreen = ({ match }) => {
   const dispatch = useDispatch();
