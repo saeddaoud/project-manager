@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import {
+  MY_TASKS_FETCH_FAIL,
+  MY_TASKS_FETCH_REQUEST,
+  MY_TASKS_FETCH_SUCCESS,
   TASKS_FETCH_FAIL,
   TASKS_FETCH_REQUEST,
   TASKS_FETCH_SUCCESS,
@@ -162,6 +165,69 @@ export const fetchTask = (taskId) => async (dispatch, getState) => {
     // console.log(error.response.data.error);
     dispatch({
       type: TASK_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+// fetchMyTasks can take an argument queryOptions as an object with three possible properties' names: keyword, status, and limit.
+
+export const fetchMyTasks = (queryOptions) => async (dispatch, getState) => {
+  const keyword = queryOptions?.keyword;
+  const limit = queryOptions?.limit;
+  const status = queryOptions?.status;
+
+  // console.log(keyword, limit, status);
+
+  let query = [];
+
+  if (keyword) {
+    query.push(`keyword=${keyword}`);
+  } else {
+    if (status) {
+      query.push(`status=${status}`);
+    }
+    if (limit) {
+      query.push(`limit=${limit}`);
+    }
+  }
+
+  // console.log(query.length);
+
+  try {
+    dispatch({
+      type: MY_TASKS_FETCH_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } =
+      query.length > 0
+        ? await axios.get(
+            `/api/v1/tasks?${query.join(',').replace(',', '&')}`,
+            config
+          )
+        : await axios.get(`/api/v1/tasks`, config);
+
+    dispatch({
+      type: MY_TASKS_FETCH_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response.data.error);
+    dispatch({
+      type: MY_TASKS_FETCH_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

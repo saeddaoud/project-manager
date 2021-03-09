@@ -60,6 +60,7 @@ export const addTask = asyncHandlder(async (req, res, next) => {
 //@decsription    Get signed in employee's tasks
 //@access         Private
 export const getTasks = asyncHandlder(async (req, res, next) => {
+  console.log('get tasks');
   let employee = await Employee.findById(req.employee._id);
 
   if (!employee) {
@@ -69,6 +70,8 @@ export const getTasks = asyncHandlder(async (req, res, next) => {
   const status = req.query.status;
   const limit = req.query.limit && Number(req.query.limit);
   const keyword = req.query.keyword;
+
+  // console.log(status, limit, keyword);
   // If a keyword is provided retrieve the projects whose name is matched. Otherwise if a status is provided filter documents based on status. Else, retrieve all projects.
   const query = keyword
     ? {
@@ -81,9 +84,13 @@ export const getTasks = asyncHandlder(async (req, res, next) => {
     ? { $and: [{ employee: employee._id }, { status: status }] }
     : { employee: employee._id };
 
+  // console.log(query);
+
   const tasks = limit
     ? await Task.find(query).limit(limit).populate('employee', 'name')
     : await Task.find(query).populate('employee', 'name');
+
+  // console.log(tasks);
 
   res.status(200).json({
     success: true,

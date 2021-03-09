@@ -7,6 +7,8 @@ import Spinner from '../components/Spinner';
 import Message from '../components/Message';
 import { fetchProjects } from '../redux/actions/projectActions';
 import Projects from '../components/Projects';
+import { fetchMyTasks } from '../redux/actions/taskActions';
+import Tasks from '../components/Tasks';
 
 const ProfileScreen = () => {
   const [hidden, setHidden] = useState(true);
@@ -19,6 +21,9 @@ const ProfileScreen = () => {
     loading: projectsLoading,
     error: projectsError,
   } = useSelector((state) => state.projectsFetch);
+  const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
+    (state) => state.myTasksFetch
+  );
 
   // console.log(user, loading);
 
@@ -52,6 +57,10 @@ const ProfileScreen = () => {
     if (user && user.role !== 'employee') {
       dispatch(fetchProjects({ status: 'active', limit: '3' }));
       // dispatch(fetchProjects());
+    }
+
+    if (user && user.role === 'employee') {
+      dispatch(fetchMyTasks({ limit: '3' }));
     }
 
     // dispatch(fetchProjects());
@@ -137,6 +146,7 @@ const ProfileScreen = () => {
             {user.role !== 'employee' && projects && (
               <Projects projects={projects} />
             )}
+            {user.role === 'employee' && tasks && <Tasks tasks={tasks} />}
           </div>
         </div>
       )}
