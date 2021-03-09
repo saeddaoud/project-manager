@@ -66,10 +66,24 @@ export const getTasks = asyncHandlder(async (req, res, next) => {
     return next(new ErrorResponse('Employee not found', 404));
   }
 
-  const tasks = await Task.find({ employee: employee._id }).populate(
-    'employee',
-    'name'
-  );
+  const status = req.query.status;
+  const limit = req.query.limit && Number(req.query.limit);
+  const keyword = req.query.keyword;
+  // If a keyword is provided retrieve the projects whose name is matched. Otherwise if a status is provided filter documents based on status. Else, retrieve all projects.
+  const query = keyword
+    ? {
+        $and: [
+          { employee: employee._id },
+          { name: { $regex: keyword, $options: 'i' } },
+        ],
+      }
+    : status
+    ? { $and: [{ employee: employee._id }, { status: status }] }
+    : { employee: employee._id };
+
+  const tasks = limit
+    ? await Task.find(query).limit(limit).populate('employee', 'name')
+    : await Task.find(query).populate('employee', 'name');
 
   res.status(200).json({
     success: true,
