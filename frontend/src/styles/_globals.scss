@@ -25,6 +25,9 @@ h1,
 h2 {
   letter-spacing: 3px;
 }
+h3 {
+  font-size: 1.8rem;
+}
 h2 {
   font-size: 2rem;
 }
@@ -84,6 +87,12 @@ a {
   &-jcfe {
     justify-content: flex-end;
   }
+}
+
+.text-center {
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .add-container {

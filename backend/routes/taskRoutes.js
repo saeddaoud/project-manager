@@ -8,6 +8,7 @@ import {
   updateTask,
   removeEmployeeFromTask,
   getTasks,
+  updateTaskStatus,
 } from '../controllers/taskControllers.js';
 import { authorize, protect } from '../middleware/authMiddleware.js';
 
@@ -22,7 +23,10 @@ router
   .route('/:id')
   .delete(protect, authorize('manager'), deleteTask)
   .put(protect, authorize('manager'), updateTask)
-  .get(protect, authorize('supervisor', 'manager'), getTask);
+  .get(protect, getTask);
+
+router.route('/:id/status').put(protect, updateTaskStatus);
+
 router
   .route('/:taskId/employee/add')
   .put(protect, authorize('supervisor', 'manager'), addEmployeeToTask);

@@ -46,8 +46,8 @@ const Tasks = ({ tasks }) => {
             </div>
           </div>
           <div className='flex'>
-            <div>Status</div>
-            <div>Employee</div>
+            <div>Status: {task.status}</div>
+            {/* <div>Employee(s):</div> */}
           </div>
         </li>
         // </Link>

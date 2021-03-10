@@ -174,6 +174,49 @@ export const updateTask = asyncHandlder(async (req, res, next) => {
   });
 });
 
+//@route          PUT /api/v1/tasks/:id/status
+//@decsription    Update task's status by assigned employee
+//@access         Private/assigned employee only
+export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
+  const { status } = req.body;
+  const employee = await Employee.findById(req.employee._id);
+  let task = await Task.findById(req.params.id);
+  // Check if task exists
+  if (!task) {
+    return next(new ErrorResponse('Task not found', 404));
+  }
+  // check if signed in employee is the assigned employee t the task
+  if (!task.employee.includes(employee._id)) {
+    return next(
+      new ErrorResponse(
+        'Not authorized. You are not an assigned employee for this task',
+        401
+      )
+    );
+  }
+
+  task = await Task.findByIdAndUpdate(
+    req.params.id,
+    { $set: { status: status } },
+    {
+      new: true,
+    }
+  );
+
+  // const project = await Project.findByIdAndUpdate(task.project, {
+  //   $pull: { tasks: task._id },
+  // });
+
+  // console.log(project);
+
+  // await task.remove();
+
+  res.status(200).json({
+    success: true,
+    data: task,
+  });
+});
+
 //@route            PUT /api/v1/tasks/:taskId/employee/add
 //@desc             Add employee(s) to a task
 //@Access           Private/Manager or Supervisor only

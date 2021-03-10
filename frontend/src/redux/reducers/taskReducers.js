@@ -26,6 +26,10 @@ import {
   TASK_FETCH_REQUEST,
   TASK_FETCH_RESET,
   TASK_FETCH_SUCCESS,
+  TASK_STATUS_UPDATE_FAIL,
+  TASK_STATUS_UPDATE_REQUEST,
+  TASK_STATUS_UPDATE_RESET,
+  TASK_STATUS_UPDATE_SUCCESS,
   TASK_UPDATE_FAIL,
   TASK_UPDATE_REQUEST,
   TASK_UPDATE_RESET,
@@ -60,6 +64,23 @@ export const taskUpdateReducer = (state = {}, action) => {
     case TASK_UPDATE_FAIL:
       return { loading: false, error: payload };
     case TASK_UPDATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const taskStatusUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case TASK_STATUS_UPDATE_REQUEST:
+      return { loading: true };
+    case TASK_STATUS_UPDATE_SUCCESS:
+      return { loading: false, success: payload.success, task: payload.data };
+    case TASK_STATUS_UPDATE_FAIL:
+      return { loading: false, error: payload };
+    case TASK_STATUS_UPDATE_RESET:
       return {};
     default:
       return state;

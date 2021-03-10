@@ -22,6 +22,9 @@ import {
   TASK_FETCH_FAIL,
   TASK_FETCH_REQUEST,
   TASK_FETCH_SUCCESS,
+  TASK_STATUS_UPDATE_FAIL,
+  TASK_STATUS_UPDATE_REQUEST,
+  TASK_STATUS_UPDATE_SUCCESS,
   TASK_UPDATE_FAIL,
   TASK_UPDATE_REQUEST,
   TASK_UPDATE_SUCCESS,
@@ -122,6 +125,63 @@ export const updateTask = (task) => async (dispatch, getState) => {
     // console.log(error.response.data.error);
     dispatch({
       type: TASK_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const updateTaskStatus = ({ taskId, status }) => async (
+  dispatch,
+  getState
+) => {
+  // const { taskId, ...taskBody } = task;
+  // console.log(taskId, taskBody);
+  try {
+    dispatch({
+      type: TASK_STATUS_UPDATE_REQUEST,
+    });
+
+    let token = getState().employeeLogin.userInfo.token;
+    token = `Bearer ${token}`;
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/tasks/${taskId}/status`,
+      { status },
+      config
+    );
+
+    // let project = getState().projectFetch.project;
+
+    // project.tasks = project.tasks.map((xtask) => {
+    //   console.log(xtask._id.toString(), taskId.toString());
+    //   return xtask._id.toString() === taskId.toString() ? data.data : xtask;
+    // });
+
+    // console.log(project);
+
+    dispatch({
+      type: TASK_STATUS_UPDATE_SUCCESS,
+      payload: data,
+    });
+    // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
+    // dispatch({
+    //   type: TASK_FETCH_SUCCESS,
+    //   payload: data,
+    // });
+  } catch (error) {
+    // console.log(error.response.data.error);
+    dispatch({
+      type: TASK_STATUS_UPDATE_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
