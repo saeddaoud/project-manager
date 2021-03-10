@@ -60,7 +60,7 @@ export const addTask = asyncHandlder(async (req, res, next) => {
 //@decsription    Get signed in employee's tasks
 //@access         Private
 export const getTasks = asyncHandlder(async (req, res, next) => {
-  console.log('get tasks');
+  // console.log('get tasks');
   let employee = await Employee.findById(req.employee._id);
 
   if (!employee) {

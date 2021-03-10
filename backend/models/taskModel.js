@@ -26,8 +26,8 @@ const taskSchema = new Schema(
     status: {
       type: String,
       required: [true, "Task's status is required"],
-      enum: ['Not Started', 'In Progress', 'Aborted', 'Completed'],
-      default: 'Not Started',
+      enum: ['not started', 'in progress', 'paused', 'aborted', 'completed'],
+      default: 'not started',
     },
   },
   {

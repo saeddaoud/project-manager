@@ -15,26 +15,35 @@ const Tasks = ({ tasks }) => {
           <div className='flex'>
             <div>{task.name}</div>
             {/* <div>{task.status}</div> */}
-            {user && (user.role === 'manager' || user.role === 'supervisor') && (
-              <div className='action-btns flex'>
+
+            <div className='action-btns flex'>
+              {user && (user.role === 'manager' || user.role === 'supervisor') && (
                 <div
                   className='action-btn action-btn__delete'
                   onClick={() => dispatch(deleteTask(task._id))}
                 >
                   <i className='far fa-trash-alt'></i>
                 </div>
+              )}
 
-                {/* <div className='action-btn action-btn__edit'>
+              {/* <div className='action-btn action-btn__edit'>
                   <i className='far fa-edit'></i>
                 </div> */}
 
+              {user.role === 'employee' ? (
+                <Link to={`/employee/task/${task._id}`}>
+                  <div className='action-btn action-btn__link'>
+                    <i className='fas fa-external-link-alt'></i>{' '}
+                  </div>
+                </Link>
+              ) : (
                 <Link to={`/task/${task._id}`}>
                   <div className='action-btn action-btn__link'>
                     <i className='fas fa-external-link-alt'></i>{' '}
                   </div>
                 </Link>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <div className='flex'>
             <div>Status</div>

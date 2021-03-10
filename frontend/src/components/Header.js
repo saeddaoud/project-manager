@@ -54,7 +54,7 @@ const Header = () => {
               ) : (
                 user && (
                   <li>
-                    <Link to='/tasks' onClick={() => setShow(false)}>
+                    <Link to='/employee/tasks' onClick={() => setShow(false)}>
                       My Tasks
                     </Link>
                   </li>

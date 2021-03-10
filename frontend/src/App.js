@@ -13,6 +13,8 @@ import ProjectsScreen from './screens/ProjectsScreen';
 import RegistrationScreen from './screens/RegistrationScreen';
 import TaskScreen from './screens/TaskScreen';
 import TasksScreen from './screens/TasksScreen';
+import EmployeeTaskScreen from './screens/EmployeeTaskScreen';
+import EmployeeTasksScreen from './screens/EmployeeTasksScreen';
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
           <Route exact path='/signup' component={RegistrationScreen} />
           <Route exact path='/profile/me' component={ProfileScreen} />
           <Route exact path='/projects' component={ProjectsScreen} />
-          <Route exact path='/tasks' component={TasksScreen} />
+          <Route exact path='/employee/tasks' component={EmployeeTasksScreen} />
           <Route
             exact
             path='/employees/projects'
@@ -40,6 +42,11 @@ function App() {
           <Route exact path='/profile/:id' component={EmployeeProfileScreen} />
           <Route exact path='/project/:id' component={ProjectScreen} />
           <Route exact path='/task/:id' component={TaskScreen} />
+          <Route
+            exact
+            path='/employee/task/:id'
+            component={EmployeeTaskScreen}
+          />
         </Switch>
       </div>
       <Footer />

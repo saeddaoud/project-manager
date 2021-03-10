@@ -195,7 +195,7 @@ export const fetchMyTasks = (queryOptions) => async (dispatch, getState) => {
     }
   }
 
-  // console.log(query.length);
+  // console.log(query);
 
   try {
     dispatch({
