@@ -20,6 +20,10 @@ const ProjectScreen = ({ match }) => {
   const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
     (state) => state.tasksFetch
   );
+  const { success: addTaskSuccess } = useSelector((state) => state.taskAdd);
+  const { success: deleteTaskSuccess } = useSelector(
+    (state) => state.taskDelete
+  );
 
   const [projectName, setProjectName] = useState('');
   const [projectDescription, setProjectDescription] = useState('');
@@ -51,7 +55,7 @@ const ProjectScreen = ({ match }) => {
     //   setProjectDescription(projectDescription);
     // }
     dispatch(fetchProject(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, addTaskSuccess, deleteTaskSuccess]);
 
   const addTaskHandler = (e) => {
     e.preventDefault();

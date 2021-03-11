@@ -31,6 +31,14 @@ const projectSchema = new Schema(
         ref: 'Employee',
       },
     ],
+    totalNoOfTasks: {
+      type: Number,
+      default: 0,
+    },
+    totalNoOfCompletedTasks: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

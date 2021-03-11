@@ -7,6 +7,7 @@ import {
   getTasks,
   updateProject,
 } from '../controllers/projectControllers.js';
+import { addTask } from '../controllers/taskControllers.js';
 import { authorize, protect } from '../middleware/authMiddleware.js';
 import taskRoutes from './taskRoutes.js';
 
@@ -31,6 +32,7 @@ router
 
 router
   .route('/:projectId/tasks')
-  .get(protect, authorize('supervisor', 'manager'), getTasks);
+  .get(protect, authorize('supervisor', 'manager'), getTasks)
+  .post(protect, authorize('manager'), addTask);
 
 export default router;

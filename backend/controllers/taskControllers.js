@@ -46,7 +46,10 @@ export const addTask = asyncHandlder(async (req, res, next) => {
 
   project = await Project.findByIdAndUpdate(
     req.params.projectId,
-    { $push: { tasks: mongoose.Types.ObjectId(task._id) } },
+    {
+      $push: { tasks: mongoose.Types.ObjectId(task._id) },
+      $inc: { totalNoOfTasks: 1 },
+    },
     { new: true }
   );
 
@@ -87,8 +90,11 @@ export const getTasks = asyncHandlder(async (req, res, next) => {
   // console.log(query);
 
   const tasks = limit
-    ? await Task.find(query).limit(limit).populate('employee', 'name')
-    : await Task.find(query).populate('employee', 'name');
+    ? await Task.find(query)
+        .limit(limit)
+        .populate('employee', 'name')
+        .sort({ _id: -1 })
+    : await Task.find(query).populate('employee', 'name').sort({ _id: -1 });
 
   // console.log(tasks);
 
@@ -110,6 +116,7 @@ export const deleteTask = asyncHandlder(async (req, res, next) => {
 
   const project = await Project.findByIdAndUpdate(task.project, {
     $pull: { tasks: task._id },
+    $inc: { totalNoOfTasks: -1 },
   });
 
   // console.log(project);
@@ -181,6 +188,9 @@ export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
   const { status } = req.body;
   const employee = await Employee.findById(req.employee._id);
   let task = await Task.findById(req.params.id);
+  console.log(task);
+  const prevStatus = task.status;
+  const project = await Project.findById({ project: task.project });
   // Check if task exists
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
@@ -192,6 +202,20 @@ export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
         'Not authorized. You are not an assigned employee for this task',
         401
       )
+    );
+  }
+
+  if (prevStatus !== 'completed' && status === 'completed') {
+    await Project.findByIdAndUpdate(
+      project._id,
+      { $inc: { totalNoOfCompletedTasks: 1 } },
+      { new: true }
+    );
+  } else if (prevStatus === 'completed' && status !== 'completed') {
+    await Project.findByIdAndUpdate(
+      project._id,
+      { $inc: { totalNoOfCompletedTasks: -1 } },
+      { new: true }
     );
   }
 

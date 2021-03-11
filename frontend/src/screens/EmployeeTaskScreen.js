@@ -24,6 +24,8 @@ const EmployeeTaskScreen = () => {
 
   const { id } = useParams();
 
+  // console.log(id, task, status);
+
   useEffect(() => {
     if (task && status !== '') {
       dispatch(updateTaskStatus({ taskId: task._id, status }));
@@ -66,23 +68,27 @@ const EmployeeTaskScreen = () => {
                 <p style={{ textAlign: 'left' }}>{task.description}</p>
               </div>
               <div className='h-line'></div>
-              <div className='task-details__status flex'>
-                {taskStatusUpdateError && (
-                  <Message>{taskStatusUpdateError}</Message>
-                )}
-                <div>Task's Status</div>
-                <div>
-                  <select
-                    name='status'
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                  >
-                    <option value='not started'>Not Started</option>
-                    <option value='in progress'>In Progress</option>
-                    <option value='aborted'>Aborted</option>
-                    <option value='paused'>Paused</option>
-                    <option value='completed'>Completed</option>
-                  </select>
+              <div className='task-details__status flex flex-fdc'>
+                <div className='task-status__error'>
+                  {taskStatusUpdateError && (
+                    <Message>{taskStatusUpdateError}</Message>
+                  )}
+                </div>
+                <div className='task-status__info flex'>
+                  <div>Task's Status</div>
+                  <div>
+                    <select
+                      name='status'
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value='not started'>Not Started</option>
+                      <option value='in progress'>In Progress</option>
+                      <option value='aborted'>Aborted</option>
+                      <option value='paused'>Paused</option>
+                      <option value='completed'>Completed</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div className='h-line'></div>

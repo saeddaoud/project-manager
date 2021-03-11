@@ -69,10 +69,9 @@ export const getTasks = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Project not found', 404));
   }
 
-  const tasks = await Task.find({ project: project._id }).populate(
-    'employee',
-    'name'
-  );
+  const tasks = await Task.find({ project: project._id })
+    .populate('employee', 'name')
+    .sort({ _id: -1 });
 
   res.status(200).json({
     success: true,

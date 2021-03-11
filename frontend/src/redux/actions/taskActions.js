@@ -54,9 +54,11 @@ export const addTask = (task) => async (dispatch, getState) => {
       config
     );
 
-    let project = getState().projectFetch.project;
+    let tasks = getState().tasksFetch.tasks;
 
-    project.tasks.unshift(data.data);
+    tasks.unshift(data.data);
+
+    console.log(tasks, data);
 
     dispatch({
       type: TASK_ADD_SUCCESS,
@@ -64,8 +66,8 @@ export const addTask = (task) => async (dispatch, getState) => {
     });
     // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
     dispatch({
-      type: PROJECT_FETCH_SUCCESS,
-      payload: { success: true, data: project },
+      type: TASKS_FETCH_SUCCESS,
+      payload: { success: true, data: tasks },
     });
   } catch (error) {
     // console.log(error.response.data.error);
@@ -138,7 +140,7 @@ export const updateTaskStatus = ({ taskId, status }) => async (
   getState
 ) => {
   // const { taskId, ...taskBody } = task;
-  // console.log(taskId, taskBody);
+  console.log(taskId, status);
   try {
     dispatch({
       type: TASK_STATUS_UPDATE_REQUEST,
@@ -159,6 +161,8 @@ export const updateTaskStatus = ({ taskId, status }) => async (
       { status },
       config
     );
+
+    console.log(data);
 
     // let project = getState().projectFetch.project;
 
@@ -414,10 +418,10 @@ export const deleteTask = (taskId) => async (dispatch, getState) => {
 
     const { data } = await axios.delete(`/api/v1/tasks/${taskId}`, config);
 
-    let project = getState().projectFetch.project;
+    let tasks = getState().tasksFetch.tasks;
 
-    project.tasks = project.tasks.filter(
-      (projectTask) => projectTask._id.toString() !== taskId.toString()
+    tasks = tasks.filter(
+      (taskItem) => taskItem._id.toString() !== taskId.toString()
     );
 
     dispatch({
@@ -426,8 +430,8 @@ export const deleteTask = (taskId) => async (dispatch, getState) => {
     });
     // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
     dispatch({
-      type: PROJECT_FETCH_SUCCESS,
-      payload: { success: true, data: project },
+      type: TASKS_FETCH_SUCCESS,
+      payload: { success: true, data: tasks },
     });
   } catch (error) {
     // console.log(error.response.data.error);

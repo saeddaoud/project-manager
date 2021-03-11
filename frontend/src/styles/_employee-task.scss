@@ -1,3 +1,7 @@
 .employee-project-task-details {
   font-size: 1.5rem;
+  .task-status__error,
+  .task-status__info {
+    width: 100%;
+  }
 }
