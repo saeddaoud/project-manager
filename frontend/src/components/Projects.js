@@ -14,7 +14,7 @@ const Projects = ({ projects }) => {
         <li key={project._id}>
           <div className='flex'>
             <div>{project.name}</div>
-            <div>{project.status}</div>
+            {/* <div>{project.status}</div> */}
             <div
               className={
                 user && user.role === 'manager'
@@ -43,8 +43,11 @@ const Projects = ({ projects }) => {
             </div>
           </div>
           <div className='flex'>
-            <div>Progress</div>
-            <div>Employee</div>
+            <div>
+              Progress: {`${project.totalNoOfCompletedTasks}`}/
+              {`${project.totalNoOfTasks}`}
+            </div>
+            <div>{project.status}</div>
           </div>
         </li>
         // </Link>

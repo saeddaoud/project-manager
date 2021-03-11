@@ -186,11 +186,12 @@ export const updateTask = asyncHandlder(async (req, res, next) => {
 //@access         Private/assigned employee only
 export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
   const { status } = req.body;
+  // console.log(status);
   const employee = await Employee.findById(req.employee._id);
   let task = await Task.findById(req.params.id);
-  console.log(task);
+  // console.log(task);
   const prevStatus = task.status;
-  const project = await Project.findById({ project: task.project });
+  const project = await Project.findById(task.project);
   // Check if task exists
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
