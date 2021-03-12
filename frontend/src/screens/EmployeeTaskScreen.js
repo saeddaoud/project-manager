@@ -13,7 +13,7 @@ import Message from '../components/Message';
 const EmployeeTaskScreen = () => {
   const dispatch = useDispatch();
 
-  const [status, setStatus] = useState('not started');
+  const [status, setStatus] = useState('');
 
   console.log(status);
 
@@ -27,7 +27,7 @@ const EmployeeTaskScreen = () => {
   // console.log(id, task, status);
 
   useEffect(() => {
-    if (task && status !== 'not started') {
+    if (task && status) {
       dispatch(updateTaskStatus({ taskId: task._id, status }));
     }
   }, [status]);

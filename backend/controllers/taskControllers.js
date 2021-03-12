@@ -200,6 +200,7 @@ export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
   // console.log(task);
   const prevStatus = task.status;
   let project = await Project.findById(task.project);
+  let project2 = project;
   // Check if task exists
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
@@ -213,25 +214,36 @@ export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
       )
     );
   }
-
+  // console.log('hit', prevStatus, status);
   if (prevStatus !== 'completed' && status === 'completed') {
-    project = await Project.findByIdAndUpdate(
+    project2 = await Project.findByIdAndUpdate(
       project._id,
       { $inc: { totalNoOfCompletedTasks: 1 } },
       { new: true }
     );
   } else if (prevStatus === 'completed' && status !== 'completed') {
-    project = await Project.findByIdAndUpdate(
+    project2 = await Project.findByIdAndUpdate(
       project._id,
       { $inc: { totalNoOfCompletedTasks: -1 } },
       { new: true }
     );
   }
-  // console.log(project.totalNoOfTasks, project.totalNoOfCompletedTasks);
-  if (project.totalNoOfTasks === project.totalNoOfCompletedTasks) {
+  // console.log(
+  //   project.totalNoOfTasks,
+  //   project.totalNoOfCompletedTasks,
+  //   project2.totalNoOfTasks,
+  //   project2.totalNoOfCompletedTasks
+  // );
+  if (project2.totalNoOfTasks === project2.totalNoOfCompletedTasks) {
     await Project.findByIdAndUpdate(
       project._id,
       { $set: { status: 'completed' } },
+      { new: true }
+    );
+  } else {
+    await Project.findByIdAndUpdate(
+      project._id,
+      { $set: { status: 'active' } },
       { new: true }
     );
   }
