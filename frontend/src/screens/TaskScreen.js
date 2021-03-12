@@ -182,28 +182,41 @@ const TaskScreen = ({ match }) => {
       {task && (
         <div className='project-details flex flex-fdc'>
           <div className='project-summary'>
-            <div className='project-summary__item project-summary__item--title'>
+            <div className='project-summary__item project-summary__item--title text-center'>
               <h3>Task's Summary</h3>
             </div>
 
-            <div
-              className='project-summary__item project-summary__item--name flex'
-              style={{ width: '30%' }}
-            >
-              {task.project.name}{' '}
-              <Link to={`/project/${task.project._id}`}>
-                <div className='action-btn action-btn__link'>
-                  <i className='fas fa-external-link-alt'></i>{' '}
-                </div>
-              </Link>
+            <div className='project-summary__item project-summary__item--name flex'>
+              <div>Project</div>
+              <div>
+                <Link to={`/project/${task.project._id}`}>
+                  {' '}
+                  {task.project.name}
+                </Link>
+                {/* <Link to={`/project/${task.project._id}`}>
+                  <div className='action-btn action-btn__link'>
+                    <i className='fas fa-external-link-alt'></i>{' '}
+                  </div>
+                </Link> */}
+              </div>
             </div>
 
-            <div className='project-summary__item project-summary__item--name'>
-              {task.name}
+            <div className='project-summary__item project-summary__item--name flex'>
+              <div>Task</div>
+              <div>{task.name}</div>
             </div>
-            <div className='project-summary__item project-summary__item--desc'>
+            <div className='project-summary__item project-summary__item--name flex'>
+              <div>Status</div>
+              <div>{task.status}</div>
+            </div>
+            <div className='project-summary__item project-summary__item--name flex'>
+              <div>
+                <strong>Description</strong> : {task.description}
+              </div>
+            </div>
+            {/* <div className='project-summary__item project-summary__item--desc'>
               {task.description}
-            </div>
+            </div> */}
           </div>
           <div className='h-line'></div>
           <div className='project-tasks'>

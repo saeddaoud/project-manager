@@ -114,10 +114,18 @@ export const deleteTask = asyncHandlder(async (req, res, next) => {
     return next(new ErrorResponse('Task not found', 404));
   }
 
-  const project = await Project.findByIdAndUpdate(task.project, {
-    $pull: { tasks: task._id },
-    $inc: { totalNoOfTasks: -1 },
-  });
+  if (task.status === 'completed') {
+    await Project.findByIdAndUpdate(task.project, {
+      $pull: { tasks: task._id },
+      $inc: { totalNoOfTasks: -1 },
+      $inc: { totalNoOfCompletedTasks: -1 },
+    });
+  } else {
+    await Project.findByIdAndUpdate(task.project, {
+      $pull: { tasks: task._id },
+      $inc: { totalNoOfTasks: -1 },
+    });
+  }
 
   // console.log(project);
 
@@ -135,7 +143,7 @@ export const deleteTask = asyncHandlder(async (req, res, next) => {
 export const getTask = asyncHandlder(async (req, res, next) => {
   const task = await Task.findById(req.params.id)
     .populate('project', 'name')
-    .populate('employee', 'name');
+    .populate('employee', 'name avatar');
 
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
@@ -191,7 +199,7 @@ export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
   let task = await Task.findById(req.params.id);
   // console.log(task);
   const prevStatus = task.status;
-  const project = await Project.findById(task.project);
+  let project = await Project.findById(task.project);
   // Check if task exists
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
@@ -207,15 +215,23 @@ export const updateTaskStatus = asyncHandlder(async (req, res, next) => {
   }
 
   if (prevStatus !== 'completed' && status === 'completed') {
-    await Project.findByIdAndUpdate(
+    project = await Project.findByIdAndUpdate(
       project._id,
       { $inc: { totalNoOfCompletedTasks: 1 } },
       { new: true }
     );
   } else if (prevStatus === 'completed' && status !== 'completed') {
-    await Project.findByIdAndUpdate(
+    project = await Project.findByIdAndUpdate(
       project._id,
       { $inc: { totalNoOfCompletedTasks: -1 } },
+      { new: true }
+    );
+  }
+  // console.log(project.totalNoOfTasks, project.totalNoOfCompletedTasks);
+  if (project.totalNoOfTasks === project.totalNoOfCompletedTasks) {
+    await Project.findByIdAndUpdate(
+      project._id,
+      { $set: { status: 'completed' } },
       { new: true }
     );
   }
@@ -249,12 +265,15 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
   const { employeeToAddToTask } = req.body;
 
   let task = await Task.findById(req.params.taskId);
+  let project = await Project.findById(task.project);
+  const employee = await Employee.findById(employeeToAddToTask);
 
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
   }
-
-  const employee = await Employee.findById(employeeToAddToTask);
+  if (!project) {
+    return next(new ErrorResponse('Project not found', 404));
+  }
 
   if (!employee) {
     return next(new ErrorResponse('Employee not found', 404));
@@ -270,6 +289,13 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
     task._id,
     {
       $push: { employee: mongoose.Types.ObjectId(employee._id) },
+    },
+    { new: true }
+  );
+  project = await Project.findByIdAndUpdate(
+    project._id,
+    {
+      $push: { employees: mongoose.Types.ObjectId(employee._id) },
     },
     { new: true }
   );
@@ -291,12 +317,15 @@ export const removeEmployeeFromTask = asyncHandlder(async (req, res, next) => {
   const { employeeToRemoveFromTask } = req.body;
 
   let task = await Task.findById(req.params.taskId);
+  let project = await Project.findById(task.project);
+  const employee = await Employee.findById(employeeToRemoveFromTask);
 
   if (!task) {
     return next(new ErrorResponse('Task not found', 404));
   }
-
-  const employee = await Employee.findById(employeeToRemoveFromTask);
+  if (!project) {
+    return next(new ErrorResponse('Project not found', 404));
+  }
 
   if (!employee) {
     return next(new ErrorResponse('Employee not found', 404));
@@ -315,6 +344,13 @@ export const removeEmployeeFromTask = asyncHandlder(async (req, res, next) => {
     task._id,
     {
       $pull: { employee: mongoose.Types.ObjectId(employee._id) },
+    },
+    { new: true }
+  );
+  project = await Project.findByIdAndUpdate(
+    project._id,
+    {
+      $pull: { employees: mongoose.Types.ObjectId(employee._id) },
     },
     { new: true }
   );

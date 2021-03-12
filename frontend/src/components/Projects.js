@@ -43,11 +43,28 @@ const Projects = ({ projects }) => {
             </div>
           </div>
           <div className='flex'>
-            <div>
-              Progress: {`${project.totalNoOfCompletedTasks}`}/
-              {`${project.totalNoOfTasks}`}
-            </div>
+            <div>Progress</div>
+            <div>{`${project.totalNoOfCompletedTasks}/${
+              project.totalNoOfTasks
+            } (${
+              project.totalNoOfTasks
+                ? parseFloat(
+                    (project.totalNoOfCompletedTasks / project.totalNoOfTasks) *
+                      100
+                  ).toFixed(1)
+                : parseFloat(0).toFixed(1)
+            }%)`}</div>
+            {/* <div>{project.status}</div> */}
+          </div>
+          <div className='flex'>
+            <div>Status</div>
             <div>{project.status}</div>
+            {/* <div>{project.status}</div> */}
+          </div>
+          <div className='flex'>
+            <div>Employees</div>
+            <div>{project.employees.length}</div>
+            {/* <div>{project.status}</div> */}
           </div>
         </li>
         // </Link>

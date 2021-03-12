@@ -55,7 +55,7 @@ const ProfileScreen = () => {
     }
 
     if (user && user.role !== 'employee') {
-      dispatch(fetchProjects({ status: 'active', limit: '3' }));
+      dispatch(fetchProjects({ limit: '3' }));
       // dispatch(fetchProjects());
     }
 

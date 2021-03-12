@@ -17,6 +17,7 @@ const ProjectScreen = ({ match }) => {
   const { project, loading, error } = useSelector(
     (state) => state.projectFetch
   );
+  const { user } = useSelector((state) => state.meFetch);
   const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
     (state) => state.tasksFetch
   );
@@ -137,42 +138,70 @@ const ProjectScreen = ({ match }) => {
           addTaskHandler={addTaskHandler}
         />
       )}
-      <div className='add-container my-1 flex flex-jcsa'>
-        <div
-          className='add-container__btn'
-          // onClick={() => setShowAddProjectForm(true)}
-        >
+      {user && user.role === 'manager' && (
+        <div className='add-container my-1 flex flex-jcsa'>
           <div
-            className='btn btn--dark'
-            onClick={() => setShowProjectForm(true)}
+            className='add-container__btn'
+            // onClick={() => setShowAddProjectForm(true)}
           >
-            <i className='far fa-edit'></i> Edit Project
+            <div
+              className='btn btn--dark'
+              onClick={() => setShowProjectForm(true)}
+            >
+              <i className='far fa-edit'></i> Edit Project
+            </div>
+            {/* <i className='far fa-plus-square'></i> */}
           </div>
-          {/* <i className='far fa-plus-square'></i> */}
-        </div>
-        <div
-          className='add-container__btn'
-          // onClick={() => setShowAddProjectForm(true)}
-        >
-          <div className='btn btn--dark' onClick={() => setShowTaskForm(true)}>
-            <i className='fas fa-plus'></i> Add Task
+          <div
+            className='add-container__btn'
+            // onClick={() => setShowAddProjectForm(true)}
+          >
+            <div
+              className='btn btn--dark'
+              onClick={() => setShowTaskForm(true)}
+            >
+              <i className='fas fa-plus'></i> Add Task
+            </div>
+            {/* <i className='far fa-plus-square'></i> */}
           </div>
-          {/* <i className='far fa-plus-square'></i> */}
         </div>
-      </div>
+      )}
       {loading && <Spinner />}
       {error && <Message>{error}</Message>}
       {project && (
-        <div className='project-details flex flex-fdc'>
+        <div className='project-details flex flex-fdc my-1'>
           <div className='project-summary'>
-            <div className='project-summary__item project-summary__item--title'>
+            <div className='project-summary__item project-summary__item--title text-center'>
               <h3>Project's Summary</h3>
             </div>
-            <div className='project-summary__item project-summary__item--name'>
-              {project.name}
+            <div className='project-summary__item project-summary__item--name flex'>
+              <div>Project</div>
+              <div>{project.name}</div>
+            </div>
+            <div className='project-summary__item project-summary__item--progress flex'>
+              <div>Progress</div>
+              <div>{`${project.totalNoOfCompletedTasks}/${
+                project.totalNoOfTasks
+              } (${
+                project.totalNoOfTasks
+                  ? parseFloat(
+                      (project.totalNoOfCompletedTasks /
+                        project.totalNoOfTasks) *
+                        100
+                    ).toFixed(1)
+                  : parseFloat(0).toFixed(1)
+              }%)`}</div>
+            </div>
+            <div className='project-summary__item project-summary__item--status flex'>
+              <div>Status</div>
+              <div>{project.status}</div>
+            </div>
+            <div className='project-summary__item project-summary__item--employees flex'>
+              <div>Employees</div>
+              <div>{project.employees.length}</div>
             </div>
             <div className='project-summary__item project-summary__item--desc'>
-              {project.description}
+              <strong>Description</strong>: {project.description}
             </div>
           </div>
           <div className='h-line'></div>

@@ -16,10 +16,10 @@ const Tasks = ({ tasks }) => {
             <div>{task.name}</div>
             {/* <div>{task.status}</div> */}
 
-            <div className='action-btns flex'>
-              {user && (user.role === 'manager' || user.role === 'supervisor') && (
+            <div className='action-btns flex flex-jcfe'>
+              {user && user.role === 'manager' && (
                 <div
-                  className='action-btn action-btn__delete'
+                  className='action-btn action-btn__delete mx-1'
                   onClick={() => dispatch(deleteTask(task._id))}
                 >
                   <i className='far fa-trash-alt'></i>
@@ -46,8 +46,12 @@ const Tasks = ({ tasks }) => {
             </div>
           </div>
           <div className='flex'>
-            <div>Status: {task.status}</div>
-            {/* <div>Employee(s):</div> */}
+            <div>Status</div>
+            <div>{task.status}</div>
+          </div>
+          <div className='flex'>
+            <div>Employee(s)</div>
+            <div>{task.employee.map((x) => x.name).join(', ')}</div>
           </div>
         </li>
         // </Link>

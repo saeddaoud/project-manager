@@ -14,26 +14,29 @@ const Employees = ({ employees }) => {
         <li key={employee._id}>
           <div className='flex'>
             <div>{employee.name}</div>
+            <div className='img'>
+              <img src={employee.avatar} alt='image' />
+            </div>
             {/* <div>{task.status}</div> */}
             {/* {user && (user.role === 'manager' || user.role === 'supervisor') && ( */}
-            <div className='action-btns flex'>
-              {/* <div
+            {/* <div className='action-btns flex'> */}
+            {/* <div
                   className='action-btn action-btn__delete'
                   onClick={() => dispatch(deleteTask(task._id))}
                 >
                   <i className='far fa-trash-alt'></i>
                 </div> */}
 
-              {/* <div className='action-btn action-btn__edit'>
+            {/* <div className='action-btn action-btn__edit'>
                   <i className='far fa-edit'></i>
                 </div> */}
 
-              <Link to={`/admin/employee-details/${employee._id}`}>
+            {/* <Link to={`/admin/employee-details/${employee._id}`}>
                 <div className='action-btn action-btn__link'>
                   <i className='fas fa-external-link-alt'></i>{' '}
                 </div>
-              </Link>
-            </div>
+              </Link> */}
+            {/* </div> */}
             {/* )
             } */}
           </div>
