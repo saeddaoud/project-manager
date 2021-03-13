@@ -18,6 +18,16 @@
   }
   .search {
     width: 100%;
+    form {
+      input {
+        @include responsive-property('font-size', $reduced-font-size);
+      }
+    }
+  }
+  .filter {
+    select {
+      @include responsive-property('font-size', $reduced-font-size);
+    }
   }
   input {
     border: none;

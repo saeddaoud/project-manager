@@ -1,6 +1,8 @@
 .project-summary {
   width: 100%;
-  padding: 1rem;
+  @include responsive-property('padding', $padding);
+  @include responsive-property('font-size', $reduced-font-size);
+  // padding: 1rem;
   margin-bottom: 1rem;
   @include responsive-property('font-size', $reduced-font-size);
   border-radius: 10px;

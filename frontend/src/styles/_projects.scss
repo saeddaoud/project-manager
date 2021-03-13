@@ -1,12 +1,19 @@
 .projects-list {
   color: $primary-text-color;
+  // @include responsive-property('width', $width);
   width: 100%;
+  .h-line {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    margin: 1rem 0;
+  }
   a {
     color: $primary-text-color;
   }
   li {
     display: block;
-    padding: 1rem;
+    @include responsive-property('padding', $padding); // padding: 1rem;
     margin-bottom: 1rem;
     @include responsive-property('font-size', $reduced-font-size);
     border-radius: 10px;

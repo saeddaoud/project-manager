@@ -1,5 +1,19 @@
 .employee-project-task-details {
-  font-size: 1.5rem;
+  .employee-project-task-details-item {
+    @include responsive-property(
+      'margin',
+      (
+        medium: 1.5rem,
+        large: 2rem,
+        x-large: 2.5rem,
+      )
+    );
+  }
+  // .title {
+  //   margin-top: 1rem;
+  // }
+  // font-size: 1.5rem;
+  @include responsive-property('font-size', $reduced-font-size);
   .task-status__error,
   .task-status__info {
     width: 100%;

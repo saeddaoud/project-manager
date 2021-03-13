@@ -45,30 +45,30 @@ const EmployeeTaskScreen = () => {
     <div className='container'>
       {loading && <Spinner />}
       {error && <Message>{error}</Message>}
-      <h1 className='title my-1 text-center'>Task's Details</h1>
+      <h3 className='title text-center'>Task's Details</h3>
       <div className='h-line'></div>
       <div className='employee-project-task-details'>
         {task && (
           <>
             <div className='project-details'>
-              <div className='project-details__name flex'>
+              <div className='employee-project-task-details-item project-details__name flex'>
                 <div>Project Name</div>
                 <div>{task.project.name}</div>
               </div>
             </div>
             <div className='h-line'></div>
             <div className='task-details'>
-              <div className='task-details__name flex'>
+              <div className='employee-project-task-details-item task-details__name flex'>
                 <div>Task's Name</div>
                 <div>{task.name}</div>
               </div>
               <div className='h-line'></div>
-              <div className='task-details__description'>
+              <div className='employee-project-task-details-item task-details__description'>
                 <h3>Task's Description</h3>
                 <p style={{ textAlign: 'left' }}>{task.description}</p>
               </div>
               <div className='h-line'></div>
-              <div className='task-details__status flex flex-fdc'>
+              <div className='employee-project-task-details-item task-details__status flex flex-fdc'>
                 <div className='task-status__error'>
                   {taskStatusUpdateError && (
                     <Message>{taskStatusUpdateError}</Message>

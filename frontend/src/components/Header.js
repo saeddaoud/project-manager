@@ -9,7 +9,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.meFetch);
   return (
     <div className='header'>
-      <div className='container '>
+      <div className='header-container '>
         <nav className='nav flex'>
           <div className='nav__logo'>
             <h4>Project M</h4>

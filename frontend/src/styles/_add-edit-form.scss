@@ -1,6 +1,7 @@
 .add-form {
   z-index: 100;
-  width: 90%;
+  @include responsive-property('width', $container-width);
+  // width: 90%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -8,16 +9,34 @@
   background: $primary-bg-color;
   color: $primary-text-color;
   .input-control {
+    @include responsive-property(
+      'margin-bottom',
+      (
+        large: 2rem,
+        x-large: 2.5rem,
+      )
+    );
+    // &:last-child {
+    //   @include responsive-property(
+    //     'margin-bottom',
+    //     $input-control-margin-bottom
+    //   );
+    // }
+    // margin-bottom: 2rem;
     input {
       z-index: 100;
+      @include responsive-property('font-size', $reduced-font-size);
     }
     textarea {
       // display: block;
       position: absolute;
-      top: 25px;
+      @include responsive-property('top', $form-input-textarea-top-position);
+      // top: 25px;
       width: 100%;
+      height: 80%;
       padding: 0.5rem;
-      font-size: 1.5rem;
+      @include responsive-property('font-size', $reduced-font-size-to-large);
+      // font-size: 1.5rem;
       font-family: inherit;
       // z-index: -10;
       &:focus,

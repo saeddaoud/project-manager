@@ -17,7 +17,7 @@ const taskSchema = new Schema(
     name: {
       type: String,
       required: [true, "Task's name is required"],
-      unique: true,
+      // unique: true,
     },
     description: {
       type: String,

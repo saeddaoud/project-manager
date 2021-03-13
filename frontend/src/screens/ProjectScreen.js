@@ -21,7 +21,11 @@ const ProjectScreen = ({ match }) => {
   const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
     (state) => state.tasksFetch
   );
-  const { success: addTaskSuccess } = useSelector((state) => state.taskAdd);
+  const {
+    success: addTaskSuccess,
+    loading: addTaskLoading,
+    error: addTaskError,
+  } = useSelector((state) => state.taskAdd);
   const { success: deleteTaskSuccess } = useSelector(
     (state) => state.taskDelete
   );
@@ -178,6 +182,7 @@ const ProjectScreen = ({ match }) => {
               <div>Project</div>
               <div>{project.name}</div>
             </div>
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--progress flex'>
               <div>Progress</div>
               <div>{`${project.totalNoOfCompletedTasks}/${
@@ -192,14 +197,17 @@ const ProjectScreen = ({ match }) => {
                   : parseFloat(0).toFixed(1)
               }%)`}</div>
             </div>
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--status flex'>
               <div>Status</div>
               <div>{project.status}</div>
             </div>
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--employees flex'>
               <div>Employees</div>
               <div>{project.employees.length}</div>
             </div>
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--desc'>
               <strong>Description</strong>: {project.description}
             </div>
@@ -212,6 +220,8 @@ const ProjectScreen = ({ match }) => {
             <div className='project-tasks__list'>
               {tasksLoading && <Spinner />}
               {tasksError && <Message>{tasksError}</Message>}
+              {addTaskLoading && <Spinner />}
+              {addTaskError && <Message>{addTaskError}</Message>}
               {tasks && <Tasks tasks={tasks} />}
             </div>
           </div>

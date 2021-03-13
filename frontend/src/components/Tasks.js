@@ -45,10 +45,12 @@ const Tasks = ({ tasks }) => {
               )}
             </div>
           </div>
+          <div className='h-line'></div>
           <div className='flex'>
             <div>Status</div>
             <div>{task.status}</div>
           </div>
+          <div className='h-line'></div>
           <div className='flex'>
             <div>Employee(s)</div>
             <div>{task.employee.map((x) => x.name).join(', ')}</div>

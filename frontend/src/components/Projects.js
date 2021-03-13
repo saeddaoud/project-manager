@@ -42,6 +42,7 @@ const Projects = ({ projects }) => {
               </Link>
             </div>
           </div>
+          <div className='h-line'></div>
           <div className='flex'>
             <div>Progress</div>
             <div>{`${project.totalNoOfCompletedTasks}/${
@@ -56,11 +57,13 @@ const Projects = ({ projects }) => {
             }%)`}</div>
             {/* <div>{project.status}</div> */}
           </div>
+          <div className='h-line'></div>
           <div className='flex'>
             <div>Status</div>
             <div>{project.status}</div>
             {/* <div>{project.status}</div> */}
           </div>
+          <div className='h-line'></div>
           <div className='flex'>
             <div>Employees</div>
             <div>{project.employees.length}</div>

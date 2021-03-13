@@ -23,6 +23,26 @@ $h4-font-size: (
   large: 2rem,
   x-large: 2.5rem,
 );
+$h3-font-size: (
+  small: 1.8rem,
+  medium: 2rem,
+  large: 2.5rem,
+  x-large: 2.8rem,
+);
+
+$container-width: (
+  small: 90%,
+  medium: 80%,
+  large: 70%,
+  x-large: 60%,
+);
+
+$padding: (
+  small: 1rem,
+  medium: 1.5rem,
+  large: 2rem,
+  x-large: 2.5rem,
+);
 
 $default-font-size: (
   small: 2rem,
@@ -36,6 +56,25 @@ $reduced-font-size: (
   medium: 1.6rem,
   large: 1.9rem,
   x-large: 2.1rem,
+);
+
+$reduced-font-size-to-large: (
+  small: 1.4rem,
+  medium: 1.6rem,
+  large: 1.9rem,
+);
+
+$input-control-margin-bottom: (
+  small: 5rem,
+  // medium: 1rem,
+  // x-large: 3rem,,,,,,,,,
+);
+
+$form-input-textarea-top-position: (
+  small: 25px,
+  // medium: 30px,
+  large: 30px,
+  x-large: 35px,
 );
 
 $action-btn-width: (

@@ -26,7 +26,9 @@ h2 {
   letter-spacing: 3px;
 }
 h3 {
+  @include responsive-property('font-size', $h3-font-size);
   font-size: 1.8rem;
+  font-weight: normal;
 }
 h2 {
   font-size: 2rem;
@@ -53,10 +55,19 @@ p {
   // z-index: -15;
 }
 
-.container {
+.header-container {
   width: 90%;
   height: 100%;
   margin: 0 auto;
+  // overflow-y: scroll;
+}
+
+.container {
+  @include responsive-property('width', $container-width);
+  // width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 1rem;
   // overflow-y: scroll;
 }
 
@@ -94,6 +105,10 @@ a {
   width: 100%;
   text-align: center;
 }
+
+// button {
+//   display: block;
+// }
 
 .add-container {
   width: 100%;
@@ -135,13 +150,21 @@ a {
     position: relative;
     label {
       position: absolute;
-      font-size: 1.5rem;
+      // font-size: 1.5rem;
+      @include responsive-property('font-size', $reduced-font-size);
+      // @include responsive-property(
+      //   'margin-bottom',
+      //   (
+      //     large: 2rem,
+      //   )
+      // );
       top: 0;
       left: 0;
     }
     input {
       position: absolute;
-      top: 25px;
+      @include responsive-property('top', $form-input-textarea-top-position);
+      // top: 25px;
       width: 100%;
       padding: 0.5rem;
       font-size: 1.5rem;
@@ -177,9 +200,10 @@ a {
 }
 
 select {
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
+  @include responsive-property('font-size', $reduced-font-size);
   padding: 0.5rem;
-  height: 32.5px;
+  height: 40px;
   &:focus,
   &:active {
     outline: none;
@@ -211,8 +235,10 @@ select {
 }
 
 .btn {
+  display: block;
   padding: 0.2rem 1.5rem;
-  font-size: 1.5rem;
+  @include responsive-property('font-size', $reduced-font-size);
+  // font-size: 1.5rem;
   border-radius: 5px;
   transition: background-color 0.4s ease-in;
   cursor: pointer;
@@ -224,7 +250,9 @@ select {
 
 .btn--dark {
   padding: 0.5rem 1.5rem;
-  font-size: 1.5rem;
+  @include responsive-property('font-size', $reduced-font-size);
+
+  // font-size: 1.5rem;
   border-radius: 5px;
   background-color: $primary-bg-color;
   transition: background-color 0.4s ease-in;
