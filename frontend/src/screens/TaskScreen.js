@@ -200,15 +200,17 @@ const TaskScreen = ({ match }) => {
                 </Link> */}
               </div>
             </div>
-
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--name flex'>
               <div>Task</div>
               <div>{task.name}</div>
             </div>
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--name flex'>
               <div>Status</div>
               <div>{task.status}</div>
             </div>
+            <div className='h-line'></div>
             <div className='project-summary__item project-summary__item--name flex'>
               <div>
                 <strong>Description</strong> : {task.description}

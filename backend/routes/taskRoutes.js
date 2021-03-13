@@ -22,7 +22,7 @@ router
 router
   .route('/:id')
   .delete(protect, authorize('manager'), deleteTask)
-  .put(protect, authorize('manager'), updateTask)
+  .put(protect, authorize('supervisor', 'manager'), updateTask)
   .get(protect, getTask);
 
 router.route('/:id/status').put(protect, updateTaskStatus);

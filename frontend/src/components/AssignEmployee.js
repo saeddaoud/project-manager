@@ -32,14 +32,14 @@ const AssignEmployee = ({ setShowEmployeesList, task }) => {
       {/* <BackDrop /> */}
       {loading && <Spinner />}
       {error && <Message>{error}</Message>}
-      <div className='employees-list-container'>
-        <div
-          className='employees-list-container__close'
-          onClick={() => setShowEmployeesList(false)}
-        >
-          <i className='far fa-times-circle'></i>
-        </div>
+      <div className=' employees-list-container'>
         <ul className='employees-list'>
+          <div
+            className='employees-list-container__close'
+            onClick={() => setShowEmployeesList(false)}
+          >
+            <i className='far fa-times-circle'></i>
+          </div>
           {employees &&
             employees.map(
               (employee) =>

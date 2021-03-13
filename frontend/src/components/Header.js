@@ -36,16 +36,19 @@ const Header = () => {
               ) : (
                 user && (
                   <li>
-                    <Link
+                    <Link to='/employee/tasks' onClick={() => setShow(false)}>
+                      My Tasks
+                    </Link>
+                    {/* <Link
                       to='/employees/projects'
                       onClick={() => setShow(false)}
                     >
                       My Projects
-                    </Link>
+                    </Link> */}
                   </li>
                 )
               )}
-              {user && user.role !== 'employee' ? (
+              {/* {user && user.role !== 'employee' ? (
                 <li>
                   <Link to='/employees' onClick={() => setShow(false)}>
                     Employees
@@ -59,7 +62,7 @@ const Header = () => {
                     </Link>
                   </li>
                 )
-              )}
+              )} */}
               {user ? (
                 <li>
                   <Link to='/login' onClick={() => dispatch(logout())}>
@@ -112,15 +115,21 @@ const Header = () => {
                     user && (
                       <li>
                         <Link
+                          to='/employee/tasks'
+                          onClick={() => setShow(false)}
+                        >
+                          My Tasks
+                        </Link>
+                        {/* <Link
                           to='/employees/projects'
                           onClick={() => setShow(false)}
                         >
                           My Projects
-                        </Link>
+                        </Link> */}
                       </li>
                     )
                   )}
-                  {user && user.role !== 'employee' ? (
+                  {/* {user && user.role !== 'employee' ? (
                     <li>
                       <Link to='/employees' onClick={() => setShow(false)}>
                         Employees
@@ -137,7 +146,7 @@ const Header = () => {
                         </Link>
                       </li>
                     )
-                  )}
+                  )} */}
                   {user ? (
                     <li>
                       <Link

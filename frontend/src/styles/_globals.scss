@@ -27,14 +27,18 @@ h2 {
 }
 h3 {
   @include responsive-property('font-size', $h3-font-size);
-  font-size: 1.8rem;
+  // font-size: 1.8rem;
   font-weight: normal;
 }
 h2 {
-  font-size: 2rem;
+  @include responsive-property('font-size', $h2-font-size);
+  // font-size: 2rem;
+  font-weight: normal;
 }
 h1 {
-  font-size: 2.5rem;
+  @include responsive-property('font-size', $h3-font-size);
+  // font-size: 2.5rem;
+  font-weight: normal;
 }
 h4 {
   @include responsive-property(font-size, $h4-font-size);
@@ -42,7 +46,8 @@ h4 {
 }
 
 p {
-  font-size: 1.8rem;
+  @include responsive-property(font-size, $reduced-font-size);
+  // font-size: 1.8rem;
   line-height: 1.5;
   text-align: center;
 }
@@ -211,8 +216,18 @@ select {
 }
 
 .card {
-  min-height: 70%;
-  padding: 1rem;
+  @include responsive-property(
+    min-height,
+    (
+      small: 50%,
+      // medium: 50%,
+      // large: 50%,
+      // x-large: 40%,,,,
+    )
+  );
+  // min-height: 70%;
+  @include responsive-property(padding, $padding);
+  // padding: 1rem;
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);

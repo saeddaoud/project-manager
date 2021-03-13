@@ -2,8 +2,22 @@
   color: $primary-text-color;
   width: 100%;
   .img {
-    height: 40px;
-    width: 40px;
+    @include responsive-property(
+      'height',
+      (
+        small: 40px,
+        medium: 50px,
+        large: 60px,
+      )
+    );
+    @include responsive-property(
+      'width',
+      (
+        small: 40px,
+        medium: 50px,
+        large: 60px,
+      )
+    );
 
     img {
       height: 100%;
@@ -16,7 +30,8 @@
   }
   li {
     display: block;
-    padding: 1rem;
+    @include responsive-property('padding', $padding);
+    // padding: 1rem;
     margin-bottom: 1rem;
     @include responsive-property('font-size', $reduced-font-size);
     border-radius: 10px;

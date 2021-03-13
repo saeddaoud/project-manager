@@ -15,12 +15,9 @@ const AddEditProjectForm = ({
   addProjectHandler,
   edit = false,
 }) => {
-  const { error, loading } = useSelector((state) => state.taskAdd);
   return (
     <>
       <BackDrop />
-      {loading && <Spinner />}
-      {error && <Message>{error}</Message>}
       <form className='form add-form' onSubmit={addProjectHandler}>
         <div className='input-control'>
           <label>Project's Name</label>

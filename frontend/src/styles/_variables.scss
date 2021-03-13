@@ -29,6 +29,18 @@ $h3-font-size: (
   large: 2.5rem,
   x-large: 2.8rem,
 );
+$h2-font-size: (
+  small: 2rem,
+  medium: 2.3rem,
+  large: 2.8rem,
+  x-large: 3rem,
+);
+$h1-font-size: (
+  small: 2.2rem,
+  medium: 2.5rem,
+  large: 3rem,
+  x-large: 3.2rem,
+);
 
 $container-width: (
   small: 90%,
@@ -67,7 +79,7 @@ $reduced-font-size-to-large: (
 $input-control-margin-bottom: (
   small: 5rem,
   // medium: 1rem,
-  // x-large: 3rem,,,,,,,,,
+  // x-large: 3rem,,,,,,,,,,
 );
 
 $form-input-textarea-top-position: (
