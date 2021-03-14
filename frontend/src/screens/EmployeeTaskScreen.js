@@ -11,7 +11,7 @@ const EmployeeTaskScreen = () => {
 
   const [status, setStatus] = useState('');
 
-  console.log(status);
+  // console.log(status);
 
   const { task, loading, error } = useSelector((state) => state.taskFetch);
   const { error: taskStatusUpdateError } = useSelector(

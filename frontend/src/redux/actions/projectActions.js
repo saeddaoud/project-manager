@@ -323,13 +323,13 @@ export const deleteProject = (projectId) => async (dispatch, getState) => {
 
     let fetchedProjects = getState().projectsFetch.projects;
 
-    console.log(fetchedProjects);
+    // console.log(fetchedProjects);
 
     fetchedProjects = fetchedProjects.filter(
       (fetchedProject) => fetchedProject._id.toString() !== projectId.toString()
     );
 
-    console.log(fetchedProjects);
+    // console.log(fetchedProjects);
 
     dispatch({
       type: PROJECT_DELETE_SUCCESS,

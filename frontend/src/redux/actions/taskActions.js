@@ -52,7 +52,13 @@ export const addTask = (task) => async (dispatch, getState) => {
 
     let tasks = getState().tasksFetch.tasks;
 
-    tasks.unshift(data.data);
+    if (tasks) {
+      tasks.unshift(data.data);
+      dispatch({
+        type: TASKS_FETCH_SUCCESS,
+        payload: { success: true, data: tasks },
+      });
+    }
 
     // console.log(tasks, data);
 
@@ -61,10 +67,6 @@ export const addTask = (task) => async (dispatch, getState) => {
       payload: data,
     });
     // updata projects in the frontend by deleting the task from tasks without fetching the project with its tasks again from the backend
-    dispatch({
-      type: TASKS_FETCH_SUCCESS,
-      payload: { success: true, data: tasks },
-    });
   } catch (error) {
     // console.log(error.response.data.error);
     dispatch({
@@ -136,7 +138,7 @@ export const updateTaskStatus = ({ taskId, status }) => async (
   getState
 ) => {
   // const { taskId, ...taskBody } = task;
-  console.log(taskId, status);
+  // console.log(taskId, status);
   try {
     dispatch({
       type: TASK_STATUS_UPDATE_REQUEST,
@@ -158,7 +160,7 @@ export const updateTaskStatus = ({ taskId, status }) => async (
       config
     );
 
-    console.log(data);
+    // console.log(data);
 
     // let project = getState().projectFetch.project;
 
