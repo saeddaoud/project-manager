@@ -25,7 +25,7 @@ const AssignEmployee = ({ setShowEmployeesList, task }) => {
 
   useEffect(() => {
     dispatch(listEmployees());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

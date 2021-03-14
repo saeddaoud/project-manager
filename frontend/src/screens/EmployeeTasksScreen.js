@@ -11,7 +11,7 @@ const EmployeeTasksScreen = () => {
   // const history = useHistory();
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.meFetch);
+  // const { user } = useSelector((state) => state.meFetch);
   // console.log(user);
   const { tasks, error, loading } = useSelector((state) => state.myTasksFetch);
 

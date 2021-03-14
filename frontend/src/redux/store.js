@@ -21,7 +21,6 @@ import {
   taskDeleteReducer,
   taskEmployeeAddReducer,
   taskEmployeeRemoveReducer,
-  taskEmployeesFetchReducer,
   taskFetchReducer,
   tasksFetchReducer,
   taskStatusUpdateReducer,

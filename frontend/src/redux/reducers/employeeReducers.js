@@ -1,6 +1,7 @@
 import {
   AVATAR_UPDATE_FAIL,
   AVATAR_UPDATE_REQUEST,
+  AVATAR_UPDATE_RESET,
   AVATAR_UPDATE_SUCCESS,
   EMPLOYEES_LIST_FAIL,
   EMPLOYEES_LIST_REQUEST,
@@ -101,6 +102,8 @@ export const avatarUpdateReducer = (state = {}, action) => {
       };
     case AVATAR_UPDATE_FAIL:
       return { loading: false, error: payload };
+    case AVATAR_UPDATE_RESET:
+      return {};
     default:
       return state;
   }

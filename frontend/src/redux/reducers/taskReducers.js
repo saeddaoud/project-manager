@@ -13,6 +13,7 @@ import {
   TASK_ADD_SUCCESS,
   TASK_DELETE_FAIL,
   TASK_DELETE_REQUEST,
+  TASK_DELETE_RESET,
   TASK_DELETE_SUCCESS,
   TASK_EMPLOYEE_ADD_FAIL,
   TASK_EMPLOYEE_ADD_REQUEST,
@@ -182,6 +183,8 @@ export const taskDeleteReducer = (state = {}, action) => {
       return { loading: false, success: payload.success };
     case TASK_DELETE_FAIL:
       return { loading: false, error: payload };
+    case TASK_DELETE_RESET:
+      return {};
     default:
       return state;
   }

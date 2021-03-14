@@ -52,7 +52,7 @@ const ProjectScreen = ({ match }) => {
       setProjectDescription(project.description);
       dispatch(fetchTasks(project._id));
     }
-  }, [project]);
+  }, [project, dispatch]);
 
   useEffect(() => {
     // if (project) {

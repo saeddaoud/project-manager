@@ -4,8 +4,6 @@ import {
   MY_TASKS_FETCH_FAIL,
   MY_TASKS_FETCH_REQUEST,
   MY_TASKS_FETCH_SUCCESS,
-  TASKS_FETCH_FAIL,
-  TASKS_FETCH_REQUEST,
   TASKS_FETCH_SUCCESS,
   TASK_ADD_FAIL,
   TASK_ADD_REQUEST,
@@ -29,8 +27,6 @@ import {
   TASK_UPDATE_REQUEST,
   TASK_UPDATE_SUCCESS,
 } from '../constants/taskConstants';
-
-import { PROJECT_FETCH_SUCCESS } from '../constants/projectConstants';
 
 export const addTask = (task) => async (dispatch, getState) => {
   try {
@@ -58,7 +54,7 @@ export const addTask = (task) => async (dispatch, getState) => {
 
     tasks.unshift(data.data);
 
-    console.log(tasks, data);
+    // console.log(tasks, data);
 
     dispatch({
       type: TASK_ADD_SUCCESS,
@@ -83,7 +79,7 @@ export const addTask = (task) => async (dispatch, getState) => {
 
 export const updateTask = (task) => async (dispatch, getState) => {
   const { taskId, ...taskBody } = task;
-  console.log(taskId, taskBody);
+  // console.log(taskId, taskBody);
   try {
     dispatch({
       type: TASK_UPDATE_REQUEST,

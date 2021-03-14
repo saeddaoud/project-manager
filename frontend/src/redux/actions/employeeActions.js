@@ -20,13 +20,26 @@ import {
   AVATAR_UPDATE_SUCCESS,
   AVATAR_UPDATE_FAIL,
   AVATAR_UPDATE_REQUEST,
+  AVATAR_UPDATE_RESET,
 } from '../constants/employeeConstants';
 import {
   PROJECTS_FETCH_RESET,
   PROJECT_ADD_RESET,
   PROJECT_DELETE_RESET,
   PROJECT_FETCH_RESET,
+  PROJECT_UPDATE_RESET,
 } from '../constants/projectConstants';
+import {
+  MY_TASKS_FETCH_RESET,
+  TASKS_FETCH_RESET,
+  TASK_ADD_RESET,
+  TASK_DELETE_RESET,
+  TASK_EMPLOYEE_ADD_RESET,
+  TASK_EMPLOYEE_REMOVE_RESET,
+  TASK_FETCH_RESET,
+  TASK_STATUS_UPDATE_RESET,
+  TASK_UPDATE_RESET,
+} from '../constants/taskConstants';
 
 export const loginEmployee = (employee) => async (dispatch) => {
   try {
@@ -147,7 +160,7 @@ export const listEmployees = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get('/api/v1/employees', config);
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: EMPLOYEES_LIST_SUCCESS,
       payload: data,
@@ -217,6 +230,9 @@ export const logout = () => (dispatch) => {
     type: EMPLOYEES_LIST_RESET,
   });
   dispatch({
+    type: AVATAR_UPDATE_RESET,
+  });
+  dispatch({
     type: PROJECTS_FETCH_RESET,
   });
   dispatch({
@@ -227,6 +243,37 @@ export const logout = () => (dispatch) => {
   });
   dispatch({
     type: PROJECT_DELETE_RESET,
+  });
+  dispatch({
+    type: PROJECT_UPDATE_RESET,
+  });
+
+  dispatch({
+    type: TASKS_FETCH_RESET,
+  });
+  dispatch({
+    type: TASK_ADD_RESET,
+  });
+  dispatch({
+    type: TASK_UPDATE_RESET,
+  });
+  dispatch({
+    type: TASK_DELETE_RESET,
+  });
+  dispatch({
+    type: TASK_FETCH_RESET,
+  });
+  dispatch({
+    type: TASK_STATUS_UPDATE_RESET,
+  });
+  dispatch({
+    type: TASK_EMPLOYEE_REMOVE_RESET,
+  });
+  dispatch({
+    type: TASK_EMPLOYEE_ADD_RESET,
+  });
+  dispatch({
+    type: MY_TASKS_FETCH_RESET,
   });
 
   localStorage.removeItem('userInfo');

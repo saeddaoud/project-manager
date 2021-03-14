@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import AddEditProjectForm from '../components/AddEditProjectForm';
 import AddEditTaskForm from '../components/AddEditTaskForm';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
-import Tasks from '../components/Tasks';
 import AssignEmployee from '../components/AssignEmployee';
-import {
-  fetchProject,
-  updateProject,
-  fetchProjects,
-} from '../redux/actions/projectActions';
-import { addTask, fetchTask, updateTask } from '../redux/actions/taskActions';
+
+import { fetchTask, updateTask } from '../redux/actions/taskActions';
 import Employees from '../components/Employees';
 
 const TaskScreen = ({ match }) => {
@@ -23,11 +17,9 @@ const TaskScreen = ({ match }) => {
     error: addEmployeeError,
     success: addEmployeeSuccess,
   } = useSelector((state) => state.taskEmployeeAdd);
-  const {
-    loading: removeEmployeeLoading,
-    error: removeEmployeeError,
-    success: removeEmployeeSuccess,
-  } = useSelector((state) => state.taskEmployeeRemove);
+  const { success: removeEmployeeSuccess } = useSelector(
+    (state) => state.taskEmployeeRemove
+  );
   const { success } = useSelector((state) => state.taskUpdate);
   // const { project } = useSelector((state) => state.projectFetch);
   // const { projects } = useSelector((state) => state.projectsFetch);

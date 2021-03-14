@@ -21,9 +21,7 @@ const ProfileScreen = () => {
     loading: projectsLoading,
     error: projectsError,
   } = useSelector((state) => state.projectsFetch);
-  const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
-    (state) => state.myTasksFetch
-  );
+  const { tasks } = useSelector((state) => state.myTasksFetch);
 
   // console.log(user, loading);
 

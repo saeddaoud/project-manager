@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  fetchTask,
-  updateTask,
-  updateTaskStatus,
-} from '../redux/actions/taskActions';
+import { fetchTask, updateTaskStatus } from '../redux/actions/taskActions';
 import Spinner from '../components/Spinner';
 import Message from '../components/Message';
 
@@ -30,7 +26,7 @@ const EmployeeTaskScreen = () => {
     if (task && status) {
       dispatch(updateTaskStatus({ taskId: task._id, status }));
     }
-  }, [status]);
+  }, [status, dispatch, task]);
 
   useEffect(() => {
     if (task && task.status !== 'status') {
@@ -40,7 +36,7 @@ const EmployeeTaskScreen = () => {
 
   useEffect(() => {
     dispatch(fetchTask(id));
-  }, []);
+  }, [dispatch, id]);
   return (
     <div className='container'>
       {loading && <Spinner />}

@@ -12,7 +12,6 @@ import ProjectScreen from './screens/ProjectScreen';
 import ProjectsScreen from './screens/ProjectsScreen';
 import RegistrationScreen from './screens/RegistrationScreen';
 import TaskScreen from './screens/TaskScreen';
-import TasksScreen from './screens/TasksScreen';
 import EmployeeTaskScreen from './screens/EmployeeTaskScreen';
 import EmployeeTasksScreen from './screens/EmployeeTasksScreen';
 

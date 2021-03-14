@@ -1,8 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import BackDrop from './BackDrop';
-import Spinner from './Spinner';
-import Message from './Message';
 
 const AddEditProjectForm = ({
   setProjectName,
