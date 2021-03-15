@@ -9,12 +9,7 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src *;
-   img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
-   style-src  'self' 'unsafe-inline' *"
-    />
+
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'" /> -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link
@@ -44,6 +39,11 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' ; script-src 'self'"
+    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
