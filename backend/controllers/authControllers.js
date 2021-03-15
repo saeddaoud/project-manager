@@ -14,14 +14,15 @@ export const register = asyncHandler(async (req, res, next) => {
   if (employee) {
     return next(new ErrorResponse('Email already exists', 400));
   }
-  const avatar = normalize(
-    gravatar.url(req.body.email, {
-      s: '200',
-      r: 'pg',
-      d: 'mm',
-    }),
-    { forceHttps: true }
-  );
+  const avatar = '/imgs/default.png';
+  // const avatar = normalize(
+  //   gravatar.url(req.body.email, {
+  //     s: '200',
+  //     r: 'pg',
+  //     d: 'mm',
+  //   }),
+  //   { forceHttps: true }
+  // );
   // Create a new user with the enetered data and return a token
   employee = await Employee.create({ ...req.body, avatar });
   const token = employee.getSignedJWTToken();
