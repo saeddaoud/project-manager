@@ -21,6 +21,10 @@ import {
   AVATAR_UPDATE_FAIL,
   AVATAR_UPDATE_REQUEST,
   AVATAR_UPDATE_RESET,
+  EMPLOYEE_REGISTER_FAIL,
+  EMPLOYEE_REGISTER_SUCCESS,
+  EMPLOYEE_REGISTER_REQUEST,
+  EMPLOYEE_REGISTER_RESET,
 } from '../constants/employeeConstants';
 import {
   PROJECTS_FETCH_RESET,
@@ -73,13 +77,53 @@ export const loginEmployee = (employee) => async (dispatch) => {
   }
 };
 
+export const registerEmployee = (employee) => async (dispatch) => {
+  try {
+    dispatch({
+      type: EMPLOYEE_REGISTER_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post(
+      '/api/v1/auth/register',
+      employee,
+      config
+    );
+
+    dispatch({
+      type: EMPLOYEE_REGISTER_SUCCESS,
+      payload: data,
+    });
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
+  } catch (error) {
+    console.log(error.response.data.error);
+    dispatch({
+      type: EMPLOYEE_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
 export const fetchMe = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: ME_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -98,7 +142,7 @@ export const fetchMe = () => async (dispatch, getState) => {
 
     localStorage.setItem('myDetails', JSON.stringify(data.data));
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: ME_FETCH_FAIL,
       payload:
@@ -115,7 +159,11 @@ export const fetchEmployee = (id) => async (dispatch, getState) => {
       type: EMPLOYEE_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -132,7 +180,7 @@ export const fetchEmployee = (id) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: EMPLOYEE_FETCH_FAIL,
       payload:
@@ -149,7 +197,11 @@ export const listEmployees = () => async (dispatch, getState) => {
       type: EMPLOYEES_LIST_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -166,7 +218,7 @@ export const listEmployees = () => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: EMPLOYEES_LIST_FAIL,
       payload:
@@ -184,7 +236,11 @@ export const updateAvatar = (avatar) => async (dispatch, getState) => {
       type: AVATAR_UPDATE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -205,7 +261,7 @@ export const updateAvatar = (avatar) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: AVATAR_UPDATE_FAIL,
       payload:
@@ -219,6 +275,9 @@ export const updateAvatar = (avatar) => async (dispatch, getState) => {
 export const logout = () => (dispatch) => {
   dispatch({
     type: EMPLOYEE_LOGIN_RESET,
+  });
+  dispatch({
+    type: EMPLOYEE_REGISTER_RESET,
   });
   dispatch({
     type: EMPLOYEE_FETCH_RESET,

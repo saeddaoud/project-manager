@@ -14,6 +14,10 @@ const employeeSchema = new Schema(
       type: String,
       required: [true, 'Please enter a valid email'],
       unique: true,
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        'Please add a valid email',
+      ],
     },
     password: {
       type: String,

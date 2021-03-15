@@ -34,7 +34,11 @@ export const addTask = (task) => async (dispatch, getState) => {
       type: TASK_ADD_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -87,7 +91,11 @@ export const updateTask = (task) => async (dispatch, getState) => {
       type: TASK_UPDATE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -144,7 +152,11 @@ export const updateTaskStatus = ({ taskId, status }) => async (
       type: TASK_STATUS_UPDATE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -198,7 +210,11 @@ export const fetchTask = (taskId) => async (dispatch, getState) => {
       type: TASK_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -264,7 +280,11 @@ export const fetchMyTasks = (queryOptions) => async (dispatch, getState) => {
       type: MY_TASKS_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -287,7 +307,7 @@ export const fetchMyTasks = (queryOptions) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: MY_TASKS_FETCH_FAIL,
       payload:
@@ -307,7 +327,11 @@ export const addEmployeeToTask = ({ taskId, employeeToAddToTask }) => async (
       type: TASK_EMPLOYEE_ADD_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -357,7 +381,11 @@ export const removeEmployeeFromTask = ({
       type: TASK_EMPLOYEE_REMOVE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -404,7 +432,11 @@ export const deleteTask = (taskId) => async (dispatch, getState) => {
       type: TASK_DELETE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {

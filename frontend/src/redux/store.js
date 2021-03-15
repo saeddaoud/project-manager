@@ -5,6 +5,7 @@ import {
   avatarUpdateReducer,
   employeeFetchReducer,
   employeeLoginReducer,
+  employeeRegisterReducer,
   employeesListReducer,
   meFetchReducer,
 } from './reducers/employeeReducers';
@@ -31,6 +32,7 @@ const middleware = [thunk];
 
 const reducer = combineReducers({
   employeeLogin: employeeLoginReducer,
+  employeeRegister: employeeRegisterReducer,
   meFetch: meFetchReducer,
   employeeFetch: employeeFetchReducer,
   employeesList: employeesListReducer,
@@ -51,7 +53,10 @@ const reducer = combineReducers({
   taskDelete: taskDeleteReducer,
 });
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
+const userInfoFromStorageLogin = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null;
+const userInfoFromStorageRegister = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null;
 const myDetailsFromStorage = localStorage.getItem('myDetails')
@@ -59,7 +64,8 @@ const myDetailsFromStorage = localStorage.getItem('myDetails')
   : null;
 
 const initialState = {
-  employeeLogin: { userInfo: userInfoFromStorage },
+  employeeLogin: { userInfo: userInfoFromStorageLogin },
+  employeeRegister: { userInfo: userInfoFromStorageRegister },
   meFetch: {
     user: myDetailsFromStorage,
   },

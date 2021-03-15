@@ -61,7 +61,9 @@ const EmployeeTaskScreen = () => {
               <div className='h-line'></div>
               <div className='employee-project-task-details-item task-details__description'>
                 <h3>Task's Description</h3>
-                <p style={{ textAlign: 'left' }}>{task.description}</p>
+                <p style={{ textAlign: 'left' }} className='my-1'>
+                  {task.description}
+                </p>
               </div>
               <div className='h-line'></div>
               <div className='employee-project-task-details-item task-details__status flex flex-fdc'>

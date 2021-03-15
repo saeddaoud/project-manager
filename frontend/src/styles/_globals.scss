@@ -183,7 +183,8 @@ a {
     small {
       color: $message-text-color;
       position: absolute;
-      bottom: -3px;
+      @include responsive-property('bottom', (small: -3px, large: -10px, x-large: -15px));
+      // bottom: -3px;
       left: 0;
       font-size: 1.3rem;
     }

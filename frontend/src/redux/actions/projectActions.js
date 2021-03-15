@@ -55,7 +55,11 @@ export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
       type: PROJECTS_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -78,7 +82,7 @@ export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: PROJECTS_FETCH_FAIL,
       payload:
@@ -95,7 +99,11 @@ export const fetchTasks = (projectId) => async (dispatch, getState) => {
       type: TASKS_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -178,7 +186,11 @@ export const fetchProject = (id) => async (dispatch, getState) => {
       type: PROJECT_FETCH_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -195,7 +207,7 @@ export const fetchProject = (id) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    // console.log(error.response.data.error);
     dispatch({
       type: PROJECT_FETCH_FAIL,
       payload:
@@ -212,7 +224,11 @@ export const addProject = (project) => async (dispatch, getState) => {
       type: PROJECT_ADD_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -258,7 +274,11 @@ export const updateProject = ({ projectId, ...project }) => async (
       type: PROJECT_UPDATE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
@@ -306,7 +326,11 @@ export const deleteProject = (projectId) => async (dispatch, getState) => {
       type: PROJECT_DELETE_REQUEST,
     });
 
-    let token = getState().employeeLogin.userInfo.token;
+    let token = getState().employeeLogin.userInfo
+      ? getState().employeeLogin.userInfo.token
+      : getState().employeeRegister.userInfo
+      ? getState().employeeRegister.userInfo.token
+      : null;
     token = `Bearer ${token}`;
 
     const config = {
