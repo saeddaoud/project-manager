@@ -93,7 +93,31 @@ export const fetchProjects = (queryOptions) => async (dispatch, getState) => {
   }
 };
 
-export const fetchTasks = (projectId) => async (dispatch, getState) => {
+export const fetchTasks = ({ projectId, keyword, status, limit }) => async (
+  dispatch,
+  getState
+) => {
+  // console.log(queryOptions);
+  // const keyword = queryOptions?.keyword;
+  // const limit = queryOptions?.limit;
+  // const status = queryOptions?.status;
+
+  // console.log(keyword, limit, status);
+
+  let query = [];
+
+  if (keyword) {
+    query.push(`keyword=${keyword}`);
+  } else {
+    if (status) {
+      query.push(`status=${status}`);
+    }
+    if (limit) {
+      query.push(`limit=${limit}`);
+    }
+  }
+
+  console.log(query);
   try {
     dispatch({
       type: TASKS_FETCH_REQUEST,
@@ -114,7 +138,9 @@ export const fetchTasks = (projectId) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `/api/v1/projects/${projectId}/tasks`,
+      `/api/v1/projects/${projectId}/tasks?${query
+        .join(',')
+        .replace(',', '&')}`,
       config
     );
 

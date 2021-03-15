@@ -31,6 +31,10 @@ const projectSchema = new Schema(
         ref: 'Employee',
       },
     ],
+    noOfEmployees: {
+      type: Number,
+      default: 0,
+    },
     totalNoOfTasks: {
       type: Number,
       default: 0,

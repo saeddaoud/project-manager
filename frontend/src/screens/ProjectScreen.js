@@ -42,6 +42,10 @@ const ProjectScreen = ({ match }) => {
   const [taskDescriptionError, setTaskDescriptionError] = useState('');
   const [showTaskForm, setShowTaskForm] = useState(false);
 
+  const [keyword1, setKeyword1] = useState('');
+  const [keyword, setKeyword] = useState('');
+  const [status, setStatus] = useState('all');
+
   const id = match.params.id;
 
   // console.log(project, projectName, projectDescription);
@@ -50,9 +54,13 @@ const ProjectScreen = ({ match }) => {
     if (project) {
       setProjectName(project.name);
       setProjectDescription(project.description);
-      dispatch(fetchTasks(project._id));
+      if (status === 'all') {
+        dispatch(fetchTasks({ projectId: project._id }));
+      } else {
+        dispatch(fetchTasks({ projectId: project._id, status }));
+      }
     }
-  }, [project, dispatch]);
+  }, [project, dispatch, status]);
 
   useEffect(() => {
     // if (project) {
@@ -112,6 +120,21 @@ const ProjectScreen = ({ match }) => {
         setProjectDescriptionError("Project's decsription is required");
       }
     }
+  };
+
+  const searchTaskssHandler = (e) => {
+    e.preventDefault();
+    if (keyword !== '') {
+      dispatch(fetchTasks({ projectId: project._id, keyword }));
+      setKeyword('');
+    } else {
+      dispatch(fetchTasks({ projectId: project._id }));
+    }
+    // else if (status === 'all') {
+    //   dispatch(fetchTasks({ projectId: project._id }));
+    // } else {
+    //   dispatch(fetchTasks({ projectId: project._id, status }));
+    // }
   };
 
   return (
@@ -218,6 +241,58 @@ const ProjectScreen = ({ match }) => {
               <h4>Project's Tasks</h4>
             </div>
             <div className='project-tasks__list'>
+              <div className='actions flex flex-aife flex-fdc my-1'>
+                <div className='flex flex-aife' style={{ width: '100%' }}>
+                  <div className='search'>
+                    <form
+                      onSubmit={searchTaskssHandler}
+                      className='form flex flex-fdc flex-jcsa'
+                      style={{
+                        minHeight: '25px',
+                        width: '100%',
+                        border: 'none',
+                        padding: '0',
+                        boxShadow: 'none',
+                        borderRadius: '0',
+                        borderBottom: '1px solid black',
+                      }}
+                    >
+                      {/* <div
+                className='input-control'
+                style={{
+                  height: '30px',
+                  marginBottom: '0',
+                  width: '100%',
+                }}
+              > */}
+                      {/* <label>Keyword</label> */}
+                      <input
+                        style={{ top: '15px', width: '100%' }}
+                        type='text'
+                        placeholder='Search Tasks'
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                      />
+                      {/* </div> */}
+                    </form>
+                  </div>
+                  <div className='filter'>
+                    <select
+                      name='status'
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value='all'>All</option>
+                      <option value='not started'>Not Started</option>
+                      <option value='in progress'>In Progress</option>
+                      <option value='aborted'>Aborted</option>
+                      <option value='paused'>Paused</option>
+                      <option value='completed'>Completed</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               {tasksLoading && <Spinner />}
               {tasksError && <Message>{tasksError}</Message>}
               {addTaskLoading && <Spinner />}

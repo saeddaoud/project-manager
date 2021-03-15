@@ -278,6 +278,7 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
 
   let task = await Task.findById(req.params.taskId);
   let project = await Project.findById(task.project);
+  let project2 = project;
   const employee = await Employee.findById(employeeToAddToTask);
 
   if (!task) {
@@ -297,6 +298,14 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
     );
   }
 
+  // project = await Project.findByIdAndUpdate(
+  //   project._id,
+  //   {
+  //     $inc: { noOfEmployees: 1 },
+  //   },
+  //   { new: true }
+  // );
+
   task = await Task.findByIdAndUpdate(
     task._id,
     {
@@ -304,6 +313,7 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
     },
     { new: true }
   );
+
   project = await Project.findByIdAndUpdate(
     project._id,
     {
@@ -311,6 +321,16 @@ export const addEmployeeToTask = asyncHandlder(async (req, res, next) => {
     },
     { new: true }
   );
+
+  // if (!project.employees.includes(employee._id)) {
+  // project = await Project.findByIdAndUpdate(
+  //   project._id,
+  //   {
+  //     $inc: { noOfEmployees: 1 },
+  //   },
+  //   { new: true }
+  // );
+  // }
 
   // employee.avatar = avatar;
 
@@ -351,6 +371,13 @@ export const removeEmployeeFromTask = asyncHandlder(async (req, res, next) => {
       )
     );
   }
+  // project = await Project.findByIdAndUpdate(
+  //   project._id,
+  //   {
+  //     $inc: { noOfEmployees: -1 },
+  //   },
+  //   { new: true }
+  // );
 
   task = await Task.findByIdAndUpdate(
     task._id,
@@ -359,6 +386,10 @@ export const removeEmployeeFromTask = asyncHandlder(async (req, res, next) => {
     },
     { new: true }
   );
+
+  // if (project.employees.includes(employee._id)) {
+
+  // }
   project = await Project.findByIdAndUpdate(
     project._id,
     {
