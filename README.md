@@ -12,3 +12,8 @@
   * Assign and remove employees from tasks.
 * Users with the employee's role (the default role when registering) can only
   * Change the status of their assigned tasks.
+
+### The Application Pages
+#### For Managers
+#### For Supervisors
+#### For Employees
