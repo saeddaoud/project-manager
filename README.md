@@ -16,6 +16,8 @@
 ### The Application Pages
 #### For Guests (unregistered users)
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/home.png)
+![](https://github.com/saeddaoud/project-manager/blob/main/images/signin.png)
+![](https://github.com/saeddaoud/project-manager/blob/main/images/signup.png)
 #### For Managers
 #### For Supervisors
 #### For Employees
