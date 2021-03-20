@@ -14,6 +14,7 @@
   * Change the status of their assigned tasks.
 
 ### The Application Pages
+#### For Guests (unregistered users)
 #### For Managers
 #### For Supervisors
 #### For Employees
