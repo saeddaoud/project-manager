@@ -16,15 +16,15 @@
 ### The Application Pages
 #### For Guests (unregistered users)
 1. Home/Welcome page
-2. 
+
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/home.png)
 
 2. Login page where already registered users can sign-in using their credentials, with backend validation
-3. 
+ 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/login.png)
 
-2. Sign Up page where new users can register, with frontend/backend validation
-3. 
+3. Sign Up page where new users can register, with frontend/backend validation
+
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/signup.png)
 #### For Managers
 #### For Supervisors
