@@ -68,7 +68,7 @@ Users with the role supervisor have the same pages as users with the role manage
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/employee-profile.png)
 
-3. My Tasks Page: The navbar show My Tasks instead of Projects when the signed-in user is a regular employee. This link shows all the tasks that have been assigned to the signed-in employee, with the option to search tasks by name, or filter them by status.
+3. My Tasks Page: The navbar will show My Tasks instead of Projects when the signed-in user is a regular employee. This link shows all the tasks that have been assigned to the signed-in employee, with the option to search tasks by name, or filter them by status.
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/employee-tasks.png)
 
