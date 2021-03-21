@@ -26,6 +26,12 @@
 3. Sign Up page where new users can register, with frontend/backend validation
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/signup.png)
+
 #### For Managers
+
+1. Profile Page: when a user with the role manager signs in, they will be redirected to their profile page, that displays their avatar, personal information (name and email address), and the last 3 active projects.
+
+![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-profile-1.png)
+
 #### For Supervisors
 #### For Employees
