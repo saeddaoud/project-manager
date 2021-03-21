@@ -64,7 +64,7 @@ Users with the role supervisor have the same pages as users with the role manage
 
 #### For Employees
 
-1. Profile Page: Like users with the manager/supervisor role, a reguglar employee is redirected to their profile page when they sign in. The only difference is that intead of displaying the 3 most recent projects, the 3 most recent tasks are displayed.
+1. Profile Page: Like users with the manager/supervisor role, a regular employee is redirected to their profile page when they sign in. The only difference is that intead of displaying the 3 most recent projects, the 3 most recent tasks are displayed.
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/employee-profile.png)
 
@@ -72,4 +72,6 @@ Users with the role supervisor have the same pages as users with the role manage
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/employee-tasks.png)
 
-5. Specific Task Page:
+5. Specific Task Page: Within My Tasks page or from the displayed tasks in the profile page, the signed-in employee can view a specific task with its details like the project's name, task's name, task's description, and task's status, which can be changed to indicate the current status of the task.
+
+![](https://github.com/saeddaoud/project-manager/blob/main/images/employee-task.png)
