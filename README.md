@@ -46,6 +46,12 @@ each task's element displays the name of the task, its status, and the employees
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-project-1.png)
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-project-2.png)
 
+4. Specific Task's Page: by navigating to a specific task, a manger can add employees to the task and/or edit the task. A summary of the task is shown. The summary includes: the project's name (which is clickable for quick reference to the project's page), the task's name, the task's status, and the task's description. 
+
+Below the task's summary, a list of the asiisgned employees includeing their names and avatars are displayed.
+
+![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-task.png)
+
 #### For Supervisors
 
 1. Profile Page: 
