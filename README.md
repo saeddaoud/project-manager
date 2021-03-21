@@ -29,9 +29,13 @@
 
 #### For Managers
 
-1. Profile Page: when a user with the role manager signs in, they will be redirected to their profile page, that displays their avatar, personal information (name and email address), and the last 3 active projects.
+1. Profile Page: when a user with the role manager signs in, they will be redirected to their profile page, that displays their avatar, personal information (username and email address), and the last 3 active projects.
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-profile-1.png)
+
+2. Projects Page: the projects link will be available in the navbar to navigate to the list of projects. By default only active projects are displayed, but the page includes a search bar to search projects by name, or to filter projects by status.
+
+![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-projects-page.png)
 
 #### For Supervisors
 #### For Employees
