@@ -57,5 +57,9 @@ Below the task's summary, a list of the asiisgned employees includeing their nam
 Users with the role supervisor have the same pages as users with the role manager, except that they cannot create new projects, delete or edit existing ones. They can however edit tasks within projects, and assign and remove employees from tasks.
 
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/supervisor-profile.png)
+![](https://github.com/saeddaoud/project-manager/blob/main/images/supervisor-projects.png)
+![](https://github.com/saeddaoud/project-manager/blob/main/images/supervisor-project-1.png)
+![](https://github.com/saeddaoud/project-manager/blob/main/images/supervisor-project-2.png)
+![](https://github.com/saeddaoud/project-manager/blob/main/images/supervisor-task.png)
 
 #### For Employees
