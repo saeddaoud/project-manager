@@ -47,4 +47,7 @@ each task's element displays the name of the task, its status, and the employees
 ![](https://github.com/saeddaoud/project-manager/blob/main/images/manager-project-2.png)
 
 #### For Supervisors
+
+1. Profile Page: 
+
 #### For Employees
